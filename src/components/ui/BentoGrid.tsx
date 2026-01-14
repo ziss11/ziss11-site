@@ -1,7 +1,13 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Database, Layout, Server, Smartphone } from 'lucide-react';
+import {
+  Database,
+  Layout,
+  Server,
+  ShieldCheck,
+  Smartphone,
+} from 'lucide-react';
 
 const BentoCard = ({
   children,
@@ -32,10 +38,11 @@ const BentoCard = ({
       justifyContent: 'space-between',
       overflow: 'hidden',
       position: 'relative',
-      background: 'rgba(255,255,255,0.08)',
-      border: '1px solid rgba(255,255,255,0.1)',
-      boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
-      backdropFilter: 'blur(12px)',
+      background: 'rgba(5, 5, 10, 0.8)', // Darker terminal background (Matches Projects)
+      border: '1px solid rgba(126, 231, 135, 0.2)', // Terminal Green border
+      boxShadow: '0 4px 30px rgba(0, 0, 0, 0.4)',
+      backdropFilter: 'blur(10px)',
+      fontFamily: 'var(--font-mono)', // Enforce terminal font
     }}
   >
     <div
@@ -49,17 +56,25 @@ const BentoCard = ({
     >
       <div
         style={{
-          background: 'rgba(255,255,255,0.1)',
+          background: 'rgba(126, 231, 135, 0.1)', // Green tint bg
           padding: '8px',
           borderRadius: '12px',
         }}
       >
         <Icon
           size={20}
-          color='#fff'
+          color='#7ee787' // Terminal Green icon
         />
       </div>
-      <h3 style={{ fontSize: '1.1rem', fontWeight: 600, color: '#fff' }}>
+      <h3
+        style={{
+          fontSize: '1.1rem',
+          fontWeight: 600,
+          color: '#c9d1d9',
+          fontFamily: 'var(--font-mono)',
+        }}
+      >
+        <span style={{ color: '#8b949e' }}>{'// '}</span>
         {title}
       </h3>
     </div>
@@ -74,7 +89,7 @@ const BentoCard = ({
         width: '150px',
         height: '150px',
         background:
-          'radial-gradient(circle, rgba(77, 77, 255, 0.15) 0%, transparent 70%)',
+          'radial-gradient(circle, rgba(126, 231, 135, 0.15) 0%, transparent 70%)',
         filter: 'blur(30px)',
         zIndex: 1,
       }}
@@ -93,9 +108,10 @@ export default function BentoGrid() {
           fontSize: '2.5rem',
           marginBottom: '3rem',
           textAlign: 'center',
+          fontFamily: 'var(--font-mono)',
         }}
       >
-        Mobile <span className='text-gradient-blue'>Arsenal</span>
+        Mobile <span style={{ color: '#7ee787' }}>Arsenal</span>
       </motion.h2>
 
       <div
@@ -108,142 +124,134 @@ export default function BentoGrid() {
       >
         {/* Mobile Architecture - Large Span */}
         <BentoCard
-          title='Mobile Architecture'
+          title='System Architecture'
           icon={Layout}
           span='col-span-2'
           delay={0.1}
         >
           <div
             style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '0.85rem',
+              color: '#8b949e',
               display: 'flex',
-              justifyContent: 'space-around',
-              alignItems: 'center',
-              height: '100%',
+              flexDirection: 'column',
+              gap: '0.5rem',
             }}
           >
-            <div
-              className='arch-circle'
-              style={{ textAlign: 'center' }}
-            >
-              <div
-                className='circle-progress'
-                style={{
-                  width: '60px',
-                  height: '60px',
-                  border: '4px solid #58a6ff',
-                  borderRadius: '50%',
-                  marginBottom: '0.5rem',
-                }}
-              ></div>
-              <span>Clean Arch</span>
+            <div>
+              <span style={{ color: '#7ee787' }}>[SYSTEM]</span> Initializing
+              modules...
             </div>
             <div
-              className='arch-circle'
-              style={{ textAlign: 'center' }}
+              style={{
+                paddingLeft: '1rem',
+                borderLeft: '1px solid rgba(126, 231, 135, 0.2)',
+              }}
             >
-              <div
-                className='circle-progress'
-                style={{
-                  width: '60px',
-                  height: '60px',
-                  border: '4px solid #7ee787',
-                  borderRadius: '50%',
-                  marginBottom: '0.5rem',
-                }}
-              ></div>
-              <span>BLoC</span>
+              {[
+                { name: 'Clean Architecture', status: 'LOADED' },
+                { name: 'BLoC State Mgmt', status: 'ACTIVE' },
+                { name: 'Dependency Injection', status: 'READY' },
+                { name: 'Router Module', status: 'MOUNTED' },
+              ].map((mod) => (
+                <div
+                  key={mod.name}
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    marginBottom: '4px',
+                  }}
+                >
+                  <span>{mod.name}</span>
+                  <span style={{ color: '#7ee787' }}>[{mod.status}]</span>
+                </div>
+              ))}
             </div>
-            <div
-              className='arch-circle'
-              style={{ textAlign: 'center' }}
-            >
-              <div
-                className='circle-progress'
-                style={{
-                  width: '60px',
-                  height: '60px',
-                  border: '4px solid #bc8cff',
-                  borderRadius: '50%',
-                  marginBottom: '0.5rem',
-                }}
-              ></div>
-              <span>MVVM</span>
+            <div>
+              <span style={{ color: '#7ee787' }}>[SYSTEM]</span> All systems
+              operational.
             </div>
           </div>
         </BentoCard>
 
         {/* Realtime Database - Pulse Effect */}
         <BentoCard
-          title='Realtime'
+          title='Network Stream'
           icon={Database}
           delay={0.2}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            <div style={{ position: 'relative' }}>
-              <div
-                style={{
-                  width: '12px',
-                  height: '12px',
-                  background: '#00ff9f',
-                  borderRadius: '50%',
-                }}
-              ></div>
-              <div
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '100%',
-                  height: '100%',
-                  background: '#00ff9f',
-                  borderRadius: '50%',
-                  animation: 'ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite',
-                }}
-              ></div>
+          <div
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '0.85rem',
+              color: '#8b949e',
+            }}
+          >
+            <div>
+              <span style={{ color: '#c9d1d9' }}>&gt;</span> Connecting to
+              socket...
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <span style={{ fontSize: '0.9rem', color: '#ccc' }}>
-                Websocket
-              </span>
-              <span style={{ fontSize: '0.9rem', color: '#ccc' }}>
-                Firebase
-              </span>
+            <div style={{ color: '#7ee787' }}>
+              <span style={{ color: '#c9d1d9' }}>&gt;</span> Handshake success.
+            </div>
+            <div style={{ color: '#7ee787' }}>
+              <span style={{ color: '#c9d1d9' }}>&gt;</span> Subscribing to
+              channel.
+            </div>
+            <div
+              style={{
+                marginTop: '0.8rem',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                color: '#c9d1d9',
+              }}
+            >
+              <div
+                style={{
+                  width: 8,
+                  height: 8,
+                  background: '#7ee787',
+                  borderRadius: '50%',
+                  boxShadow: '0 0 8px #7ee787',
+                  animation: 'pulse 2s infinite',
+                }}
+              />
+              Stream Active
             </div>
           </div>
         </BentoCard>
 
         {/* Mobile Frameworks */}
         <BentoCard
-          title='Mobile Frameworks'
+          title='Tech Stack'
           icon={Smartphone}
           delay={0.3}
         >
-          <ul style={{ listStyle: 'none', fontSize: '0.95rem', color: '#bbb' }}>
-            <li
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>
+            <div style={{ color: '#8b949e', marginBottom: '0.5rem' }}>
+              <span style={{ color: '#7ee787' }}>root@mobile:~$</span>{' '}
+              ./list-stack
+            </div>
+            <div
               style={{
-                marginBottom: '0.5rem',
-                fontWeight: 600,
-                color: '#58a6ff',
+                display: 'grid',
+                gridTemplateColumns: '1fr 1fr',
+                gap: '4px',
+                color: '#c9d1d9',
               }}
             >
-              Flutter
-            </li>
-            <li
-              style={{
-                marginBottom: '0.5rem',
-                color: '#8b949e',
-              }}
-            >
-              Swift (iOS)
-            </li>
-            <li
-              style={{
-                color: '#8b949e',
-              }}
-            >
-              Kotlin (Android)
-            </li>
-          </ul>
+              <span>Flutter</span>
+              <span style={{ color: '#7ee787', textAlign: 'right' }}>3.x</span>
+              <span>Dart</span>
+              <span style={{ color: '#7ee787', textAlign: 'right' }}>3.0</span>
+              <span>Kotlin</span>
+              <span style={{ color: '#7ee787', textAlign: 'right' }}>1.9</span>
+              <span>Swift</span>
+              <span style={{ color: '#7ee787', textAlign: 'right' }}>5.9</span>
+            </div>
+          </div>
         </BentoCard>
 
         {/* CI/CD */}
@@ -267,7 +275,7 @@ export default function BentoGrid() {
               transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 2 }}
               style={{
                 height: '100%',
-                background: 'linear-gradient(90deg, #4d4dff, #bc13fe)',
+                background: 'linear-gradient(90deg, #2ea043, #7ee787)',
                 borderRadius: '3px',
               }}
             />
@@ -283,6 +291,39 @@ export default function BentoGrid() {
           >
             <span>Codemagic</span>
             <span>Github Actions</span>
+          </div>
+        </BentoCard>
+
+        {/* Testing Strategy */}
+        <BentoCard
+          title='Testing Strategy'
+          icon={ShieldCheck}
+          delay={0.5}
+        >
+          {/* Testing Section Replacement */}
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>
+            <div style={{ color: '#8b949e', marginBottom: '0.5rem' }}>
+              $ run_tests.sh
+            </div>
+            {[
+              { label: 'Unit Tests', val: 'PASS' },
+              { label: 'Widget Tests', val: 'PASS' },
+              { label: 'Integration', val: 'PASS' },
+            ].map((test, i) => (
+              <div
+                key={i}
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  marginBottom: '0.3rem',
+                }}
+              >
+                <span>
+                  <span style={{ color: '#79c0ff' }}>[TEST]</span> {test.label}
+                </span>
+                <span style={{ color: '#7ee787' }}>{test.val}</span>
+              </div>
+            ))}
           </div>
         </BentoCard>
       </div>

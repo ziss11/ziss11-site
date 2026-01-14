@@ -79,14 +79,15 @@ const ProjectModal = ({
       exit={{ scale: 0.9, opacity: 0 }}
       onClick={(e) => e.stopPropagation()}
       style={{
-        background: 'rgba(20, 20, 30, 0.9)',
-        border: '1px solid rgba(255,255,255,0.1)',
+        background: 'rgba(5, 5, 10, 0.95)',
+        border: '1px solid rgba(126, 231, 135, 0.2)',
         padding: '2rem',
         borderRadius: '24px',
-        maxWidth: '400px',
-        width: '100%',
+        maxWidth: '500px',
+        width: '90%',
         position: 'relative',
-        boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
+        boxShadow: '0 0 40px rgba(126, 231, 135, 0.1)',
+        fontFamily: 'var(--font-mono)',
       }}
     >
       <button
@@ -122,11 +123,12 @@ const ProjectModal = ({
               alignItems: 'center',
               gap: '12px',
               padding: '12px 20px',
-              background: 'rgba(255,255,255,0.05)',
+              background: 'rgba(126, 231, 135, 0.05)',
+              border: '1px solid rgba(126, 231, 135, 0.2)',
               borderRadius: '12px',
-              color: 'white',
+              color: '#c9d1d9',
               textDecoration: 'none',
-              transition: 'background 0.2s',
+              transition: 'all 0.2s',
             }}
             className='hover-bg'
           >
@@ -144,11 +146,12 @@ const ProjectModal = ({
               alignItems: 'center',
               gap: '12px',
               padding: '12px 20px',
-              background: 'rgba(255,255,255,0.05)',
+              background: 'rgba(126, 231, 135, 0.05)',
+              border: '1px solid rgba(126, 231, 135, 0.2)',
               borderRadius: '12px',
-              color: 'white',
+              color: '#c9d1d9',
               textDecoration: 'none',
-              transition: 'background 0.2s',
+              transition: 'all 0.2s',
             }}
             className='hover-bg'
           >
@@ -169,11 +172,12 @@ const ProjectModal = ({
               alignItems: 'center',
               gap: '12px',
               padding: '12px 20px',
-              background: 'rgba(255,255,255,0.05)',
+              background: 'rgba(126, 231, 135, 0.05)',
+              border: '1px solid rgba(126, 231, 135, 0.2)',
               borderRadius: '12px',
-              color: 'white',
+              color: '#c9d1d9',
               textDecoration: 'none',
-              transition: 'background 0.2s',
+              transition: 'all 0.2s',
             }}
             className='hover-bg'
           >
@@ -328,53 +332,84 @@ const ProjectCard = ({
           rotateX,
           rotateY,
           transformStyle: 'preserve-3d',
-          background: 'rgba(255,255,255,0.08)',
-          border: '1px solid rgba(255,255,255,0.1)',
-          boxShadow: '0 4px 30px rgba(0, 0, 0, 0.1)',
-          borderRadius: '20px',
+          background: 'rgba(5, 5, 10, 0.8)', // Darker theme bg
+          border: '1px solid rgba(126, 231, 135, 0.2)', // Terminal Green Border
+          boxShadow: '0 4px 30px rgba(0, 0, 0, 0.4)',
+          backdropFilter: 'blur(10px)',
+          borderRadius: '16px', // Slightly sharper for terminal feel
           padding: '2rem',
           height: '100%',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
           cursor: 'pointer',
+          fontFamily: 'var(--font-mono)',
         }}
         className='glass-panel'
         whileHover={{
-          scale: 1.05,
+          scale: 1.02, // Less scale
           zIndex: 10,
-          borderColor: 'rgba(77, 77, 255, 0.8)',
-          background: 'rgba(255,255,255,0.1)',
+          borderColor: 'rgba(126, 231, 135, 0.6)', // Brighter Green on hover
+          background: 'rgba(5, 5, 10, 0.95)',
         }}
       >
         <div style={{ transform: 'translateZ(50px)' }}>
+          {/* IDE Header Like */}
           <div
             style={{
-              color: '#4d4dff',
-              fontSize: '0.8rem',
-              fontWeight: 600,
-              marginBottom: '0.5rem',
-              textTransform: 'uppercase',
-              letterSpacing: '1px',
+              color: '#8b949e',
+              fontSize: '0.75rem',
+              fontWeight: 500,
+              marginBottom: '0.8rem',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              overflow: 'hidden',
+              whiteSpace: 'nowrap',
             }}
           >
-            {project.category}
+            <span style={{ color: '#7ee787' }}>root@portfolio</span>
+            <span style={{ color: '#c9d1d9' }}>:</span>
+            <span style={{ color: '#58a6ff' }}>~/projects</span>
+            <span style={{ color: '#c9d1d9' }}>$</span>
+            <span style={{ color: '#c9d1d9' }}>
+              ./view {project.title.toLowerCase().replace(/\s+/g, '-')}
+            </span>
+            <motion.span
+              animate={{ opacity: [0, 1, 0] }}
+              transition={{ duration: 0.8, repeat: Infinity }}
+              style={{
+                display: 'inline-block',
+                width: '6px',
+                height: '1.2em',
+                background: '#7ee787',
+                verticalAlign: 'middle',
+              }}
+            />
           </div>
+
           <h3
-            style={{ fontSize: '1.5rem', marginBottom: '1rem', color: '#fff' }}
+            style={{
+              fontSize: '1.4rem',
+              marginBottom: '1rem',
+              color: '#c9d1d9',
+              fontWeight: 600,
+            }}
           >
             {project.title}
           </h3>
-          <p
+
+          <div
             style={{
-              color: '#aaa',
+              color: '#8b949e',
               lineHeight: 1.6,
-              fontSize: '0.95rem',
+              fontSize: '0.9rem',
               marginBottom: '1.5rem',
+              fontStyle: 'italic',
             }}
           >
-            {project.description}
-          </p>
+            {'//'} {project.description}
+          </div>
         </div>
 
         <div
@@ -386,19 +421,20 @@ const ProjectCard = ({
             marginTop: 'auto',
           }}
         >
-          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
-            {project.tech.split(', ').map((t: string) => (
-              <span
-                key={t}
-                style={{
-                  fontSize: '0.75rem',
-                  background: 'rgba(255,255,255,0.1)',
-                  padding: '4px 8px',
-                  borderRadius: '4px',
-                  color: '#ccc',
-                }}
-              >
+          <div
+            style={{
+              display: 'flex',
+              gap: '0.5rem',
+              flexWrap: 'wrap',
+              fontSize: '0.85rem',
+              color: '#8b949e',
+            }}
+          >
+            <span style={{ color: '#7ee787' }}>[STACK]</span>
+            {project.tech.split(', ').map((t: string, i, arr) => (
+              <span key={t}>
                 {t}
+                {i < arr.length - 1 && ','}
               </span>
             ))}
           </div>
@@ -425,12 +461,24 @@ export default function Projects() {
         style={{ marginBottom: '4rem', textAlign: 'center' }}
       >
         <h2
-          style={{ fontSize: '2.5rem', marginBottom: '1rem', color: 'white' }}
+          style={{
+            fontSize: '2.5rem',
+            marginBottom: '1rem',
+            color: '#c9d1d9',
+            fontFamily: 'var(--font-mono)',
+          }}
         >
-          Featured <span className='text-gradient-blue'>Projects</span>
+          Featured <span style={{ color: '#7ee787' }}>Projects</span>
         </h2>
-        <p style={{ color: '#888', maxWidth: '600px', margin: '0 auto' }}>
-          Showcase of deployed applications impacting thousands of users.
+        <p
+          style={{
+            color: '#8b949e',
+            maxWidth: '600px',
+            margin: '0 auto',
+            fontFamily: 'var(--font-mono)',
+          }}
+        >
+          {'>'} Showcase of deployed applications impacting thousands of users.
         </p>
       </motion.div>
 

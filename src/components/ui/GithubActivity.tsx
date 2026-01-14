@@ -17,11 +17,11 @@ const ContributionBox = ({
   // Level 4: Extreme (Purple/Pink accent)
 
   const colors = [
-    'rgba(255, 255, 255, 0.03)', // 0
-    'rgba(77, 77, 255, 0.2)', // 1
-    'rgba(77, 77, 255, 0.5)', // 2
-    '#4d4dff', // 3
-    '#bc13fe', // 4
+    'rgba(255, 255, 255, 0.05)', // 0
+    '#0e4429', // 1
+    '#006d32', // 2
+    '#26a641', // 3
+    '#39d353', // 4
   ];
 
   return (
@@ -106,27 +106,46 @@ export default function GithubActivity() {
         style={{
           maxWidth: '900px',
           margin: '0 auto',
-          background: 'rgba(255, 255, 255, 0.02)',
-          border: '1px solid rgba(255, 255, 255, 0.05)',
+          background: 'rgba(5, 5, 10, 0.8)',
+          border: '1px solid rgba(126, 231, 135, 0.2)',
           borderRadius: '24px',
           padding: '2rem',
           backdropFilter: 'blur(10px)',
+          boxShadow: '0 4px 30px rgba(0, 0, 0, 0.4)',
+          fontFamily: 'var(--font-mono)',
         }}
       >
         <div
           style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
             marginBottom: '2rem',
+            fontFamily: 'var(--font-mono)',
           }}
         >
-          <h2 style={{ fontSize: '1.5rem', color: 'white' }}>
-            Github <span className='text-gradient-blue'>Activity</span>
-          </h2>
-          <div style={{ color: '#888', fontSize: '0.9rem' }}>
-            {totalContributions} contributions in the last year
+          <div
+            style={{
+              color: '#8b949e',
+              marginBottom: '0.2rem',
+              fontSize: '0.9rem',
+            }}
+          >
+            <span style={{ color: '#7ee787' }}>➜</span>{' '}
+            <span style={{ color: '#79c0ff' }}>~</span> $ git contributions
+            --user=ziss11
           </div>
+          <h2
+            style={{ fontSize: '1.5rem', color: '#c9d1d9', marginBottom: '0' }}
+          >
+            Github <span style={{ color: '#7ee787' }}>Activity</span>
+          </h2>
+        </div>
+        <div
+          style={{
+            color: '#8b949e',
+            fontSize: '0.9rem',
+            fontFamily: 'var(--font-mono)',
+          }}
+        >
+          {'//'} {totalContributions} contributions in the last year
         </div>
 
         <div
@@ -155,16 +174,17 @@ export default function GithubActivity() {
             alignItems: 'center',
             marginTop: '1rem',
             fontSize: '0.8rem',
-            color: '#666',
+            color: '#8b949e',
+            fontFamily: 'var(--font-mono)',
           }}
         >
-          <span>Less</span>
+          <span>{'/* Less'}</span>
           <div style={{ display: 'flex', gap: '2px' }}>
             <div
               style={{
                 width: 10,
                 height: 10,
-                background: 'rgba(255, 255, 255, 0.03)',
+                background: 'rgba(255, 255, 255, 0.05)',
                 borderRadius: 2,
               }}
             ></div>
@@ -172,7 +192,7 @@ export default function GithubActivity() {
               style={{
                 width: 10,
                 height: 10,
-                background: 'rgba(77, 77, 255, 0.2)',
+                background: '#0e4429',
                 borderRadius: 2,
               }}
             ></div>
@@ -180,7 +200,7 @@ export default function GithubActivity() {
               style={{
                 width: 10,
                 height: 10,
-                background: 'rgba(77, 77, 255, 0.5)',
+                background: '#006d32',
                 borderRadius: 2,
               }}
             ></div>
@@ -188,7 +208,7 @@ export default function GithubActivity() {
               style={{
                 width: 10,
                 height: 10,
-                background: '#4d4dff',
+                background: '#26a641',
                 borderRadius: 2,
               }}
             ></div>
@@ -196,12 +216,12 @@ export default function GithubActivity() {
               style={{
                 width: 10,
                 height: 10,
-                background: '#bc13fe',
+                background: '#39d353',
                 borderRadius: 2,
               }}
             ></div>
           </div>
-          <span>More</span>
+          <span>{'More */'}</span>
         </div>
       </div>
     </section>

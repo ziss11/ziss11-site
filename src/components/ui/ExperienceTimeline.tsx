@@ -1,7 +1,6 @@
 'use client';
 
 import { motion, useScroll, useSpring } from 'framer-motion';
-import { Briefcase, Building2, Calendar } from 'lucide-react';
 import { useRef } from 'react';
 
 const experiences = [
@@ -60,6 +59,7 @@ const TimelineCard = ({
 }) => {
   return (
     <motion.div
+      className='timeline-card'
       initial={{ opacity: 0, x: data.side === 'left' ? -50 : 50 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, margin: '-100px' }}
@@ -77,9 +77,10 @@ const TimelineCard = ({
         style={{
           padding: '1.5rem',
           borderRadius: '20px',
-          background: 'rgba(255,255,255,0.05)',
-          border: '1px solid rgba(255,255,255,0.1)',
-          boxShadow: '0 4px 30px rgba(0, 0, 0, 0.2)',
+          background: 'rgba(5, 5, 10, 0.8)', // Darker terminal background
+          border: '1px solid rgba(88, 166, 255, 0.15)', // Match Mobile Arsenal (Cyan)
+          backdropFilter: 'blur(10px)',
+          boxShadow: '0 4px 30px rgba(0, 0, 0, 0.4)',
           position: 'relative',
           overflow: 'hidden',
           transition: 'all 0.3s ease',
@@ -92,6 +93,7 @@ const TimelineCard = ({
             justifyContent: 'space-between',
             alignItems: 'center',
             marginBottom: '1rem',
+            fontFamily: 'var(--font-mono)', // Terminal font
           }}
         >
           <div
@@ -99,23 +101,24 @@ const TimelineCard = ({
               display: 'flex',
               alignItems: 'center',
               gap: '0.4rem',
-              color: '#4d4dff',
+              color: '#7ee787', // Terminal Green
               fontSize: '0.85rem',
               fontWeight: 600,
             }}
           >
-            <Calendar size={14} />
+            <span style={{ color: '#8b949e' }}>$</span>
             {data.period}
           </div>
           <span
             style={{
               fontSize: '0.75rem',
               padding: '0.2rem 0.6rem',
-              borderRadius: '99px',
-              background: 'rgba(77, 77, 255, 0.15)',
-              color: '#4d4dff',
-              border: '1px solid rgba(77, 77, 255, 0.3)',
+              borderRadius: '4px',
+              background: 'rgba(126, 231, 135, 0.1)', // Green tint
+              color: '#7ee787', // Green text
+              border: '1px solid rgba(126, 231, 135, 0.2)',
               fontWeight: 500,
+              fontFamily: 'var(--font-mono)',
             }}
           >
             {data.type}
@@ -127,33 +130,29 @@ const TimelineCard = ({
           <h3
             style={{
               fontSize: '1.3rem',
-              color: 'white',
+              color: '#c9d1d9', // Light gray text
               marginBottom: '0.3rem',
               display: 'flex',
               alignItems: 'center',
               gap: '0.5rem',
+              fontFamily: 'var(--font-mono)',
             }}
           >
-            <Briefcase
-              size={18}
-              color='#bc13fe'
-            />
+            <span style={{ color: '#7ee787' }}>{'>'}</span>
             {data.role}
           </h3>
           <h4
             style={{
               fontSize: '0.95rem',
-              color: '#ccc',
+              color: '#8b949e',
               display: 'flex',
               alignItems: 'center',
               gap: '0.4rem',
+              fontFamily: 'var(--font-mono)',
+              marginLeft: '1.2rem', // Indent for hierarchy
             }}
           >
-            <Building2
-              size={14}
-              color='#888'
-            />
-            {data.company}
+            <span style={{ color: '#79c0ff' }}>@</span> {data.company}
           </h4>
         </div>
 
@@ -176,11 +175,12 @@ const TimelineCard = ({
               key={i}
               style={{
                 fontSize: '0.75rem',
-                color: '#fff',
-                background: 'rgba(255,255,255,0.08)',
+                color: '#79c0ff', // Soft Blue
+                background: 'rgba(56, 139, 253, 0.1)',
                 padding: '0.2rem 0.6rem',
-                borderRadius: '6px',
-                border: '1px solid rgba(255,255,255,0.05)',
+                borderRadius: '4px',
+                border: '1px solid rgba(56, 139, 253, 0.2)',
+                fontFamily: 'var(--font-mono)',
               }}
             >
               {tech}
@@ -189,21 +189,48 @@ const TimelineCard = ({
         </div>
       </div>
 
-      {/* Timeline Dot */}
+      {/* Tech Connector Line */}
       <div
+        className='timeline-connector'
         style={{
           position: 'absolute',
-          top: '24px',
-          [data.side === 'left' ? 'right' : 'left']: '-11.5%',
-          width: '16px',
-          height: '16px',
-          background: '#1a1a1a', // Dark center
-          border: '3px solid #4d4dff', // Blue ring
-          borderRadius: '50%',
-          zIndex: 10,
-          boxShadow: '0 0 15px rgba(77, 77, 255, 0.6)',
+          top: '32px',
+          [data.side === 'left' ? 'right' : 'left']: '-20px',
+          width: '12%',
+          height: '0',
+          borderTop: '2px dashed rgba(126, 231, 135, 0.3)',
+          zIndex: 1,
         }}
       />
+
+      {/* Cyberpunk Diamond Node */}
+      <div
+        className='timeline-dot'
+        style={{
+          position: 'absolute',
+          top: '21px',
+          [data.side === 'left' ? 'right' : 'left']: 'calc(-11.1% - 11px)',
+          width: '22px',
+          height: '22px',
+          transform: 'rotate(45deg)',
+          background: '#050505',
+          border: '2px solid #7ee787', // Terminal Green Border
+          zIndex: 10,
+          boxShadow: '0 0 10px rgba(126, 231, 135, 0.5)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <div
+          style={{
+            width: '8px',
+            height: '8px',
+            background: '#7ee787',
+            boxShadow: '0 0 8px #7ee787',
+          }}
+        />
+      </div>
     </motion.div>
   );
 };
@@ -242,6 +269,7 @@ export default function ExperienceTimeline() {
       >
         {/* Center Line */}
         <div
+          className='center-line'
           style={{
             position: 'absolute',
             left: '50%',
@@ -249,20 +277,21 @@ export default function ExperienceTimeline() {
             bottom: 0,
             width: '2px',
             background:
-              'linear-gradient(to bottom, transparent, rgba(77, 77, 255, 0.3), transparent)',
+              'linear-gradient(to bottom, transparent, rgba(126, 231, 135, 0.3), transparent)',
             transform: 'translateX(-50%)',
           }}
         />
 
         {/* Animated Progress Line */}
         <motion.div
+          className='progress-line'
           style={{
             position: 'absolute',
             left: '50%',
             top: 0,
             bottom: 0,
             width: '2px',
-            background: 'linear-gradient(to bottom, #4d4dff, #bc13fe)',
+            background: 'linear-gradient(to bottom, #7ee787, #2ea043)',
             transform: 'translateX(-50%)',
             transformOrigin: 'top',
             scaleY,
@@ -278,6 +307,26 @@ export default function ExperienceTimeline() {
           />
         ))}
       </div>
+      <style
+        jsx
+        global
+      >{`
+        @media (max-width: 768px) {
+          .timeline-card {
+            width: 100% !important;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            margin-bottom: 2rem !important;
+          }
+
+          .timeline-dot,
+          .timeline-connector,
+          .center-line,
+          .progress-line {
+            display: none !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

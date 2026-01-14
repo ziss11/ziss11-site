@@ -37,25 +37,43 @@ const Counter = ({
   return (
     <div
       ref={ref}
-      style={{ textAlign: 'center' }}
+      style={{
+        textAlign: 'left', // Align left for log style
+        fontFamily: 'var(--font-mono)',
+        borderBottom: '1px dashed rgba(126, 231, 135, 0.2)',
+        padding: '1rem 0',
+        width: '100%',
+        maxWidth: '300px',
+      }}
     >
+      <div
+        style={{ fontSize: '0.8rem', color: '#8b949e', marginBottom: '0.2rem' }}
+      >
+        <span style={{ color: '#7ee787' }}>[BENCHMARK]</span>{' '}
+        {label.toUpperCase()}
+      </div>
       <motion.div
         style={{
-          fontSize: '3.5rem',
-          fontWeight: 800,
-          color: '#fff',
-          marginBottom: '0.5rem',
-          fontFamily: 'var(--font-mono)',
+          fontSize: '2rem',
+          fontWeight: 700,
+          color: '#c9d1d9',
+          display: 'flex',
+          alignItems: 'baseline',
+          gap: '10px',
         }}
-        className='text-gradient-blue'
       >
-        {prefix}
-        {displayValue}
-        {suffix}
+        <div
+          style={{ display: 'flex', alignItems: 'center', gap: '8px', flex: 1 }}
+        >
+          <span style={{ fontSize: '0.9rem', color: '#7ee787' }}>{'>'}</span>
+          <span style={{ color: '#c9d1d9' }}>
+            {prefix}
+            {displayValue}
+            {suffix}
+          </span>
+        </div>
+        <span style={{ fontSize: '0.8rem', color: '#2ea043' }}>[OK]</span>
       </motion.div>
-      <div style={{ color: '#aaa', fontSize: '1rem', letterSpacing: '1px' }}>
-        {label}
-      </div>
     </div>
   );
 };
@@ -65,20 +83,27 @@ export default function PerformanceMetrics() {
     <section
       style={{
         padding: '6rem 10%',
-        background:
-          'linear-gradient(180deg, transparent 0%, rgba(77, 77, 255, 0.05) 50%, transparent 100%)',
         margin: '4rem 0',
+        fontFamily: 'var(--font-mono)',
+        borderTop: '1px solid rgba(126, 231, 135, 0.1)',
+        borderBottom: '1px solid rgba(126, 231, 135, 0.1)',
       }}
     >
       <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
         <h2
-          style={{ fontSize: '2.5rem', marginBottom: '1rem', color: 'white' }}
+          style={{
+            fontSize: '2.5rem',
+            marginBottom: '1rem',
+            color: '#c9d1d9',
+            fontFamily: 'var(--font-mono)',
+          }}
         >
-          Performance <span style={{ color: '#bc13fe' }}>Obsessed</span>
+          System <span style={{ color: '#7ee787' }}>Metrics</span>
         </h2>
-        <p style={{ color: '#888', maxWidth: '600px', margin: '0 auto' }}>
-          Metrics from my latest production deployment.
-        </p>
+        <div style={{ color: '#8b949e', fontFamily: 'var(--font-mono)' }}>
+          <span style={{ color: '#7ee787' }}>root@server:~$</span>{' '}
+          ./run-benchmarks.sh
+        </div>
       </div>
 
       <div

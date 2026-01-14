@@ -27,139 +27,88 @@ export default function About() {
             position: 'relative',
           }}
         >
-          {/* Terminal Header Dots */}
+          {/* Terminal Window Controls - Monochromatic for Terminal Feel */}
           <div
             style={{
               position: 'absolute',
-              top: '10px',
-              left: '12px',
+              top: '12px',
+              left: '16px',
               display: 'flex',
-              gap: '6px',
+              gap: '8px',
             }}
           >
             <div
               style={{
-                width: '10px',
-                height: '10px',
+                width: '12px',
+                height: '12px',
                 borderRadius: '50%',
-                background: '#f85149',
+                background: 'rgba(126, 231, 135, 0.3)',
+                border: '1px solid rgba(126, 231, 135, 0.4)',
               }}
             />
             <div
               style={{
-                width: '10px',
-                height: '10px',
+                width: '12px',
+                height: '12px',
                 borderRadius: '50%',
-                background: '#ffa657',
+                background: 'rgba(126, 231, 135, 0.3)',
+                border: '1px solid rgba(126, 231, 135, 0.4)',
               }}
             />
             <div
               style={{
-                width: '10px',
-                height: '10px',
+                width: '12px',
+                height: '12px',
                 borderRadius: '50%',
-                background: '#7ee787',
+                background: 'rgba(126, 231, 135, 0.3)',
+                border: '1px solid rgba(126, 231, 135, 0.4)',
               }}
             />
           </div>
 
           {/* Content */}
-          <div style={{ marginTop: '1rem' }}>
+          <div style={{ marginTop: '2rem' }}>
             <h2
               style={{
-                fontSize: 'clamp(1.5rem, 3vw, 2rem)',
+                fontSize: '1.2rem',
                 marginBottom: '1.5rem',
                 color: '#c9d1d9',
                 fontFamily: 'var(--font-mono)',
-                fontWeight: 600,
+                fontWeight: 500,
               }}
             >
-              <span style={{ color: '#6e7681' }}>{'// '}</span>
-              <span style={{ color: '#58a6ff' }}>About Me</span>
+              <span style={{ color: '#7ee787' }}>root@portfolio:~$</span> whoami
             </h2>
 
             <div
               style={{
                 fontSize: '1rem',
-                color: '#8b949e',
+                color: '#c9d1d9',
                 lineHeight: 1.8,
                 fontFamily: 'var(--font-mono)',
+                paddingLeft: '1rem',
+                borderLeft: '2px solid rgba(126, 231, 135, 0.2)',
               }}
             >
-              <p style={{ marginBottom: '1rem' }}>
-                <span style={{ color: '#bc8cff' }}>const</span>{' '}
-                <span style={{ color: '#58a6ff' }}>profile</span> = {'{'}
-                <br />
-                <span style={{ paddingLeft: '2rem', display: 'block' }}>
-                  <span style={{ color: '#58a6ff' }}>role</span>:{' '}
-                  <span style={{ color: '#ffa657' }}>
-                    &apos;Senior Mobile Engineer&apos;
-                  </span>
-                  ,
-                </span>
-                <span style={{ paddingLeft: '2rem', display: 'block' }}>
-                  <span style={{ color: '#58a6ff' }}>specialization</span>:{' '}
-                  <span style={{ color: '#7ee787' }}>[</span>
-                  <span style={{ color: '#ffa657' }}>
-                    &apos;iOS&apos;
-                  </span>,{' '}
-                  <span style={{ color: '#ffa657' }}>&apos;Android&apos;</span>,{' '}
-                  <span style={{ color: '#ffa657' }}>&apos;Flutter&apos;</span>
-                  <span style={{ color: '#7ee787' }}>]</span>,
-                </span>
-                <span style={{ paddingLeft: '2rem', display: 'block' }}>
-                  <span style={{ color: '#58a6ff' }}>expertise</span>:{' '}
-                  <span style={{ color: '#7ee787' }}>[</span>
-                  <span style={{ color: '#ffa657' }}>
-                    &apos;Native Development&apos;
-                  </span>
-                  ,{' '}
-                  <span style={{ color: '#ffa657' }}>
-                    &apos;State Management&apos;
-                  </span>
-                  ,{' '}
-                  <span style={{ color: '#ffa657' }}>
-                    &apos;Performance Optimization&apos;
-                  </span>
-                  <span style={{ color: '#7ee787' }}>]</span>,
-                </span>
-                <span style={{ paddingLeft: '2rem', display: 'block' }}>
-                  <span style={{ color: '#58a6ff' }}>architecture</span>:{' '}
-                  <span style={{ color: '#ffa657' }}>
-                    &apos;Clean Architecture + BLoC&apos;
-                  </span>
-                  ,
-                </span>
-                <span style={{ paddingLeft: '2rem', display: 'block' }}>
-                  <span style={{ color: '#58a6ff' }}>focus</span>:{' '}
-                  <span style={{ color: '#7ee787' }}>[</span>
-                  <span style={{ color: '#ffa657' }}>&apos;60fps UI&apos;</span>
-                  ,{' '}
-                  <span style={{ color: '#ffa657' }}>
-                    &apos;App Size Optimization&apos;
-                  </span>
-                  ,{' '}
-                  <span style={{ color: '#ffa657' }}>
-                    &apos;Offline-First&apos;
-                  </span>
-                  <span style={{ color: '#7ee787' }}>]</span>
-                </span>
-                {'};'}
-              </p>
-
-              <p
-                style={{
-                  color: '#6e7681',
-                  fontStyle: 'italic',
-                  marginTop: '1.5rem',
-                }}
-              >
-                {'/* '}
-                Building production-ready mobile apps that users love. From
-                pixel-perfect UIs to complex state management and real-time
-                features.
-                {' */'}
-              </p>
+              <div style={{ marginBottom: '0.8rem' }}>
+                <span style={{ color: '#7ee787' }}>[USER]</span> ziss11
+              </div>
+              <div style={{ marginBottom: '0.8rem' }}>
+                <span style={{ color: '#7ee787' }}>[ROLE]</span> Senior Mobile
+                Engineer
+              </div>
+              <div style={{ marginBottom: '0.8rem' }}>
+                <span style={{ color: '#7ee787' }}>[SPECS]</span> iOS • Android
+                • Flutter
+              </div>
+              <div style={{ marginBottom: '0.8rem' }}>
+                <span style={{ color: '#7ee787' }}>[FOCUS]</span> Native
+                Performance, 60fps UI, Offline-First
+              </div>
+              <div style={{ marginBottom: '0.8rem' }}>
+                <span style={{ color: '#7ee787' }}>[STATUS]</span> Building
+                production-ready apps...
+              </div>
             </div>
           </div>
         </motion.div>

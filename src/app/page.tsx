@@ -23,12 +23,12 @@ export default function Home() {
         </div>
         {/* Content Sections */}
         <Hero />
-        <About />
         <ExperienceTimeline />
         <Projects />
         <BentoGrid />
         <PerformanceMetrics />
         <GithubActivity />
+        <About />
         <footer
           style={{
             padding: '2rem',
@@ -40,7 +40,7 @@ export default function Home() {
             fontFamily: 'var(--font-mono)',
           }}
         >
-          © {new Date().getFullYear()} Zis.
+          © {new Date().getFullYear()} ziss11.
         </footer>
       </main>
     </LenisWrapper>
