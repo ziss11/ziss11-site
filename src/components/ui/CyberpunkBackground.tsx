@@ -1,20 +1,18 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useMemo } from 'react';
+import { useState } from 'react';
 
 export default function CyberpunkBackground() {
   // Generate hexagonal particles
-  const hexagons = useMemo(
-    () =>
-      Array.from({ length: 20 }).map(() => ({
-        x: Math.random() * 100,
-        y: Math.random() * 100,
-        size: Math.random() * 30 + 20,
-        duration: Math.random() * 10 + 15,
-        delay: Math.random() * 5,
-      })),
-    []
+  const [hexagons] = useState(() =>
+    Array.from({ length: 20 }).map(() => ({
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 30 + 20,
+      duration: Math.random() * 10 + 15,
+      delay: Math.random() * 5,
+    }))
   );
 
   return (

@@ -93,44 +93,55 @@ export default function About() {
                 <span style={{ paddingLeft: '2rem', display: 'block' }}>
                   <span style={{ color: '#58a6ff' }}>role</span>:{' '}
                   <span style={{ color: '#ffa657' }}>
-                    'Senior Mobile Engineer'
+                    &apos;Senior Mobile Engineer&apos;
                   </span>
                   ,
                 </span>
                 <span style={{ paddingLeft: '2rem', display: 'block' }}>
                   <span style={{ color: '#58a6ff' }}>specialization</span>:{' '}
                   <span style={{ color: '#7ee787' }}>[</span>
-                  <span style={{ color: '#ffa657' }}>'iOS'</span>,{' '}
-                  <span style={{ color: '#ffa657' }}>'Android'</span>,{' '}
-                  <span style={{ color: '#ffa657' }}>'Flutter'</span>
+                  <span style={{ color: '#ffa657' }}>
+                    &apos;iOS&apos;
+                  </span>,{' '}
+                  <span style={{ color: '#ffa657' }}>&apos;Android&apos;</span>,{' '}
+                  <span style={{ color: '#ffa657' }}>&apos;Flutter&apos;</span>
                   <span style={{ color: '#7ee787' }}>]</span>,
                 </span>
                 <span style={{ paddingLeft: '2rem', display: 'block' }}>
                   <span style={{ color: '#58a6ff' }}>expertise</span>:{' '}
                   <span style={{ color: '#7ee787' }}>[</span>
-                  <span style={{ color: '#ffa657' }}>'Native Development'</span>
-                  , <span style={{ color: '#ffa657' }}>'State Management'</span>
+                  <span style={{ color: '#ffa657' }}>
+                    &apos;Native Development&apos;
+                  </span>
                   ,{' '}
                   <span style={{ color: '#ffa657' }}>
-                    'Performance Optimization'
+                    &apos;State Management&apos;
+                  </span>
+                  ,{' '}
+                  <span style={{ color: '#ffa657' }}>
+                    &apos;Performance Optimization&apos;
                   </span>
                   <span style={{ color: '#7ee787' }}>]</span>,
                 </span>
                 <span style={{ paddingLeft: '2rem', display: 'block' }}>
                   <span style={{ color: '#58a6ff' }}>architecture</span>:{' '}
                   <span style={{ color: '#ffa657' }}>
-                    'Clean Architecture + BLoC'
+                    &apos;Clean Architecture + BLoC&apos;
                   </span>
                   ,
                 </span>
                 <span style={{ paddingLeft: '2rem', display: 'block' }}>
                   <span style={{ color: '#58a6ff' }}>focus</span>:{' '}
                   <span style={{ color: '#7ee787' }}>[</span>
-                  <span style={{ color: '#ffa657' }}>'60fps UI'</span>,{' '}
+                  <span style={{ color: '#ffa657' }}>&apos;60fps UI&apos;</span>
+                  ,{' '}
                   <span style={{ color: '#ffa657' }}>
-                    'App Size Optimization'
+                    &apos;App Size Optimization&apos;
                   </span>
-                  , <span style={{ color: '#ffa657' }}>'Offline-First'</span>
+                  ,{' '}
+                  <span style={{ color: '#ffa657' }}>
+                    &apos;Offline-First&apos;
+                  </span>
                   <span style={{ color: '#7ee787' }}>]</span>
                 </span>
                 {'};'}

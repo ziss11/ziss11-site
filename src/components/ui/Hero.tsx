@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 const containerVariants = {
@@ -19,7 +20,7 @@ const itemVariants = {
   visible: {
     opacity: 1,
     x: 0,
-    transition: { duration: 0.5, ease: 'easeOut' },
+    transition: { duration: 0.5 },
   },
 };
 
@@ -52,14 +53,30 @@ export default function Hero() {
         initial='hidden'
         animate='visible'
       >
-        {/* Terminal Comment */}
+        {/* Logo */}
         <motion.div
           variants={itemVariants}
-          style={{ marginBottom: '1rem' }}
+          style={{ marginBottom: '2rem' }}
         >
-          <span style={{ color: '#8b949e', fontStyle: 'italic' }}>
-            // Senior Mobile Engineer
-          </span>
+          <div
+            style={{
+              width: '80px',
+              height: '80px',
+              position: 'relative',
+              borderRadius: '16px',
+              overflow: 'hidden',
+              boxShadow: '0 0 30px rgba(126, 231, 135, 0.3)',
+              border: '1px solid rgba(126, 231, 135, 0.2)',
+            }}
+          >
+            <Image
+              src='/logo.png'
+              alt='Logo'
+              fill
+              style={{ objectFit: 'cover' }}
+              priority
+            />
+          </div>
         </motion.div>
 
         {/* Main Title with Terminal Prompt */}
@@ -77,11 +94,11 @@ export default function Hero() {
             <span style={{ color: '#7ee787' }}>$</span>{' '}
             <span style={{ color: '#bc8cff' }}>const</span>{' '}
             <span style={{ color: '#58a6ff' }}>mobileEngineer</span> ={' '}
-            <span style={{ color: '#ffa657' }}>"</span>
+            <span style={{ color: '#ffa657' }}>&quot;</span>
             <span style={{ color: '#7ee787' }}>
               Crafting Native Mobile Experiences
             </span>
-            <span style={{ color: '#ffa657' }}>"</span>
+            <span style={{ color: '#ffa657' }}>&quot;</span>
             {showCursor && (
               <span
                 style={{
@@ -129,16 +146,18 @@ export default function Hero() {
           >
             <li style={{ marginBottom: '0.5rem', color: '#8b949e' }}>
               <span style={{ color: '#58a6ff' }}>platforms</span>:{' '}
-              <span style={{ color: '#7ee787' }}>['iOS', 'Android']</span>
+              <span style={{ color: '#7ee787' }}>
+                [&apos;iOS&apos;, &apos;Android&apos;]
+              </span>
             </li>
             <li style={{ marginBottom: '0.5rem', color: '#8b949e' }}>
               <span style={{ color: '#58a6ff' }}>framework</span>:{' '}
-              <span style={{ color: '#7ee787' }}>'Flutter'</span>
+              <span style={{ color: '#7ee787' }}>&apos;Flutter&apos;</span>
             </li>
             <li style={{ marginBottom: '0.5rem', color: '#8b949e' }}>
               <span style={{ color: '#58a6ff' }}>architecture</span>:{' '}
               <span style={{ color: '#7ee787' }}>
-                'Clean Architecture + BLoC'
+                &apos;Clean Architecture + BLoC&apos;
               </span>
             </li>
           </ul>

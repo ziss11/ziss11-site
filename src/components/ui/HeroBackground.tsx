@@ -1,23 +1,21 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useMemo } from 'react';
+import { useState } from 'react';
 
 export default function HeroBackground() {
-  // Generate stable random values using useMemo
-  const particles = useMemo(
-    () =>
-      Array.from({ length: 30 }).map((_, i) => ({
-        width: Math.random() * 4 + 2,
-        height: Math.random() * 4 + 2,
-        left: Math.random() * 100,
-        top: Math.random() * 100,
-        color: i % 2 === 0 ? '#4d4dff' : '#bc13fe',
-        shadowSize: Math.random() * 10 + 5,
-        duration: Math.random() * 3 + 2,
-        delay: Math.random() * 2,
-      })),
-    []
+  // Generate stable random values using useState
+  const [particles] = useState(() =>
+    Array.from({ length: 30 }).map((_, i) => ({
+      width: Math.random() * 4 + 2,
+      height: Math.random() * 4 + 2,
+      left: Math.random() * 100,
+      top: Math.random() * 100,
+      color: i % 2 === 0 ? '#4d4dff' : '#bc13fe',
+      shadowSize: Math.random() * 10 + 5,
+      duration: Math.random() * 3 + 2,
+      delay: Math.random() * 2,
+    }))
   );
 
   return (

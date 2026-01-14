@@ -1,20 +1,20 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useMemo } from 'react';
+import { useState } from 'react';
 
 export default function ParallaxBackground() {
   // Generate stable random particles
-  const particles = useMemo(
-    () =>
-      Array.from({ length: 50 }).map(() => ({
-        x: Math.random() * 100,
-        y: Math.random() * 100,
-        size: Math.random() * 3 + 1,
-        duration: Math.random() * 20 + 10,
-        delay: Math.random() * 5,
-      })),
-    []
+  const [particles] = useState(() =>
+    Array.from({ length: 50 }).map(() => ({
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 3 + 1,
+      duration: Math.random() * 20 + 10,
+      delay: Math.random() * 5,
+      animateX: Math.random() * 100 - 50,
+      animateY: Math.random() * 100 - 50,
+    }))
   );
 
   return (
@@ -54,8 +54,8 @@ export default function ParallaxBackground() {
             }`,
           }}
           animate={{
-            x: [0, Math.random() * 100 - 50, 0],
-            y: [0, Math.random() * 100 - 50, 0],
+            x: [0, particle.animateX, 0],
+            y: [0, particle.animateY, 0],
             opacity: [0.2, 0.8, 0.2],
             scale: [1, 1.5, 1],
           }}

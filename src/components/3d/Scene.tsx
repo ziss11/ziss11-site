@@ -9,7 +9,6 @@ import {
 } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { Suspense } from 'react';
-import SmartphoneScene from './SmartphoneScene';
 
 export default function Scene() {
   return (
@@ -64,8 +63,6 @@ export default function Scene() {
             opacity={0.5}
             color='#4d4dff'
           />
-
-          <SmartphoneScene />
 
           <OrbitControls
             enableZoom={false}
