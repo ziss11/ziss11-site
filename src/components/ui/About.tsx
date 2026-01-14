@@ -61,7 +61,7 @@ export default function About() {
               >
                 [USER]
               </span>
-              <span>ziss11</span>
+              <span>Abdul Azis</span>
             </div>
 
             <div
