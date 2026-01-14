@@ -2,6 +2,7 @@
 
 import About from '@/components/ui/About';
 import BentoGrid from '@/components/ui/BentoGrid';
+import ContactTerminal from '@/components/ui/ContactTerminal';
 import ExperienceTimeline from '@/components/ui/ExperienceTimeline';
 import GithubActivity from '@/components/ui/GithubActivity';
 import Hero from '@/components/ui/Hero';
@@ -29,6 +30,7 @@ export default function Home() {
         <PerformanceMetrics />
         <GithubActivity />
         <About />
+        <ContactTerminal />
         <footer
           style={{
             padding: '2rem',
@@ -40,7 +42,7 @@ export default function Home() {
             fontFamily: 'var(--font-mono)',
           }}
         >
-          © {new Date().getFullYear()} ziss11.
+          © {new Date().getFullYear()} Abdul Azis.
         </footer>
       </main>
     </LenisWrapper>

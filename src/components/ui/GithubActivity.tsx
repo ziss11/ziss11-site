@@ -102,6 +102,20 @@ export default function GithubActivity() {
 
   return (
     <section style={{ padding: '6rem 10%', position: 'relative' }}>
+      {/* Visual Title - Matched to other sections */}
+      <h2
+        style={{
+          fontSize: '2.5rem',
+          textAlign: 'center',
+          marginBottom: '4rem',
+          color: 'white',
+          fontFamily: 'var(--font-mono)',
+          fontWeight: 700,
+        }}
+      >
+        Github <span style={{ color: '#7ee787' }}>Activity</span>
+      </h2>
+
       <div
         style={{
           maxWidth: '900px',
@@ -115,16 +129,17 @@ export default function GithubActivity() {
           fontFamily: 'var(--font-mono)',
         }}
       >
+        {/* Internal Terminal Command styled as sub-header or detail */}
         <div
           style={{
-            marginBottom: '2rem',
-            fontFamily: 'var(--font-mono)',
+            marginBottom: '1.5rem',
+            borderBottom: '1px solid rgba(126, 231, 135, 0.1)',
+            paddingBottom: '1rem',
           }}
         >
           <div
             style={{
               color: '#8b949e',
-              marginBottom: '0.2rem',
               fontSize: '0.9rem',
             }}
           >
@@ -132,20 +147,15 @@ export default function GithubActivity() {
             <span style={{ color: '#79c0ff' }}>~</span> $ git contributions
             --user=ziss11
           </div>
-          <h2
-            style={{ fontSize: '1.5rem', color: '#c9d1d9', marginBottom: '0' }}
+          <div
+            style={{
+              color: '#8b949e',
+              fontSize: '0.9rem',
+              marginTop: '0.5rem',
+            }}
           >
-            Github <span style={{ color: '#7ee787' }}>Activity</span>
-          </h2>
-        </div>
-        <div
-          style={{
-            color: '#8b949e',
-            fontSize: '0.9rem',
-            fontFamily: 'var(--font-mono)',
-          }}
-        >
-          {'//'} {totalContributions} contributions in the last year
+            {'//'} {totalContributions} contributions in the last year
+          </div>
         </div>
 
         <div

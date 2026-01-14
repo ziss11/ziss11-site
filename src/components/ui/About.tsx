@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import SkillsOrbit from './SkillsOrbit';
 
 export default function About() {
   return (
@@ -9,120 +8,107 @@ export default function About() {
       style={{
         position: 'relative',
         zIndex: 1,
-        padding: '8rem 10%',
+        padding: '6rem 10%',
       }}
     >
-      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-        {/* Terminal Panel with Glassmorphism */}
+      <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+        {/* Visual Title - Matched to other sections */}
+        <h2
+          style={{
+            fontSize: '2.5rem',
+            textAlign: 'center',
+            marginBottom: '4rem',
+            color: 'white',
+            fontFamily: 'var(--font-mono)',
+            fontWeight: 700,
+          }}
+        >
+          About <span style={{ color: '#7ee787' }}>Me</span>
+        </h2>
+
+        {/* Glass Panel - Unified Design */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className='glass-strong'
           style={{
-            padding: '3rem 2rem 2rem 2rem',
-            marginBottom: '4rem',
-            borderRadius: '12px',
-            position: 'relative',
+            padding: '3rem',
+            background: 'rgba(5, 5, 10, 0.8)',
+            border: '1px solid rgba(126, 231, 135, 0.2)',
+            borderRadius: '24px',
+            backdropFilter: 'blur(10px)',
+            boxShadow: '0 4px 30px rgba(0, 0, 0, 0.4)',
+            fontFamily: 'var(--font-mono)',
           }}
         >
-          {/* Terminal Window Controls - Monochromatic for Terminal Feel */}
+          {/* Internal Content - Clean List */}
           <div
             style={{
-              position: 'absolute',
-              top: '12px',
-              left: '16px',
+              fontSize: '1.1rem',
+              color: '#c9d1d9',
+              lineHeight: 2,
               display: 'flex',
-              gap: '8px',
+              flexDirection: 'column',
+              gap: '1rem',
             }}
           >
             <div
-              style={{
-                width: '12px',
-                height: '12px',
-                borderRadius: '50%',
-                background: 'rgba(126, 231, 135, 0.3)',
-                border: '1px solid rgba(126, 231, 135, 0.4)',
-              }}
-            />
-            <div
-              style={{
-                width: '12px',
-                height: '12px',
-                borderRadius: '50%',
-                background: 'rgba(126, 231, 135, 0.3)',
-                border: '1px solid rgba(126, 231, 135, 0.4)',
-              }}
-            />
-            <div
-              style={{
-                width: '12px',
-                height: '12px',
-                borderRadius: '50%',
-                background: 'rgba(126, 231, 135, 0.3)',
-                border: '1px solid rgba(126, 231, 135, 0.4)',
-              }}
-            />
-          </div>
-
-          {/* Content */}
-          <div style={{ marginTop: '2rem' }}>
-            <h2
-              style={{
-                fontSize: '1.2rem',
-                marginBottom: '1.5rem',
-                color: '#c9d1d9',
-                fontFamily: 'var(--font-mono)',
-                fontWeight: 500,
-              }}
+              style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}
             >
-              <span style={{ color: '#7ee787' }}>root@portfolio:~$</span> whoami
-            </h2>
+              <span
+                style={{ color: '#7ee787', fontWeight: 600, minWidth: '80px' }}
+              >
+                [USER]
+              </span>
+              <span>ziss11</span>
+            </div>
 
             <div
-              style={{
-                fontSize: '1rem',
-                color: '#c9d1d9',
-                lineHeight: 1.8,
-                fontFamily: 'var(--font-mono)',
-                paddingLeft: '1rem',
-                borderLeft: '2px solid rgba(126, 231, 135, 0.2)',
-              }}
+              style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}
             >
-              <div style={{ marginBottom: '0.8rem' }}>
-                <span style={{ color: '#7ee787' }}>[USER]</span> ziss11
-              </div>
-              <div style={{ marginBottom: '0.8rem' }}>
-                <span style={{ color: '#7ee787' }}>[ROLE]</span> Senior Mobile
-                Engineer
-              </div>
-              <div style={{ marginBottom: '0.8rem' }}>
-                <span style={{ color: '#7ee787' }}>[SPECS]</span> iOS • Android
-                • Flutter
-              </div>
-              <div style={{ marginBottom: '0.8rem' }}>
-                <span style={{ color: '#7ee787' }}>[FOCUS]</span> Native
-                Performance, 60fps UI, Offline-First
-              </div>
-              <div style={{ marginBottom: '0.8rem' }}>
-                <span style={{ color: '#7ee787' }}>[STATUS]</span> Building
-                production-ready apps...
-              </div>
+              <span
+                style={{ color: '#7ee787', fontWeight: 600, minWidth: '80px' }}
+              >
+                [ROLE]
+              </span>
+              <span>Senior Mobile Engineer</span>
+            </div>
+
+            <div
+              style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}
+            >
+              <span
+                style={{ color: '#7ee787', fontWeight: 600, minWidth: '80px' }}
+              >
+                [SPECS]
+              </span>
+              <span>iOS • Android • Flutter</span>
+            </div>
+
+            <div
+              style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}
+            >
+              <span
+                style={{ color: '#7ee787', fontWeight: 600, minWidth: '80px' }}
+              >
+                [FOCUS]
+              </span>
+              <span>Native Performance, 60fps UI, Offline-First</span>
+            </div>
+
+            <div
+              style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}
+            >
+              <span
+                style={{ color: '#7ee787', fontWeight: 600, minWidth: '80px' }}
+              >
+                [STATUS]
+              </span>
+              <span>Building production-ready apps...</span>
             </div>
           </div>
         </motion.div>
-
-        {/* Skills */}
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            marginTop: '4rem',
-          }}
-        >
-          <SkillsOrbit />
-        </div>
       </div>
     </section>
   );
