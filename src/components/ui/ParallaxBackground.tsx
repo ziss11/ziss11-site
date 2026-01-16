@@ -227,7 +227,7 @@ export default function ParallaxBackground() {
 
       {/* Scanline Effect */}
       <motion.div
-        className='absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent'
+        className='absolute inset-x-0 h-px bg-linear-to-r from-transparent via-blue-500/30 to-transparent'
         animate={{
           top: ['0%', '100%'],
         }}
@@ -239,7 +239,7 @@ export default function ParallaxBackground() {
       />
 
       {/* Dark Overlay for Readability */}
-      <div className='absolute inset-0 bg-gradient-to-b from-transparent via-[#020204]/50 to-[#020204]/80' />
+      <div className='absolute inset-0 bg-linear-to-b from-transparent via-[#020204]/50 to-[#020204]/80' />
     </div>
   );
 }
