@@ -108,13 +108,6 @@ const TimelineCard = ({
         </div>
       </div>
 
-      {/* Tech Connector Line - Hidden on Mobile */}
-      <div
-        className={`timeline-connector absolute top-8 w-[12%] h-0 border-t-2 border-dashed border-accent-green/30 z-1 hidden md:block ${
-          data.side === 'left' ? '-right-[20px]' : '-left-[20px]'
-        }`}
-      />
-
       {/* Cyberpunk Diamond Node - Hidden on Mobile */}
       <div
         className={`timeline-dot absolute top-[21px] w-[22px] h-[22px] rotate-45 bg-[#050505] border-2 border-accent-green z-10 shadow-[0_0_10px_rgba(126,231,135,0.5)] items-center justify-center hidden md:flex ${

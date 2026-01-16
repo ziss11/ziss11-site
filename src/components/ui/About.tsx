@@ -20,7 +20,7 @@ export default function About() {
           className='p-12 bg-[#05050a]/80 border border-accent-green/20 rounded-[24px] backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.4)]'
         >
           {/* Internal Content - Clean List */}
-          <div className='text-[1.1rem] text-text-primary leading-[2] flex flex-col gap-4'>
+          <div className='text-[1.1rem] text-text-primary leading-loose flex flex-col gap-4'>
             <div className='flex items-baseline gap-2'>
               <span className='text-accent-green font-semibold min-w-[80px]'>
                 [USER]

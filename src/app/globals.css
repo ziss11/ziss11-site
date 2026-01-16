@@ -205,15 +205,15 @@
 
 /* Glassmorphism */
 @utility glass {
-  @apply bg-[#161b22]/70 backdrop-blur-md border border-[#8b949e]/10;
+  @apply bg-[#161b22]/70 backdrop-blur-md border border-text-secondary/10;
 }
 
 @utility glass-strong {
-  @apply bg-[#161b22]/85 backdrop-blur-xl border border-[#8b949e]/15 shadow-lg;
+  @apply bg-[#161b22]/85 backdrop-blur-xl border border-text-secondary/15 shadow-lg;
 }
 
 @utility glass-subtle {
-  @apply bg-[#161b22]/50 backdrop-blur-sm border border-[#8b949e]/5;
+  @apply bg-[#161b22]/50 backdrop-blur-sm border border-text-secondary/5;
 }
 
 @utility glass-hover {

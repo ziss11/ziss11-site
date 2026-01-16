@@ -108,12 +108,12 @@ export default function GithubActivity() {
       <div className='max-w-[900px] mx-auto bg-[#05050a]/80 border border-accent-green/20 rounded-[24px] p-8 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.4)] font-mono'>
         {/* Internal Terminal Command styled as sub-header or detail */}
         <div className='mb-6 border-b border-accent-green/10 pb-4'>
-          <div className='text-[#8b949e] text-[0.9rem]'>
+          <div className='text-text-secondary text-[0.9rem]'>
             <span className='text-accent-green'>➜</span>{' '}
             <span className='text-accent-blue'>~</span> $ git contributions
             --user=ziss11
           </div>
-          <div className='text-[#8b949e] text-[0.9rem] mt-2'>
+          <div className='text-text-secondary text-[0.9rem] mt-2'>
             {'//'} {totalContributions} contributions in the last year
           </div>
         </div>
