@@ -59,129 +59,48 @@ const TimelineCard = ({
 }) => {
   return (
     <motion.div
-      className='timeline-card'
+      className={`timeline-card relative mb-8 w-full md:mb-16 md:w-[45%] ${
+        data.side === 'right' ? 'md:ml-auto' : 'md:mr-auto'
+      }`}
       initial={{ opacity: 0, x: data.side === 'left' ? -50 : 50 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, margin: '-100px' }}
       transition={{ duration: 0.5, delay: index * 0.2 }}
-      style={{
-        width: '45%',
-        marginLeft: data.side === 'right' ? 'auto' : '0',
-        marginRight: data.side === 'left' ? 'auto' : '0',
-        marginBottom: '4rem',
-        position: 'relative',
-      }}
     >
-      <div
-        className='glass-panel'
-        style={{
-          padding: '1.5rem',
-          borderRadius: '20px',
-          background: 'rgba(5, 5, 10, 0.8)', // Darker terminal background
-          border: '1px solid rgba(88, 166, 255, 0.15)', // Match Mobile Arsenal (Cyan)
-          backdropFilter: 'blur(10px)',
-          boxShadow: '0 4px 30px rgba(0, 0, 0, 0.4)',
-          position: 'relative',
-          overflow: 'hidden',
-          transition: 'all 0.3s ease',
-        }}
-      >
+      <div className='glass p-6 rounded-[20px] bg-[#05050a]/80 border border-[#58a6ff40] backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.4)] relative overflow-hidden transition-all duration-300'>
         {/* Header: Period & Type */}
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginBottom: '1rem',
-            fontFamily: 'var(--font-mono)', // Terminal font
-          }}
-        >
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.4rem',
-              color: '#7ee787', // Terminal Green
-              fontSize: '0.85rem',
-              fontWeight: 600,
-            }}
-          >
-            <span style={{ color: '#8b949e' }}>$</span>
+        <div className='flex justify-between items-center mb-4 font-mono'>
+          <div className='flex items-center gap-[0.4rem] text-accent-green text-[0.85rem] font-semibold'>
+            <span className='text-text-secondary'>$</span>
             {data.period}
           </div>
-          <span
-            style={{
-              fontSize: '0.75rem',
-              padding: '0.2rem 0.6rem',
-              borderRadius: '4px',
-              background: 'rgba(126, 231, 135, 0.1)', // Green tint
-              color: '#7ee787', // Green text
-              border: '1px solid rgba(126, 231, 135, 0.2)',
-              fontWeight: 500,
-              fontFamily: 'var(--font-mono)',
-            }}
-          >
+          <span className='text-[0.75rem] px-[0.6rem] py-[0.2rem] rounded border border-accent-green/20 bg-accent-green/10 text-accent-green font-medium font-mono'>
             {data.type}
           </span>
         </div>
 
         {/* Role & Company */}
-        <div style={{ marginBottom: '1rem' }}>
-          <h3
-            style={{
-              fontSize: '1.3rem',
-              color: '#c9d1d9', // Light gray text
-              marginBottom: '0.3rem',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              fontFamily: 'var(--font-mono)',
-            }}
-          >
-            <span style={{ color: '#7ee787' }}>{'>'}</span>
+        <div className='mb-4'>
+          <h3 className='text-[1.3rem] text-text-primary mb-[0.3rem] flex items-center gap-2 font-mono'>
+            <span className='text-accent-green'>{'>'}</span>
             {data.role}
           </h3>
-          <h4
-            style={{
-              fontSize: '0.95rem',
-              color: '#8b949e',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.4rem',
-              fontFamily: 'var(--font-mono)',
-              marginLeft: '1.2rem', // Indent for hierarchy
-            }}
-          >
-            <span style={{ color: '#79c0ff' }}>@</span> {data.company}
+          <h4 className='text-[0.95rem] text-text-secondary flex items-center gap-[0.4rem] font-mono ml-[1.2rem]'>
+            <span className='text-accent-blue font-mono'>@</span> {data.company}
           </h4>
         </div>
 
         {/* Description */}
-        <p
-          style={{
-            color: '#aaa',
-            fontSize: '0.95rem',
-            lineHeight: 1.6,
-            marginBottom: '1.2rem',
-          }}
-        >
+        <p className='text-[#aaa] text-[0.95rem] leading-[1.6] mb-[1.2rem]'>
           {data.desc}
         </p>
 
         {/* Tech Stack Tags */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+        <div className='flex flex-wrap gap-2'>
           {data.tech.map((tech, i) => (
             <span
               key={i}
-              style={{
-                fontSize: '0.75rem',
-                color: '#79c0ff', // Soft Blue
-                background: 'rgba(56, 139, 253, 0.1)',
-                padding: '0.2rem 0.6rem',
-                borderRadius: '4px',
-                border: '1px solid rgba(56, 139, 253, 0.2)',
-                fontFamily: 'var(--font-mono)',
-              }}
+              className='text-[0.75rem] text-accent-blue bg-[#388bfd1a] px-[0.6rem] py-[0.2rem] rounded border border-[#388bfd33] font-mono'
             >
               {tech}
             </span>
@@ -189,47 +108,22 @@ const TimelineCard = ({
         </div>
       </div>
 
-      {/* Tech Connector Line */}
+      {/* Tech Connector Line - Hidden on Mobile */}
       <div
-        className='timeline-connector'
-        style={{
-          position: 'absolute',
-          top: '32px',
-          [data.side === 'left' ? 'right' : 'left']: '-20px',
-          width: '12%',
-          height: '0',
-          borderTop: '2px dashed rgba(126, 231, 135, 0.3)',
-          zIndex: 1,
-        }}
+        className={`timeline-connector absolute top-8 w-[12%] h-0 border-t-2 border-dashed border-accent-green/30 z-1 hidden md:block ${
+          data.side === 'left' ? '-right-[20px]' : '-left-[20px]'
+        }`}
       />
 
-      {/* Cyberpunk Diamond Node */}
+      {/* Cyberpunk Diamond Node - Hidden on Mobile */}
       <div
-        className='timeline-dot'
-        style={{
-          position: 'absolute',
-          top: '21px',
-          [data.side === 'left' ? 'right' : 'left']: 'calc(-11.1% - 11px)',
-          width: '22px',
-          height: '22px',
-          transform: 'rotate(45deg)',
-          background: '#050505',
-          border: '2px solid #7ee787', // Terminal Green Border
-          zIndex: 10,
-          boxShadow: '0 0 10px rgba(126, 231, 135, 0.5)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
+        className={`timeline-dot absolute top-[21px] w-[22px] h-[22px] rotate-45 bg-[#050505] border-2 border-accent-green z-10 shadow-[0_0_10px_rgba(126,231,135,0.5)] items-center justify-center hidden md:flex ${
+          data.side === 'left'
+            ? '-right-[calc(11.1%+11px)]'
+            : '-left-[calc(11.1%+11px)]'
+        }`}
       >
-        <div
-          style={{
-            width: '8px',
-            height: '8px',
-            background: '#7ee787',
-            boxShadow: '0 0 8px #7ee787',
-          }}
-        />
+        <div className='w-2 h-2 bg-accent-green shadow-[0_0_8px_#7ee787]' />
       </div>
     </motion.div>
   );
@@ -251,52 +145,20 @@ export default function ExperienceTimeline() {
   return (
     <section
       ref={ref}
-      style={{ padding: '4rem 10%', position: 'relative', overflow: 'hidden' }}
+      className='py-16 px-[10%] relative overflow-hidden'
     >
-      <h2
-        style={{
-          fontSize: '2.5rem',
-          textAlign: 'center',
-          marginBottom: '5rem',
-          color: 'white',
-        }}
-      >
+      <h2 className='text-[2.5rem] text-center mb-10 md:mb-20 text-white'>
         Career <span className='text-gradient-blue'>Milestones</span>
       </h2>
 
-      <div
-        style={{ position: 'relative', maxWidth: '1000px', margin: '0 auto' }}
-      >
-        {/* Center Line */}
-        <div
-          className='center-line'
-          style={{
-            position: 'absolute',
-            left: '50%',
-            top: 0,
-            bottom: 0,
-            width: '2px',
-            background:
-              'linear-gradient(to bottom, transparent, rgba(126, 231, 135, 0.3), transparent)',
-            transform: 'translateX(-50%)',
-          }}
-        />
+      <div className='relative max-w-[1000px] mx-auto'>
+        {/* Center Line - Hidden on Mobile */}
+        <div className='center-line absolute left-1/2 top-0 bottom-0 w-[2px] bg-linear-to-b from-transparent via-accent-green/30 to-transparent -translate-x-1/2 hidden md:block' />
 
-        {/* Animated Progress Line */}
+        {/* Animated Progress Line - Hidden on Mobile */}
         <motion.div
-          className='progress-line'
-          style={{
-            position: 'absolute',
-            left: '50%',
-            top: 0,
-            bottom: 0,
-            width: '2px',
-            background: 'linear-gradient(to bottom, #7ee787, #2ea043)',
-            transform: 'translateX(-50%)',
-            transformOrigin: 'top',
-            scaleY,
-            boxShadow: '0 0 10px rgba(77, 77, 255, 0.5)',
-          }}
+          className='progress-line absolute left-1/2 top-0 bottom-0 w-[2px] bg-linear-to-b from-accent-green to-[#2ea043] -translate-x-1/2 origin-top shadow-[0_0_10px_rgba(77,77,255,0.5)] hidden md:block'
+          style={{ scaleY }}
         />
 
         {experiences.map((exp, index) => (
@@ -307,26 +169,6 @@ export default function ExperienceTimeline() {
           />
         ))}
       </div>
-      <style
-        jsx
-        global
-      >{`
-        @media (max-width: 768px) {
-          .timeline-card {
-            width: 100% !important;
-            margin-left: 0 !important;
-            margin-right: 0 !important;
-            margin-bottom: 2rem !important;
-          }
-
-          .timeline-dot,
-          .timeline-connector,
-          .center-line,
-          .progress-line {
-            display: none !important;
-          }
-        }
-      `}</style>
     </section>
   );
 }

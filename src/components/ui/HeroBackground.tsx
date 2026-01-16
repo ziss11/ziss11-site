@@ -107,24 +107,11 @@ export default function HeroBackground() {
       />
 
       {/* Grid Pattern */}
-      <div
-        className='absolute inset-0 opacity-10'
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(77, 77, 255, 0.1) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(77, 77, 255, 0.1) 1px, transparent 1px)
-          `,
-          backgroundSize: '50px 50px',
-        }}
-      />
+      <div className='absolute inset-0 opacity-10 bg-[size:50px_50px] bg-[linear-gradient(rgba(77,77,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(77,77,255,0.1)_1px,transparent_1px)]' />
 
       {/* Glowing Orbs */}
       <motion.div
-        className='absolute right-[10%] bottom-[30%] h-40 w-40 rounded-full blur-3xl'
-        style={{
-          background:
-            'radial-gradient(circle, rgba(77, 77, 255, 0.3) 0%, transparent 70%)',
-        }}
+        className='absolute right-[10%] bottom-[30%] h-40 w-40 rounded-full blur-3xl bg-[radial-gradient(circle,rgba(77,77,255,0.3)_0%,transparent_70%)]'
         animate={{
           scale: [1, 1.2, 1],
           opacity: [0.3, 0.6, 0.3],
@@ -137,11 +124,7 @@ export default function HeroBackground() {
       />
 
       <motion.div
-        className='absolute left-[15%] bottom-[20%] h-32 w-32 rounded-full blur-3xl'
-        style={{
-          background:
-            'radial-gradient(circle, rgba(188, 19, 254, 0.3) 0%, transparent 70%)',
-        }}
+        className='absolute left-[15%] bottom-[20%] h-32 w-32 rounded-full blur-3xl bg-[radial-gradient(circle,rgba(188,19,254,0.3)_0%,transparent_70%)]'
         animate={{
           scale: [1, 1.3, 1],
           opacity: [0.3, 0.5, 0.3],

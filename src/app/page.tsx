@@ -14,12 +14,9 @@ import LenisWrapper from '@/components/utils/LenisWrapper';
 export default function Home() {
   return (
     <LenisWrapper>
-      <main
-        className='relative w-full overflow-x-hidden'
-        style={{ background: '#000000' }}
-      >
+      <main className='absolute w-full overflow-x-hidden'>
         {/* <TerminalBackground /> */}
-        <div style={{ position: 'absolute', zIndex: 0 }}>
+        <div className='absolute inset-0 -z-10'>
           <TerminalBackground />
         </div>
         {/* Content Sections */}

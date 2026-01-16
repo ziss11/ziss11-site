@@ -47,42 +47,14 @@ export default function ContactTerminal() {
   };
 
   return (
-    <section
-      style={{
-        padding: '6rem 10%',
-        position: 'relative',
-        overflow: 'hidden',
-        width: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}
-    >
+    <section className='py-24 px-[10%] relative overflow-hidden w-full flex flex-col items-center'>
       {/* Title - Matched to Career Milestones */}
-      <h2
-        style={{
-          fontSize: '2.5rem',
-          textAlign: 'center',
-          marginBottom: '4rem',
-          color: 'white',
-          fontFamily: 'var(--font-mono)',
-          fontWeight: 700,
-        }}
-      >
-        Get in <span className='text-[#7ee787]'>Touch</span>
+      <h2 className='text-[2.5rem] text-center mb-16 text-white font-bold'>
+        Get in <span className='text-accent-green'>Touch</span>
       </h2>
 
       {/* Grid Layout with Explicit Inline Styles for Robustness */}
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: '2rem',
-          width: '100%',
-          maxWidth: '1200px',
-          margin: '0 auto',
-        }}
-      >
+      <div className='grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-8 w-full max-w-[1200px] mx-auto'>
         {contactMethods.map((method, index) => (
           <motion.div
             key={method.id}
@@ -94,22 +66,7 @@ export default function ContactTerminal() {
               if (method.type === 'copy') handleCopy(method.value);
               else if (method.link) window.open(method.link, '_blank');
             }}
-            className='group cursor-pointer'
-            style={{
-              background: 'rgba(5, 5, 10, 0.8)',
-              border: '1px solid rgba(126, 231, 135, 0.2)',
-              padding: '2rem',
-              borderRadius: '20px',
-              backdropFilter: 'blur(10px)',
-              position: 'relative',
-              overflow: 'hidden',
-              transition: 'all 0.3s ease',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              minHeight: '220px',
-              cursor: 'pointer', // Ensure cursor changes on hover
-            }}
+            className='group cursor-pointer bg-[#05050a]/80 border border-accent-green/20 p-8 rounded-[20px] backdrop-blur-md relative overflow-hidden transition-all duration-300 flex flex-col justify-between min-h-[220px]'
             whileHover={{
               transform: 'translateY(-5px)',
               boxShadow: '0 10px 30px -10px rgba(126, 231, 135, 0.15)',
@@ -119,41 +76,27 @@ export default function ContactTerminal() {
             {/* Header: Icon & Name */}
             <div>
               <div className='flex items-center gap-3 mb-4'>
-                <div className='p-3 rounded-lg bg-[rgba(126,231,135,0.1)] text-[#7ee787] group-hover:bg-[#7ee787] group-hover:text-black transition-colors duration-300'>
+                <div className='p-3 rounded-lg bg-accent-green/10 text-accent-green group-hover:bg-accent-green group-hover:text-black transition-colors duration-300'>
                   {method.icon}
                 </div>
-                <h3
-                  style={{
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: '1.1rem',
-                    fontWeight: 600,
-                    color: '#c9d1d9',
-                  }}
-                >
+                <h3 className='text-[1.1rem] font-semibold text-text-primary'>
                   {method.name}
                 </h3>
               </div>
 
-              <p
-                style={{
-                  color: '#8b949e',
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.9rem',
-                  wordBreak: 'break-all',
-                }}
-              >
+              <p className='text-text-secondary text-sm break-all'>
                 {method.value}
               </p>
             </div>
 
             {/* Footer: Action */}
-            <div className='mt-6 pt-4 border-t border-[#7ee787]/10 flex justify-between items-center'>
-              <span className='text-[#7ee787] text-xs font-mono font-bold opacity-60 group-hover:opacity-100 transition-opacity'>
+            <div className='mt-6 pt-4 border-t border-accent-green/10 flex justify-between items-center'>
+              <span className='text-accent-green text-xs font-mono font-bold opacity-60 group-hover:opacity-100 transition-opacity'>
                 {method.type === 'copy' && copied
                   ? 'COPIED!'
                   : method.actionLabel.toUpperCase()}
               </span>
-              <div className='text-[#7ee787] opacity-60 group-hover:transform group-hover:translate-x-1 transition-all'>
+              <div className='text-accent-green opacity-60 group-hover:transform group-hover:translate-x-1 transition-all'>
                 {method.type === 'copy' ? (
                   copied ? (
                     <Check size={16} />

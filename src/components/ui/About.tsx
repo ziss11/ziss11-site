@@ -4,26 +4,11 @@ import { motion } from 'framer-motion';
 
 export default function About() {
   return (
-    <section
-      style={{
-        position: 'relative',
-        zIndex: 1,
-        padding: '6rem 10%',
-      }}
-    >
-      <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
+    <section className='relative z-10 py-24 px-[10%]'>
+      <div className='max-w-[1000px] mx-auto'>
         {/* Visual Title - Matched to other sections */}
-        <h2
-          style={{
-            fontSize: '2.5rem',
-            textAlign: 'center',
-            marginBottom: '4rem',
-            color: 'white',
-            fontFamily: 'var(--font-mono)',
-            fontWeight: 700,
-          }}
-        >
-          About <span style={{ color: '#7ee787' }}>Me</span>
+        <h2 className='text-[2.5rem] text-center mb-16 text-white font-bold'>
+          About <span className='text-accent-green'>Me</span>
         </h2>
 
         {/* Glass Panel - Unified Design */}
@@ -32,77 +17,40 @@ export default function About() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          style={{
-            padding: '3rem',
-            background: 'rgba(5, 5, 10, 0.8)',
-            border: '1px solid rgba(126, 231, 135, 0.2)',
-            borderRadius: '24px',
-            backdropFilter: 'blur(10px)',
-            boxShadow: '0 4px 30px rgba(0, 0, 0, 0.4)',
-            fontFamily: 'var(--font-mono)',
-          }}
+          className='p-12 bg-[#05050a]/80 border border-accent-green/20 rounded-[24px] backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.4)]'
         >
           {/* Internal Content - Clean List */}
-          <div
-            style={{
-              fontSize: '1.1rem',
-              color: '#c9d1d9',
-              lineHeight: 2,
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '1rem',
-            }}
-          >
-            <div
-              style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}
-            >
-              <span
-                style={{ color: '#7ee787', fontWeight: 600, minWidth: '80px' }}
-              >
+          <div className='text-[1.1rem] text-text-primary leading-[2] flex flex-col gap-4'>
+            <div className='flex items-baseline gap-2'>
+              <span className='text-accent-green font-semibold min-w-[80px]'>
                 [USER]
               </span>
               <span>Abdul Azis</span>
             </div>
 
-            <div
-              style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}
-            >
-              <span
-                style={{ color: '#7ee787', fontWeight: 600, minWidth: '80px' }}
-              >
+            <div className='flex items-baseline gap-2'>
+              <span className='text-accent-green font-semibold min-w-[80px]'>
                 [ROLE]
               </span>
               <span>Senior Mobile Engineer</span>
             </div>
 
-            <div
-              style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}
-            >
-              <span
-                style={{ color: '#7ee787', fontWeight: 600, minWidth: '80px' }}
-              >
+            <div className='flex items-baseline gap-2'>
+              <span className='text-accent-green font-semibold min-w-[80px]'>
                 [SPECS]
               </span>
               <span>iOS • Android • Flutter</span>
             </div>
 
-            <div
-              style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}
-            >
-              <span
-                style={{ color: '#7ee787', fontWeight: 600, minWidth: '80px' }}
-              >
+            <div className='flex items-baseline gap-2'>
+              <span className='text-accent-green font-semibold min-w-[80px]'>
                 [FOCUS]
               </span>
               <span>Native Performance, 60fps UI, Offline-First</span>
             </div>
 
-            <div
-              style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}
-            >
-              <span
-                style={{ color: '#7ee787', fontWeight: 600, minWidth: '80px' }}
-              >
+            <div className='flex items-baseline gap-2'>
+              <span className='text-accent-green font-semibold min-w-[80px]'>
                 [STATUS]
               </span>
               <span>Building production-ready apps...</span>

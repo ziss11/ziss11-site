@@ -35,19 +35,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section
-      style={{
-        position: 'relative',
-        height: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        padding: '0 10%',
-        maxWidth: '1200px',
-        margin: '0 auto',
-        overflow: 'hidden',
-      }}
-    >
+    <section className='relative h-screen flex flex-col justify-center px-[10%] max-w-[1200px] mx-auto overflow-hidden'>
       <motion.div
         variants={containerVariants}
         initial='hidden'
@@ -56,24 +44,14 @@ export default function Hero() {
         {/* Logo */}
         <motion.div
           variants={itemVariants}
-          style={{ marginBottom: '2rem' }}
+          className='mb-8'
         >
-          <div
-            style={{
-              width: '80px',
-              height: '80px',
-              position: 'relative',
-              borderRadius: '16px',
-              overflow: 'hidden',
-              boxShadow: '0 0 30px rgba(126, 231, 135, 0.3)',
-              border: '1px solid rgba(126, 231, 135, 0.2)',
-            }}
-          >
+          <div className='w-20 h-20 relative rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(126,231,135,0.3)] border border-accent-green/20'>
             <Image
               src='/logo.png'
               alt='Logo'
               fill
-              style={{ objectFit: 'cover' }}
+              className='object-cover'
               priority
             />
           </div>
@@ -81,82 +59,52 @@ export default function Hero() {
 
         {/* Main Title with Terminal Prompt */}
         <motion.div variants={itemVariants}>
-          <h1
-            style={{
-              fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-              fontWeight: 600,
-              lineHeight: 1.3,
-              marginBottom: '1.5rem',
-              color: '#c9d1d9',
-              fontFamily: 'var(--font-mono)',
-            }}
-          >
-            <span style={{ color: '#7ee787' }}>$</span>{' '}
-            <span style={{ color: '#bc8cff' }}>const</span>{' '}
-            <span style={{ color: '#58a6ff' }}>mobileEngineer</span> ={' '}
-            <span style={{ color: '#ffa657' }}>&quot;</span>
-            <span style={{ color: '#7ee787' }}>
+          <h1 className='text-[clamp(2rem,5vw,3.5rem)] font-semibold leading-[1.3] mb-6 text-text-primary font-mono'>
+            <span className='text-accent-green'>$</span>{' '}
+            <span className='text-accent-purple'>const</span>{' '}
+            <span className='text-accent-blue'>mobileEngineer</span> ={' '}
+            <span className='text-accent-yellow'>&quot;</span>
+            <span className='text-accent-green'>
               Crafting Native Mobile Experiences
             </span>
-            <span style={{ color: '#ffa657' }}>&quot;</span>
+            <span className='text-accent-yellow'>&quot;</span>
             {showCursor && (
-              <span
-                style={{
-                  display: 'inline-block',
-                  width: '3px',
-                  height: '1.2em',
-                  background: '#7ee787',
-                  marginLeft: '4px',
-                  verticalAlign: 'text-bottom',
-                }}
-              />
+              <span className='inline-block w-[3px] h-[1.2em] bg-accent-green ml-1 align-text-bottom' />
             )}
           </h1>
         </motion.div>
 
         {/* Description */}
         <motion.div variants={itemVariants}>
-          <p
-            style={{
-              maxWidth: '700px',
-              lineHeight: 1.8,
-              color: '#8b949e',
-              fontSize: '1rem',
-              marginBottom: '2.5rem',
-              fontFamily: 'var(--font-mono)',
-            }}
-          >
-            <span style={{ color: '#6e7681' }}>{'/* '}</span>
+          <p className='max-w-[700px] leading-[1.8] text-text-secondary text-[1rem] mb-10 font-mono'>
+            <span className='text-text-muted'>{'/* '}</span>
             Specialized in building high-performance native mobile apps for{' '}
-            <span style={{ color: '#58a6ff' }}>iOS</span> and{' '}
-            <span style={{ color: '#7ee787' }}>Android</span>. Expert in{' '}
-            <span style={{ color: '#bc8cff' }}>Flutter</span>,{' '}
-            <span style={{ color: '#ffa657' }}>Clean Architecture</span>, and
+            <span className='text-accent-blue'>iOS</span> and{' '}
+            <span className='text-accent-green'>Android</span>. Expert in{' '}
+            <span className='text-accent-purple'>Flutter</span>,{' '}
+            <span className='text-accent-yellow'>Clean Architecture</span>, and
             delivering pixel-perfect UIs with smooth{' '}
-            <span style={{ color: '#ffa657' }}>60fps</span> performance.
-            <span style={{ color: '#6e7681' }}>{' */'}</span>
+            <span className='text-accent-yellow'>60fps</span> performance.
+            <span className='text-text-muted'>{' */'}</span>
           </p>
         </motion.div>
 
         {/* Tech Stack List */}
         <motion.div variants={itemVariants}>
-          <ul
-            className='terminal-list'
-            style={{ fontSize: '0.95rem' }}
-          >
-            <li style={{ marginBottom: '0.5rem', color: '#8b949e' }}>
-              <span style={{ color: '#58a6ff' }}>platforms</span>:{' '}
-              <span style={{ color: '#7ee787' }}>
+          <ul className='text-[0.95rem] font-mono'>
+            <li className='mb-2 text-text-secondary'>
+              <span className='text-accent-blue'>platforms</span>:{' '}
+              <span className='text-accent-green'>
                 [&apos;iOS&apos;, &apos;Android&apos;]
               </span>
             </li>
-            <li style={{ marginBottom: '0.5rem', color: '#8b949e' }}>
-              <span style={{ color: '#58a6ff' }}>framework</span>:{' '}
-              <span style={{ color: '#7ee787' }}>&apos;Flutter&apos;</span>
+            <li className='mb-2 text-text-secondary'>
+              <span className='text-accent-blue'>framework</span>:{' '}
+              <span className='text-accent-green'>&apos;Flutter&apos;</span>
             </li>
-            <li style={{ marginBottom: '0.5rem', color: '#8b949e' }}>
-              <span style={{ color: '#58a6ff' }}>architecture</span>:{' '}
-              <span style={{ color: '#7ee787' }}>
+            <li className='mb-2 text-text-secondary'>
+              <span className='text-accent-blue'>architecture</span>:{' '}
+              <span className='text-accent-green'>
                 &apos;Clean Architecture + BLoC&apos;
               </span>
             </li>

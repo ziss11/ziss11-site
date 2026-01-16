@@ -29,99 +29,39 @@ const BentoCard = ({
     whileInView={{ opacity: 1, scale: 1 }}
     viewport={{ once: true }}
     transition={{ delay, duration: 0.5 }}
-    className={`glass-panel ${span} ${className}`}
-    style={{
-      padding: '1.5rem',
-      borderRadius: '24px',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'space-between',
-      overflow: 'hidden',
-      position: 'relative',
-      background: 'rgba(5, 5, 10, 0.8)', // Darker terminal background (Matches Projects)
-      border: '1px solid rgba(126, 231, 135, 0.2)', // Terminal Green border
-      boxShadow: '0 4px 30px rgba(0, 0, 0, 0.4)',
-      backdropFilter: 'blur(10px)',
-      fontFamily: 'var(--font-mono)', // Enforce terminal font
-    }}
+    className={`glass ${span} ${className} p-6 rounded-[24px] flex flex-col justify-between overflow-hidden relative bg-[#05050a]/80 border border-accent-green/20 shadow-[0_4px_30px_rgba(0,0,0,0.4)] backdrop-blur-md`}
   >
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: '0.8rem',
-        marginBottom: '1rem',
-        zIndex: 2,
-      }}
-    >
-      <div
-        style={{
-          background: 'rgba(126, 231, 135, 0.1)', // Green tint bg
-          padding: '8px',
-          borderRadius: '12px',
-        }}
-      >
+    <div className='flex items-center gap-[0.8rem] mb-4 z-10'>
+      <div className='bg-accent-green/10 p-2 rounded-xl'>
         <Icon
           size={20}
           color='#7ee787' // Terminal Green icon
         />
       </div>
-      <h3
-        style={{
-          fontSize: '1.1rem',
-          fontWeight: 600,
-          color: '#c9d1d9',
-          fontFamily: 'var(--font-mono)',
-        }}
-      >
-        <span style={{ color: '#8b949e' }}>{'// '}</span>
+      <h3 className='text-[1.1rem] font-semibold text-text-primary'>
+        <span className='text-text-secondary'>{'// '}</span>
         {title}
       </h3>
     </div>
-    <div style={{ zIndex: 2 }}>{children}</div>
+    <div className='z-10'>{children}</div>
     {/* Subtle Glow Background */}
-    <div
-      style={{
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        width: '150px',
-        height: '150px',
-        background:
-          'radial-gradient(circle, rgba(126, 231, 135, 0.15) 0%, transparent 70%)',
-        filter: 'blur(30px)',
-        zIndex: 1,
-      }}
-    />
+    <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150px] h-[150px] bg-[radial-gradient(circle,rgba(126,231,135,0.15)_0%,transparent_70%)] blur-[30px] z-1'></div>
   </motion.div>
 );
 
 export default function BentoGrid() {
   return (
-    <section style={{ padding: '0 10%', margin: '6rem 0' }}>
+    <section className='px-[10%] my-24'>
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        style={{
-          fontSize: '2.5rem',
-          marginBottom: '3rem',
-          textAlign: 'center',
-          fontFamily: 'var(--font-mono)',
-        }}
+        className='text-[2.5rem] mb-12 text-center'
       >
-        Mobile <span style={{ color: '#7ee787' }}>Arsenal</span>
+        Mobile <span className='text-accent-green'>Arsenal</span>
       </motion.h2>
 
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: '1.5rem',
-          gridAutoRows: 'minmax(180px, auto)',
-        }}
-      >
+      <div className='grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-6 auto-rows-[minmax(180px,auto)]'>
         {/* Mobile Architecture - Large Span */}
         <BentoCard
           title='System Architecture'
@@ -129,26 +69,12 @@ export default function BentoGrid() {
           span='col-span-2'
           delay={0.1}
         >
-          <div
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '0.85rem',
-              color: '#8b949e',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '0.5rem',
-            }}
-          >
+          <div className='font-mono text-[0.85rem] text-text-secondary flex flex-col gap-2'>
             <div>
-              <span style={{ color: '#7ee787' }}>[SYSTEM]</span> Initializing
+              <span className='text-accent-green'>[SYSTEM]</span> Initializing
               modules...
             </div>
-            <div
-              style={{
-                paddingLeft: '1rem',
-                borderLeft: '1px solid rgba(126, 231, 135, 0.2)',
-              }}
-            >
+            <div className='pl-4 border-l border-accent-green/20'>
               {[
                 { name: 'Clean Architecture', status: 'LOADED' },
                 { name: 'BLoC State Mgmt', status: 'ACTIVE' },
@@ -157,19 +83,15 @@ export default function BentoGrid() {
               ].map((mod) => (
                 <div
                   key={mod.name}
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    marginBottom: '4px',
-                  }}
+                  className='flex justify-between mb-1'
                 >
                   <span>{mod.name}</span>
-                  <span style={{ color: '#7ee787' }}>[{mod.status}]</span>
+                  <span className='text-accent-green'>[{mod.status}]</span>
                 </div>
               ))}
             </div>
             <div>
-              <span style={{ color: '#7ee787' }}>[SYSTEM]</span> All systems
+              <span className='text-accent-green'>[SYSTEM]</span> All systems
               operational.
             </div>
           </div>
@@ -181,43 +103,20 @@ export default function BentoGrid() {
           icon={Database}
           delay={0.2}
         >
-          <div
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '0.85rem',
-              color: '#8b949e',
-            }}
-          >
+          <div className='font-mono text-[0.85rem] text-text-secondary'>
             <div>
-              <span style={{ color: '#c9d1d9' }}>&gt;</span> Connecting to
+              <span className='text-text-primary'>&gt;</span> Connecting to
               socket...
             </div>
-            <div style={{ color: '#7ee787' }}>
-              <span style={{ color: '#c9d1d9' }}>&gt;</span> Handshake success.
+            <div className='text-accent-green'>
+              <span className='text-text-primary'>&gt;</span> Handshake success.
             </div>
-            <div style={{ color: '#7ee787' }}>
-              <span style={{ color: '#c9d1d9' }}>&gt;</span> Subscribing to
+            <div className='text-accent-green'>
+              <span className='text-text-primary'>&gt;</span> Subscribing to
               channel.
             </div>
-            <div
-              style={{
-                marginTop: '0.8rem',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '8px',
-                color: '#c9d1d9',
-              }}
-            >
-              <div
-                style={{
-                  width: 8,
-                  height: 8,
-                  background: '#7ee787',
-                  borderRadius: '50%',
-                  boxShadow: '0 0 8px #7ee787',
-                  animation: 'pulse 2s infinite',
-                }}
-              />
+            <div className='mt-[0.8rem] flex items-center gap-2 text-text-primary'>
+              <div className='w-2 h-2 bg-accent-green rounded-full shadow-[0_0_8px_#7ee787] animate-pulse'></div>
               Stream Active
             </div>
           </div>
@@ -229,27 +128,20 @@ export default function BentoGrid() {
           icon={Smartphone}
           delay={0.3}
         >
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>
-            <div style={{ color: '#8b949e', marginBottom: '0.5rem' }}>
-              <span style={{ color: '#7ee787' }}>root@mobile:~$</span>{' '}
+          <div className='font-mono text-[0.85rem]'>
+            <div className='text-text-secondary mb-2'>
+              <span className='text-accent-green'>root@mobile:~$</span>{' '}
               ./list-stack
             </div>
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr 1fr',
-                gap: '4px',
-                color: '#c9d1d9',
-              }}
-            >
+            <div className='grid grid-cols-2 gap-1 text-text-primary'>
               <span>Flutter</span>
-              <span style={{ color: '#7ee787', textAlign: 'right' }}>3.x</span>
+              <span className='text-accent-green text-right'>3.x</span>
               <span>Dart</span>
-              <span style={{ color: '#7ee787', textAlign: 'right' }}>3.0</span>
+              <span className='text-accent-green text-right'>3.0</span>
               <span>Kotlin</span>
-              <span style={{ color: '#7ee787', textAlign: 'right' }}>1.9</span>
+              <span className='text-accent-green text-right'>1.9</span>
               <span>Swift</span>
-              <span style={{ color: '#7ee787', textAlign: 'right' }}>5.9</span>
+              <span className='text-accent-green text-right'>5.9</span>
             </div>
           </div>
         </BentoCard>
@@ -260,35 +152,15 @@ export default function BentoGrid() {
           icon={Server}
           delay={0.4}
         >
-          <div
-            style={{
-              width: '100%',
-              background: 'rgba(255,255,255,0.1)',
-              height: '6px',
-              borderRadius: '3px',
-              marginTop: '0.5rem',
-            }}
-          >
+          <div className='w-full bg-white/10 h-[6px] rounded-full mt-2'>
             <motion.div
               initial={{ width: 0 }}
               whileInView={{ width: '100%' }}
               transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 2 }}
-              style={{
-                height: '100%',
-                background: 'linear-gradient(90deg, #2ea043, #7ee787)',
-                borderRadius: '3px',
-              }}
+              className='h-full bg-linear-to-r from-[#2ea043] to-accent-green rounded-full'
             />
           </div>
-          <div
-            style={{
-              fontSize: '0.9rem',
-              marginTop: '0.8rem',
-              color: '#aaa',
-              display: 'flex',
-              justifyContent: 'space-between',
-            }}
-          >
+          <div className='text-[0.9rem] mt-[0.8rem] text-[#aaa] flex justify-between'>
             <span>Codemagic</span>
             <span>Github Actions</span>
           </div>
@@ -301,10 +173,8 @@ export default function BentoGrid() {
           delay={0.5}
         >
           {/* Testing Section Replacement */}
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem' }}>
-            <div style={{ color: '#8b949e', marginBottom: '0.5rem' }}>
-              $ run_tests.sh
-            </div>
+          <div className='font-mono text-[0.85rem]'>
+            <div className='text-text-secondary mb-2'>$ run_tests.sh</div>
             {[
               { label: 'Unit Tests', val: 'PASS' },
               { label: 'Widget Tests', val: 'PASS' },
@@ -312,16 +182,12 @@ export default function BentoGrid() {
             ].map((test, i) => (
               <div
                 key={i}
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  marginBottom: '0.3rem',
-                }}
+                className='flex justify-between mb-[0.3rem]'
               >
                 <span>
-                  <span style={{ color: '#79c0ff' }}>[TEST]</span> {test.label}
+                  <span className='text-[#79c0ff]'>[TEST]</span> {test.label}
                 </span>
-                <span style={{ color: '#7ee787' }}>{test.val}</span>
+                <span className='text-accent-green'>{test.val}</span>
               </div>
             ))}
           </div>

@@ -30,10 +30,8 @@ const ContributionBox = ({
       whileInView={{ opacity: 1, scale: 1 }}
       transition={{ delay: index * 0.002, duration: 0.2 }}
       viewport={{ once: true }}
+      className='w-[12px] h-[12px] rounded-[3px]'
       style={{
-        width: '12px',
-        height: '12px',
-        borderRadius: '3px',
         background: colors[level],
         boxShadow: level > 2 ? `0 0 8px ${colors[level]}` : 'none',
       }}
@@ -101,73 +99,26 @@ export default function GithubActivity() {
   if (loading) return null;
 
   return (
-    <section style={{ padding: '6rem 10%', position: 'relative' }}>
+    <section className='py-24 px-[10%] relative'>
       {/* Visual Title - Matched to other sections */}
-      <h2
-        style={{
-          fontSize: '2.5rem',
-          textAlign: 'center',
-          marginBottom: '4rem',
-          color: 'white',
-          fontFamily: 'var(--font-mono)',
-          fontWeight: 700,
-        }}
-      >
-        Github <span style={{ color: '#7ee787' }}>Activity</span>
+      <h2 className='text-[2.5rem] text-center mb-16 text-white font-mono font-bold'>
+        Github <span className='text-accent-green'>Activity</span>
       </h2>
 
-      <div
-        style={{
-          maxWidth: '900px',
-          margin: '0 auto',
-          background: 'rgba(5, 5, 10, 0.8)',
-          border: '1px solid rgba(126, 231, 135, 0.2)',
-          borderRadius: '24px',
-          padding: '2rem',
-          backdropFilter: 'blur(10px)',
-          boxShadow: '0 4px 30px rgba(0, 0, 0, 0.4)',
-          fontFamily: 'var(--font-mono)',
-        }}
-      >
+      <div className='max-w-[900px] mx-auto bg-[#05050a]/80 border border-accent-green/20 rounded-[24px] p-8 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.4)] font-mono'>
         {/* Internal Terminal Command styled as sub-header or detail */}
-        <div
-          style={{
-            marginBottom: '1.5rem',
-            borderBottom: '1px solid rgba(126, 231, 135, 0.1)',
-            paddingBottom: '1rem',
-          }}
-        >
-          <div
-            style={{
-              color: '#8b949e',
-              fontSize: '0.9rem',
-            }}
-          >
-            <span style={{ color: '#7ee787' }}>➜</span>{' '}
-            <span style={{ color: '#79c0ff' }}>~</span> $ git contributions
+        <div className='mb-6 border-b border-accent-green/10 pb-4'>
+          <div className='text-[#8b949e] text-[0.9rem]'>
+            <span className='text-accent-green'>➜</span>{' '}
+            <span className='text-accent-blue'>~</span> $ git contributions
             --user=ziss11
           </div>
-          <div
-            style={{
-              color: '#8b949e',
-              fontSize: '0.9rem',
-              marginTop: '0.5rem',
-            }}
-          >
+          <div className='text-[#8b949e] text-[0.9rem] mt-2'>
             {'//'} {totalContributions} contributions in the last year
           </div>
         </div>
 
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateRows: 'repeat(7, 1fr)',
-            gridAutoFlow: 'column',
-            gap: '4px',
-            overflowX: 'auto',
-            paddingBottom: '1rem',
-          }}
-        >
+        <div className='grid grid-rows-[repeat(7,1fr)] grid-flow-col gap-1 overflow-x-auto pb-4'>
           {contributions.map((level, i) => (
             <ContributionBox
               key={i}
@@ -177,59 +128,14 @@ export default function GithubActivity() {
           ))}
         </div>
 
-        <div
-          style={{
-            display: 'flex',
-            gap: '1rem',
-            alignItems: 'center',
-            marginTop: '1rem',
-            fontSize: '0.8rem',
-            color: '#8b949e',
-            fontFamily: 'var(--font-mono)',
-          }}
-        >
+        <div className='flex gap-4 items-center mt-4 text-[0.8rem] text-text-secondary font-mono'>
           <span>{'/* Less'}</span>
-          <div style={{ display: 'flex', gap: '2px' }}>
-            <div
-              style={{
-                width: 10,
-                height: 10,
-                background: 'rgba(255, 255, 255, 0.05)',
-                borderRadius: 2,
-              }}
-            ></div>
-            <div
-              style={{
-                width: 10,
-                height: 10,
-                background: '#0e4429',
-                borderRadius: 2,
-              }}
-            ></div>
-            <div
-              style={{
-                width: 10,
-                height: 10,
-                background: '#006d32',
-                borderRadius: 2,
-              }}
-            ></div>
-            <div
-              style={{
-                width: 10,
-                height: 10,
-                background: '#26a641',
-                borderRadius: 2,
-              }}
-            ></div>
-            <div
-              style={{
-                width: 10,
-                height: 10,
-                background: '#39d353',
-                borderRadius: 2,
-              }}
-            ></div>
+          <div className='flex gap-[2px]'>
+            <div className='w-[10px] h-[10px] bg-white/5 rounded-[2px]' />
+            <div className='w-[10px] h-[10px] bg-[#0e4429] rounded-[2px]' />
+            <div className='w-[10px] h-[10px] bg-[#006d32] rounded-[2px]' />
+            <div className='w-[10px] h-[10px] bg-[#26a641] rounded-[2px]' />
+            <div className='w-[10px] h-[10px] bg-[#39d353] rounded-[2px]' />
           </div>
           <span>{'More */'}</span>
         </div>

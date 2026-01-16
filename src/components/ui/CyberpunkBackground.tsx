@@ -16,14 +16,11 @@ export default function CyberpunkBackground() {
   );
 
   return (
-    <div className='fixed inset-0 z-0 overflow-hidden bg-[#0a0a0f]'>
+    <div className='fixed inset-0 -z-10 overflow-hidden bg-[#0a0a0f]'>
       {/* Perspective Grid */}
-      <div
-        className='absolute inset-0'
-        style={{ perspective: '1000px' }}
-      >
+      <div className='absolute inset-0 [perspective:1000px]'>
         <motion.div
-          className='absolute inset-0 cyber-grid opacity-20'
+          className='absolute inset-0 cyber-grid opacity-20 [transform-style:preserve-3d]'
           style={{
             transform: 'rotateX(60deg) translateZ(-200px)',
             transformOrigin: 'center bottom',
@@ -73,10 +70,10 @@ export default function CyberpunkBackground() {
                 i % 3 === 0 ? '#00fff9' : i % 3 === 1 ? '#ff006e' : '#8b00ff'
               }
               strokeWidth='1'
+              className='drop-shadow-[0_0_5px_currentColor]'
               style={{
-                filter: `drop-shadow(0 0 5px ${
-                  i % 3 === 0 ? '#00fff9' : i % 3 === 1 ? '#ff006e' : '#8b00ff'
-                })`,
+                color:
+                  i % 3 === 0 ? '#00fff9' : i % 3 === 1 ? '#ff006e' : '#8b00ff',
               }}
             />
           </svg>
@@ -85,13 +82,7 @@ export default function CyberpunkBackground() {
 
       {/* Neon Orbs */}
       <motion.div
-        className='absolute w-96 h-96 rounded-full blur-3xl'
-        style={{
-          background:
-            'radial-gradient(circle, rgba(0, 255, 249, 0.15) 0%, transparent 70%)',
-          left: '10%',
-          top: '20%',
-        }}
+        className='absolute w-96 h-96 rounded-full blur-3xl bg-[radial-gradient(circle,rgba(0,255,249,0.15)_0%,transparent_70%)] left-[10%] top-[20%]'
         animate={{
           x: [0, 100, 0],
           y: [0, -50, 0],
@@ -105,13 +96,7 @@ export default function CyberpunkBackground() {
       />
 
       <motion.div
-        className='absolute w-80 h-80 rounded-full blur-3xl'
-        style={{
-          background:
-            'radial-gradient(circle, rgba(255, 0, 110, 0.15) 0%, transparent 70%)',
-          right: '10%',
-          bottom: '20%',
-        }}
+        className='absolute w-80 h-80 rounded-full blur-3xl bg-[radial-gradient(circle,rgba(255,0,110,0.15)_0%,transparent_70%)] right-[10%] bottom-[20%]'
         animate={{
           x: [0, -100, 0],
           y: [0, 50, 0],
@@ -126,13 +111,7 @@ export default function CyberpunkBackground() {
       />
 
       <motion.div
-        className='absolute w-72 h-72 rounded-full blur-3xl'
-        style={{
-          background:
-            'radial-gradient(circle, rgba(139, 0, 255, 0.15) 0%, transparent 70%)',
-          left: '50%',
-          top: '50%',
-        }}
+        className='absolute w-72 h-72 rounded-full blur-3xl bg-[radial-gradient(circle,rgba(139,0,255,0.15)_0%,transparent_70%)] left-1/2 top-1/2'
         animate={{
           scale: [1, 1.4, 1],
           opacity: [0.1, 0.2, 0.1],
@@ -149,13 +128,7 @@ export default function CyberpunkBackground() {
       <div className='scanline' />
 
       {/* Horizontal Scanline Effect */}
-      <div
-        className='absolute inset-0 pointer-events-none opacity-5'
-        style={{
-          backgroundImage:
-            'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 249, 0.1) 2px, rgba(0, 255, 249, 0.1) 4px)',
-        }}
-      />
+      <div className='absolute inset-0 pointer-events-none opacity-5 bg-[repeating-linear-gradient(0deg,transparent,transparent_2px,rgba(0,255,249,0.1)_2px,rgba(0,255,249,0.1)_4px)]' />
 
       {/* Neon Lines */}
       <svg className='absolute inset-0 w-full h-full opacity-30'>

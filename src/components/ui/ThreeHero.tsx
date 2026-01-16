@@ -140,16 +140,7 @@ function Scene() {
 
 export default function ThreeHero() {
   return (
-    <div
-      style={{
-        width: '100vw',
-        height: '100vh',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        zIndex: -1,
-      }}
-    >
+    <div className='w-screen h-screen absolute top-0 left-0 -z-[1]'>
       <Canvas>
         <PerspectiveCamera
           makeDefault

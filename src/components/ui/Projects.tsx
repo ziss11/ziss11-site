@@ -61,76 +61,32 @@ const ProjectModal = ({
     animate={{ opacity: 1 }}
     exit={{ opacity: 0 }}
     onClick={onClose}
-    style={{
-      position: 'fixed',
-      inset: 0,
-      background: 'rgba(0,0,0,0.6)',
-      backdropFilter: 'blur(8px)',
-      zIndex: 1000,
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      padding: '20px',
-    }}
+    className='fixed inset-0 bg-black/60 backdrop-blur-sm z-1000 flex items-center justify-center p-5'
   >
     <motion.div
       initial={{ scale: 0.9, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       exit={{ scale: 0.9, opacity: 0 }}
       onClick={(e) => e.stopPropagation()}
-      style={{
-        background: 'rgba(5, 5, 10, 0.95)',
-        border: '1px solid rgba(126, 231, 135, 0.2)',
-        padding: '2rem',
-        borderRadius: '24px',
-        maxWidth: '500px',
-        width: '90%',
-        position: 'relative',
-        boxShadow: '0 0 40px rgba(126, 231, 135, 0.1)',
-        fontFamily: 'var(--font-mono)',
-      }}
+      className='bg-[#05050a]/95 border border-accent-green/20 p-8 rounded-[24px] max-w-[500px] w-[90%] relative shadow-[0_0_40px_rgba(126,231,135,0.1)]'
     >
       <button
         onClick={onClose}
-        style={{
-          position: 'absolute',
-          top: '20px',
-          right: '20px',
-          background: 'none',
-          border: 'none',
-          color: '#888',
-          cursor: 'pointer',
-        }}
+        className='absolute top-5 right-5 bg-none border-none text-[#888] cursor-pointer hover:text-white transition-colors'
       >
         <X size={24} />
       </button>
 
-      <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem', color: '#fff' }}>
-        {project.title}
-      </h3>
-      <p style={{ color: '#888', marginBottom: '2rem' }}>
-        Check out the project
-      </p>
+      <h3 className='text-[1.5rem] mb-2 text-white'>{project.title}</h3>
+      <p className='text-[#888] mb-8'>Check out the project</p>
 
-      <div style={{ display: 'grid', gap: '1rem' }}>
+      <div className='grid gap-4'>
         {project.githubUrl && (
           <a
             href={project.githubUrl}
             target='_blank'
             rel='noopener noreferrer'
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              padding: '12px 20px',
-              background: 'rgba(126, 231, 135, 0.05)',
-              border: '1px solid rgba(126, 231, 135, 0.2)',
-              borderRadius: '12px',
-              color: '#c9d1d9',
-              textDecoration: 'none',
-              transition: 'all 0.2s',
-            }}
-            className='hover-bg'
+            className='flex items-center gap-3 p-3 px-5 bg-accent-green/5 border border-accent-green/20 rounded-xl text-text-primary no-underline transition-all hover:bg-accent-green/10'
           >
             <Github size={22} />
             <span>View Source Code</span>
@@ -141,19 +97,7 @@ const ProjectModal = ({
             href={project.playStoreUrl}
             target='_blank'
             rel='noopener noreferrer'
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              padding: '12px 20px',
-              background: 'rgba(126, 231, 135, 0.05)',
-              border: '1px solid rgba(126, 231, 135, 0.2)',
-              borderRadius: '12px',
-              color: '#c9d1d9',
-              textDecoration: 'none',
-              transition: 'all 0.2s',
-            }}
-            className='hover-bg'
+            className='flex items-center gap-3 p-3 px-5 bg-accent-green/5 border border-accent-green/20 rounded-xl text-text-primary no-underline transition-all hover:bg-accent-green/10'
           >
             <AndroidIcon
               size={24}
@@ -167,19 +111,7 @@ const ProjectModal = ({
             href={project.appStoreUrl}
             target='_blank'
             rel='noopener noreferrer'
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '12px',
-              padding: '12px 20px',
-              background: 'rgba(126, 231, 135, 0.05)',
-              border: '1px solid rgba(126, 231, 135, 0.2)',
-              borderRadius: '12px',
-              color: '#c9d1d9',
-              textDecoration: 'none',
-              transition: 'all 0.2s',
-            }}
-            className='hover-bg'
+            className='flex items-center gap-3 p-3 px-5 bg-accent-green/5 border border-accent-green/20 rounded-xl text-text-primary no-underline transition-all hover:bg-accent-green/10'
           >
             <AppleIcon
               size={22}
@@ -322,30 +254,15 @@ const ProjectCard = ({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onClick={onClick}
-      style={{
-        perspective: 1000,
-        transformStyle: 'preserve-3d',
-      }}
+      className='perspective-[1000px] transform-3d'
     >
       <motion.div
         style={{
           rotateX,
           rotateY,
           transformStyle: 'preserve-3d',
-          background: 'rgba(5, 5, 10, 0.8)', // Darker theme bg
-          border: '1px solid rgba(126, 231, 135, 0.2)', // Terminal Green Border
-          boxShadow: '0 4px 30px rgba(0, 0, 0, 0.4)',
-          backdropFilter: 'blur(10px)',
-          borderRadius: '16px', // Slightly sharper for terminal feel
-          padding: '2rem',
-          height: '100%',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          cursor: 'pointer',
-          fontFamily: 'var(--font-mono)',
         }}
-        className='glass-panel'
+        className='bg-[#05050a]/80 border border-accent-green/20 shadow-[0_4px_30px_rgba(0,0,0,0.4)] backdrop-blur-md rounded-2xl p-8 h-full flex flex-col justify-between cursor-pointer'
         whileHover={{
           scale: 1.02, // Less scale
           zIndex: 10,
@@ -355,59 +272,26 @@ const ProjectCard = ({
       >
         <div style={{ transform: 'translateZ(50px)' }}>
           {/* IDE Header Like */}
-          <div
-            style={{
-              color: '#8b949e',
-              fontSize: '0.75rem',
-              fontWeight: 500,
-              marginBottom: '0.8rem',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              overflow: 'hidden',
-              whiteSpace: 'nowrap',
-            }}
-          >
-            <span style={{ color: '#7ee787' }}>root@portfolio</span>
-            <span style={{ color: '#c9d1d9' }}>:</span>
-            <span style={{ color: '#58a6ff' }}>~/projects</span>
-            <span style={{ color: '#c9d1d9' }}>$</span>
-            <span style={{ color: '#c9d1d9' }}>
+          <div className='text-text-secondary text-[0.75rem] font-medium mb-[0.8rem] flex items-center gap-2 overflow-hidden whitespace-nowrap'>
+            <span className='text-accent-green'>root@portfolio</span>
+            <span className='text-text-primary'>:</span>
+            <span className='text-accent-blue'>~/projects</span>
+            <span className='text-text-primary'>$</span>
+            <span className='text-text-primary'>
               ./view {project.title.toLowerCase().replace(/\s+/g, '-')}
             </span>
             <motion.span
               animate={{ opacity: [0, 1, 0] }}
               transition={{ duration: 0.8, repeat: Infinity }}
-              style={{
-                display: 'inline-block',
-                width: '6px',
-                height: '1.2em',
-                background: '#7ee787',
-                verticalAlign: 'middle',
-              }}
+              className='inline-block w-[6px] h-[1.2em] bg-accent-green align-middle'
             />
           </div>
 
-          <h3
-            style={{
-              fontSize: '1.4rem',
-              marginBottom: '1rem',
-              color: '#c9d1d9',
-              fontWeight: 600,
-            }}
-          >
+          <h3 className='text-[1.4rem] mb-4 text-text-primary font-semibold'>
             {project.title}
           </h3>
 
-          <div
-            style={{
-              color: '#8b949e',
-              lineHeight: 1.6,
-              fontSize: '0.9rem',
-              marginBottom: '1.5rem',
-              fontStyle: 'italic',
-            }}
-          >
+          <div className='text-text-secondary leading-[1.6] text-[0.9rem] mb-6 italic'>
             {'//'} {project.description}
           </div>
         </div>
@@ -415,22 +299,11 @@ const ProjectCard = ({
         <div
           style={{
             transform: 'translateZ(30px)',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            marginTop: 'auto',
           }}
+          className='flex justify-between items-center mt-auto'
         >
-          <div
-            style={{
-              display: 'flex',
-              gap: '0.5rem',
-              flexWrap: 'wrap',
-              fontSize: '0.85rem',
-              color: '#8b949e',
-            }}
-          >
-            <span style={{ color: '#7ee787' }}>[STACK]</span>
+          <div className='flex gap-2 flex-wrap text-[0.85rem] text-text-secondary'>
+            <span className='text-accent-green'>[STACK]</span>
             {project.tech.split(', ').map((t: string, i, arr) => (
               <span key={t}>
                 {t}
@@ -452,43 +325,23 @@ export default function Projects() {
   return (
     <section
       id='projects'
-      style={{ padding: '6rem 10%' }}
+      className='py-24 px-[10%]'
     >
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        style={{ marginBottom: '4rem', textAlign: 'center' }}
+        className='mb-16 text-center'
       >
-        <h2
-          style={{
-            fontSize: '2.5rem',
-            marginBottom: '1rem',
-            color: '#c9d1d9',
-            fontFamily: 'var(--font-mono)',
-          }}
-        >
-          Featured <span style={{ color: '#7ee787' }}>Projects</span>
+        <h2 className='text-[2.5rem] mb-4 text-text-primary block'>
+          Featured <span className='text-accent-green'>Projects</span>
         </h2>
-        <p
-          style={{
-            color: '#8b949e',
-            maxWidth: '600px',
-            margin: '0 auto',
-            fontFamily: 'var(--font-mono)',
-          }}
-        >
+        <p className='text-text-secondary max-w-[600px] mx-auto'>
           {'>'} Showcase of deployed applications impacting thousands of users.
         </p>
       </motion.div>
 
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-          gap: '2.5rem',
-        }}
-      >
+      <div className='grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-10'>
         {projects.map((project, index) => (
           <ProjectCard
             key={index}

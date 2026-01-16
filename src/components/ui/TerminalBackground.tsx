@@ -64,40 +64,21 @@ export default function TerminalBackground() {
   }, []);
 
   return (
-    <div
-      className='fixed inset-0 overflow-hidden'
-      style={{ zIndex: 0, background: '#000000', pointerEvents: 'none' }}
-    >
+    <div className='fixed inset-0 overflow-hidden -z-10 bg-black pointer-events-none'>
       {/* Matrix Rain Canvas */}
       <canvas
         ref={canvasRef}
-        className='absolute inset-0'
-        style={{ opacity: 0.15 }}
+        className='absolute inset-0 opacity-15'
       />
 
       {/* Subtle Grid Pattern */}
-      <div
-        className='absolute inset-0 grid-pattern'
-        style={{ opacity: 0.03 }}
-      />
+      <div className='absolute inset-0 grid-pattern opacity-[0.03]' />
 
       {/* Gradient Overlay for depth */}
-      <div
-        className='absolute inset-0'
-        style={{
-          background:
-            'radial-gradient(circle at 20% 50%, rgba(126, 231, 135, 0.03) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(88, 166, 255, 0.03) 0%, transparent 50%)',
-        }}
-      />
+      <div className='absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(126,231,135,0.03)_0%,transparent_50%),radial-gradient(circle_at_80%_80%,rgba(88,166,255,0.03)_0%,transparent_50%)]' />
 
       {/* Vignette */}
-      <div
-        className='absolute inset-0'
-        style={{
-          background:
-            'radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.4) 100%)',
-        }}
-      />
+      <div className='absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.4)_100%)]' />
     </div>
   );
 }

@@ -138,13 +138,7 @@ export default function ParallaxBackground() {
 
       {/* Rotating Gradient Orbs */}
       <motion.div
-        className='absolute w-96 h-96 rounded-full blur-3xl'
-        style={{
-          background:
-            'radial-gradient(circle, rgba(77, 77, 255, 0.2) 0%, transparent 70%)',
-          left: '10%',
-          top: '20%',
-        }}
+        className='absolute w-96 h-96 rounded-full blur-3xl left-[10%] top-[20%] bg-[radial-gradient(circle,rgba(77,77,255,0.2)_0%,transparent_70%)]'
         animate={{
           x: [0, 100, 0],
           y: [0, -50, 0],
@@ -158,13 +152,7 @@ export default function ParallaxBackground() {
       />
 
       <motion.div
-        className='absolute w-80 h-80 rounded-full blur-3xl'
-        style={{
-          background:
-            'radial-gradient(circle, rgba(188, 19, 254, 0.2) 0%, transparent 70%)',
-          right: '10%',
-          bottom: '20%',
-        }}
+        className='absolute w-80 h-80 rounded-full blur-3xl right-[10%] bottom-[20%] bg-[radial-gradient(circle,rgba(188,19,254,0.2)_0%,transparent_70%)]'
         animate={{
           x: [0, -100, 0],
           y: [0, 50, 0],
@@ -180,14 +168,7 @@ export default function ParallaxBackground() {
 
       {/* Grid Pattern with Animation */}
       <motion.div
-        className='absolute inset-0 opacity-10'
-        style={{
-          backgroundImage: `
-            linear-gradient(rgba(77, 77, 255, 0.3) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(77, 77, 255, 0.3) 1px, transparent 1px)
-          `,
-          backgroundSize: '50px 50px',
-        }}
+        className='absolute inset-0 opacity-10 bg-[length:50px_50px] bg-[linear-gradient(rgba(77,77,255,0.3)_1px,transparent_1px),linear-gradient(90deg,rgba(77,77,255,0.3)_1px,transparent_1px)]'
         animate={{
           backgroundPosition: ['0px 0px', '50px 50px'],
         }}
@@ -227,7 +208,7 @@ export default function ParallaxBackground() {
 
       {/* Scanline Effect */}
       <motion.div
-        className='absolute inset-x-0 h-px bg-linear-to-r from-transparent via-blue-500/30 to-transparent'
+        className='absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-blue-500/30 to-transparent'
         animate={{
           top: ['0%', '100%'],
         }}
@@ -239,7 +220,7 @@ export default function ParallaxBackground() {
       />
 
       {/* Dark Overlay for Readability */}
-      <div className='absolute inset-0 bg-linear-to-b from-transparent via-[#020204]/50 to-[#020204]/80' />
+      <div className='absolute inset-0 bg-gradient-to-b from-transparent via-[#020204]/50 to-[#020204]/80' />
     </div>
   );
 }

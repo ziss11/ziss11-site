@@ -37,42 +37,22 @@ const Counter = ({
   return (
     <div
       ref={ref}
-      style={{
-        textAlign: 'left', // Align left for log style
-        fontFamily: 'var(--font-mono)',
-        borderBottom: '1px dashed rgba(126, 231, 135, 0.2)',
-        padding: '1rem 0',
-        width: '100%',
-        maxWidth: '300px',
-      }}
+      className='text-left font-mono border-b border-accent-green/20 border-dashed py-4 w-full max-w-[300px]'
     >
-      <div
-        style={{ fontSize: '0.8rem', color: '#8b949e', marginBottom: '0.2rem' }}
-      >
-        <span style={{ color: '#7ee787' }}>[BENCHMARK]</span>{' '}
+      <div className='text-[0.8rem] text-text-secondary mb-[0.2rem]'>
+        <span className='text-accent-green'>[BENCHMARK]</span>{' '}
         {label.toUpperCase()}
       </div>
-      <motion.div
-        style={{
-          fontSize: '2rem',
-          fontWeight: 700,
-          color: '#c9d1d9',
-          display: 'flex',
-          alignItems: 'baseline',
-          gap: '10px',
-        }}
-      >
-        <div
-          style={{ display: 'flex', alignItems: 'center', gap: '8px', flex: 1 }}
-        >
-          <span style={{ fontSize: '0.9rem', color: '#7ee787' }}>{'>'}</span>
-          <span style={{ color: '#c9d1d9' }}>
+      <motion.div className='text-[2rem] font-bold text-text-primary flex items-baseline gap-[10px]'>
+        <div className='flex items-center gap-2 flex-1'>
+          <span className='text-[0.9rem] text-accent-green'>{'>'}</span>
+          <span className='text-text-primary'>
             {prefix}
             {displayValue}
             {suffix}
           </span>
         </div>
-        <span style={{ fontSize: '0.8rem', color: '#2ea043' }}>[OK]</span>
+        <span className='text-[0.8rem] text-[#2ea043]'>[OK]</span>
       </motion.div>
     </div>
   );
@@ -80,40 +60,18 @@ const Counter = ({
 
 export default function PerformanceMetrics() {
   return (
-    <section
-      style={{
-        padding: '6rem 10%',
-        margin: '4rem 0',
-        fontFamily: 'var(--font-mono)',
-        borderTop: '1px solid rgba(126, 231, 135, 0.1)',
-        borderBottom: '1px solid rgba(126, 231, 135, 0.1)',
-      }}
-    >
-      <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-        <h2
-          style={{
-            fontSize: '2.5rem',
-            marginBottom: '1rem',
-            color: '#c9d1d9',
-            fontFamily: 'var(--font-mono)',
-          }}
-        >
-          System <span style={{ color: '#7ee787' }}>Metrics</span>
+    <section className='py-24 px-[10%] my-16 font-mono border-y border-accent-green/10'>
+      <div className='text-center mb-16'>
+        <h2 className='text-[2.5rem] mb-4 text-text-primary font-mono'>
+          System <span className='text-accent-green'>Metrics</span>
         </h2>
-        <div style={{ color: '#8b949e', fontFamily: 'var(--font-mono)' }}>
-          <span style={{ color: '#7ee787' }}>root@server:~$</span>{' '}
+        <div className='text-text-secondary font-mono'>
+          <span className='text-accent-green'>root@server:~$</span>{' '}
           ./run-benchmarks.sh
         </div>
       </div>
 
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-around',
-          flexWrap: 'wrap',
-          gap: '3rem',
-        }}
-      >
+      <div className='flex justify-around flex-wrap gap-12'>
         <Counter
           value={60}
           label='FPS'

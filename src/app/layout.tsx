@@ -1,18 +1,5 @@
 import type { Metadata } from 'next';
-import { Outfit, Space_Grotesk } from 'next/font/google';
 import './globals.css';
-
-const outfit = Outfit({
-  subsets: ['latin'],
-  variable: '--font-main',
-  display: 'swap',
-});
-
-const spaceGrotesk = Space_Grotesk({
-  subsets: ['latin'],
-  variable: '--font-mono',
-  display: 'swap',
-});
 
 export const metadata: Metadata = {
   title: {
@@ -81,10 +68,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html
-      lang='en'
-      className={`${outfit.variable} ${spaceGrotesk.variable}`}
-    >
+    <html lang='en'>
       <body>{children}</body>
     </html>
   );
