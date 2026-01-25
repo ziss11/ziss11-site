@@ -1,8 +1,8 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { ArrowUpRight, Check, Copy, Mail } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { SiGithub, SiLinkedin } from 'react-icons/si';
 
 const contactMethods = [
@@ -39,6 +39,17 @@ const contactMethods = [
 
 export default function ContactTerminal() {
   const [copied, setCopied] = useState(false);
+  const [forceVisible, setForceVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const isInView = useInView(sectionRef, { once: true, margin: '100px' });
+
+  // Fallback: force visibility after 2 seconds if viewport detection fails
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setForceVisible(true);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleCopy = (text: string) => {
     navigator.clipboard.writeText(text);
@@ -46,8 +57,13 @@ export default function ContactTerminal() {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const shouldAnimate = isInView || forceVisible;
+
   return (
-    <section className='py-24 px-[10%] relative overflow-hidden w-full flex flex-col items-center'>
+    <section
+      ref={sectionRef}
+      className='py-24 px-[10%] relative overflow-hidden w-full flex flex-col items-center'
+    >
       {/* Title - Matched to Career Milestones */}
       <h2 className='text-[2.5rem] text-center mb-16 text-white font-bold'>
         Get in <span className='text-accent-green'>Touch</span>
@@ -59,9 +75,10 @@ export default function ContactTerminal() {
           <motion.div
             key={method.id}
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.1 }}
+            animate={
+              shouldAnimate ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }
+            }
+            transition={{ delay: index * 0.1, duration: 0.5 }}
             onClick={() => {
               if (method.type === 'copy') handleCopy(method.value);
               else if (method.link) window.open(method.link, '_blank');
