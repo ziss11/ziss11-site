@@ -1,5 +1,3 @@
-'use client';
-
 import About from '@/components/ui/About';
 import BentoGrid from '@/components/ui/BentoGrid';
 import ContactTerminal from '@/components/ui/ContactTerminal';
@@ -15,10 +13,7 @@ export default function Home() {
   return (
     <LenisWrapper>
       <main className='relative w-full overflow-x-hidden'>
-        {/* <TerminalBackground /> */}
-        <div className='absolute inset-0 -z-10'>
-          <TerminalBackground />
-        </div>
+        <TerminalBackground />
         {/* Content Sections */}
         <Hero />
         <ExperienceTimeline />

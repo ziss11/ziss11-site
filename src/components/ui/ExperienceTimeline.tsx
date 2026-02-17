@@ -141,7 +141,7 @@ export default function ExperienceTimeline() {
       className='py-16 px-[10%] relative overflow-hidden'
     >
       <h2 className='text-[2.5rem] text-center mb-10 md:mb-20 text-white'>
-        Career <span className='text-gradient-blue'>Milestones</span>
+        Career <span className='text-accent-blue'>Milestones</span>
       </h2>
 
       <div className='relative max-w-[1000px] mx-auto'>
