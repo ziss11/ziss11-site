@@ -9,7 +9,7 @@ const contactMethods = [
   {
     id: 'email',
     name: 'Email',
-    value: 'zis.dev@gmail.com',
+    value: 'ziss.dev@gmail.com',
     icon: <Mail size={24} />,
     type: 'copy',
     actionLabel: 'Click to copy',
