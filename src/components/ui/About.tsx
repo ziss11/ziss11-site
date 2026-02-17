@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 export default function About() {
   return (
-    <section className='relative z-10 py-24 px-[10%]'>
+    <section id='about' className='relative z-10 py-24 px-[10%]'>
       <div className='max-w-[1000px] mx-auto'>
         {/* Visual Title - Matched to other sections */}
         <h2 className='text-[2.5rem] text-center mb-16 text-white font-bold'>

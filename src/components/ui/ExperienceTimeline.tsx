@@ -137,6 +137,7 @@ export default function ExperienceTimeline() {
 
   return (
     <section
+      id='experience'
       ref={ref}
       className='py-16 px-[10%] relative overflow-hidden'
     >

@@ -51,7 +51,7 @@ const BentoCard = ({
 
 export default function BentoGrid() {
   return (
-    <section className='px-[10%] my-24'>
+    <section id='skills' className='px-[10%] my-24'>
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}

@@ -61,6 +61,7 @@ export default function ContactTerminal() {
 
   return (
     <section
+      id='contact'
       ref={sectionRef}
       className='py-24 px-[10%] relative overflow-hidden w-full flex flex-col items-center'
     >

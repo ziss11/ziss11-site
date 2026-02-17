@@ -3,6 +3,7 @@ import BentoGrid from '@/components/ui/BentoGrid';
 import ContactTerminal from '@/components/ui/ContactTerminal';
 import ExperienceTimeline from '@/components/ui/ExperienceTimeline';
 import GithubActivity from '@/components/ui/GithubActivity';
+import Header from '@/components/ui/Header';
 import Hero from '@/components/ui/Hero';
 import PerformanceMetrics from '@/components/ui/PerformanceMetrics';
 import Projects from '@/components/ui/Projects';
@@ -12,7 +13,8 @@ import LenisWrapper from '@/components/utils/LenisWrapper';
 export default function Home() {
   return (
     <LenisWrapper>
-      <main className='relative w-full overflow-x-hidden'>
+      <Header />
+      <main className='absolute w-full overflow-x-hidden'>
         <TerminalBackground />
         {/* Content Sections */}
         <Hero />

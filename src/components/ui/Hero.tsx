@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 const containerVariants = {
@@ -35,28 +34,15 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className='relative h-screen flex flex-col justify-center px-[10%] max-w-[1200px] mx-auto overflow-hidden'>
+    <section
+      id='hero'
+      className='relative h-screen flex flex-col justify-center px-[10%] max-w-[1200px] mx-auto overflow-hidden pt-20'
+    >
       <motion.div
         variants={containerVariants}
         initial='hidden'
         animate='visible'
       >
-        {/* Logo */}
-        <motion.div
-          variants={itemVariants}
-          className='mb-8'
-        >
-          <div className='w-20 h-20 relative rounded-2xl overflow-hidden shadow-[0_0_30px_rgba(126,231,135,0.3)] border border-accent-green/20'>
-            <Image
-              src='/logo.png'
-              alt='Logo'
-              fill
-              className='object-cover'
-              priority
-            />
-          </div>
-        </motion.div>
-
         {/* Main Title with Terminal Prompt */}
         <motion.div variants={itemVariants}>
           <h1 className='text-[clamp(2rem,5vw,3.5rem)] font-semibold leading-[1.3] mb-6 text-text-primary font-mono'>
