@@ -96,7 +96,12 @@ export default function GithubActivity() {
     fetchData();
   }, []);
 
-  if (loading) return null;
+  if (loading)
+    return (
+      <section className='py-24 px-[10%] relative'>
+        <div className='max-w-[900px] mx-auto bg-[#05050a]/80 border border-accent-green/20 rounded-[24px] p-8 backdrop-blur-md' style={{ minHeight: '280px' }} />
+      </section>
+    );
 
   return (
     <section className='py-24 px-[10%] relative'>
