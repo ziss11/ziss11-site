@@ -60,7 +60,7 @@ const Counter = ({
 
 export default function PerformanceMetrics() {
   return (
-    <section className='py-24 px-[10%] my-16 font-mono border-y border-accent-green/10'>
+    <section className='py-24 px-4 md:px-[10%] my-16 font-mono border-y border-accent-green/10'>
       <div className='text-center mb-16'>
         <h2 className='text-[2.5rem] mb-4 text-text-primary font-mono'>
           System <span className='text-accent-green'>Metrics</span>
@@ -71,7 +71,7 @@ export default function PerformanceMetrics() {
         </div>
       </div>
 
-      <div className='flex justify-around flex-wrap gap-12'>
+      <div className='flex justify-center md:justify-around flex-wrap gap-6 md:gap-12'>
         <Counter
           value={60}
           label='FPS'

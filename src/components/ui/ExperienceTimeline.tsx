@@ -139,7 +139,7 @@ export default function ExperienceTimeline() {
     <section
       id='experience'
       ref={ref}
-      className='py-16 px-[10%] relative overflow-hidden'
+      className='py-16 px-4 md:px-[10%] relative overflow-hidden'
     >
       <h2 className='text-[2.5rem] text-center mb-10 md:mb-20 text-white'>
         Career <span className='text-accent-blue'>Milestones</span>

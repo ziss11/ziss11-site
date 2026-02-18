@@ -98,19 +98,19 @@ export default function GithubActivity() {
 
   if (loading)
     return (
-      <section className='py-24 px-[10%] relative'>
-        <div className='max-w-[900px] mx-auto bg-[#05050a]/80 border border-accent-green/20 rounded-[24px] p-8 backdrop-blur-md' style={{ minHeight: '280px' }} />
+      <section className='py-24 px-4 md:px-[10%] relative'>
+        <div className='max-w-[900px] mx-auto bg-[#05050a]/80 border border-accent-green/20 rounded-[24px] p-4 md:p-8 backdrop-blur-md' style={{ minHeight: '280px' }} />
       </section>
     );
 
   return (
-    <section className='py-24 px-[10%] relative'>
+    <section className='py-24 px-4 md:px-[10%] relative'>
       {/* Visual Title - Matched to other sections */}
       <h2 className='text-[2.5rem] text-center mb-16 text-white font-mono font-bold'>
         Github <span className='text-accent-green'>Activity</span>
       </h2>
 
-      <div className='max-w-[900px] mx-auto bg-[#05050a]/80 border border-accent-green/20 rounded-[24px] p-8 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.4)] font-mono'>
+      <div className='max-w-[900px] mx-auto bg-[#05050a]/80 border border-accent-green/20 rounded-[24px] p-4 md:p-8 backdrop-blur-md shadow-[0_4px_30px_rgba(0,0,0,0.4)] font-mono'>
         {/* Internal Terminal Command styled as sub-header or detail */}
         <div className='mb-6 border-b border-accent-green/10 pb-4'>
           <div className='text-text-secondary text-[0.9rem]'>

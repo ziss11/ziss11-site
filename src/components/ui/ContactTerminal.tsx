@@ -63,7 +63,7 @@ export default function ContactTerminal() {
     <section
       id='contact'
       ref={sectionRef}
-      className='py-24 px-[10%] relative overflow-hidden w-full flex flex-col items-center'
+      className='py-24 px-4 md:px-[10%] relative overflow-hidden w-full flex flex-col items-center'
     >
       {/* Title - Matched to Career Milestones */}
       <h2 className='text-[2.5rem] text-center mb-16 text-white font-bold'>
@@ -71,7 +71,7 @@ export default function ContactTerminal() {
       </h2>
 
       {/* Grid Layout with Explicit Inline Styles for Robustness */}
-      <div className='grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-8 w-full max-w-[1200px] mx-auto'>
+      <div className='grid grid-cols-1 md:grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-8 w-full max-w-[1200px] mx-auto'>
         {contactMethods.map((method, index) => (
           <motion.div
             key={method.id}
@@ -84,7 +84,7 @@ export default function ContactTerminal() {
               if (method.type === 'copy') handleCopy(method.value);
               else if (method.link) window.open(method.link, '_blank');
             }}
-            className='group cursor-pointer bg-[#05050a]/80 border border-accent-green/20 p-8 rounded-[20px] backdrop-blur-md relative overflow-hidden transition-all duration-300 flex flex-col justify-between min-h-[220px]'
+            className='group cursor-pointer bg-[#05050a]/80 border border-accent-green/20 p-5 md:p-8 rounded-[20px] backdrop-blur-md relative overflow-hidden transition-all duration-300 flex flex-col justify-between min-h-[180px] md:min-h-[220px]'
             whileHover={{
               transform: 'translateY(-5px)',
               boxShadow: '0 10px 30px -10px rgba(126, 231, 135, 0.15)',

@@ -36,7 +36,7 @@ export default function Hero() {
   return (
     <section
       id='hero'
-      className='relative h-screen flex flex-col justify-center px-[10%] max-w-[1200px] mx-auto overflow-hidden pt-20'
+      className='relative h-screen flex flex-col justify-center px-4 md:px-[10%] max-w-[1200px] mx-auto overflow-hidden pt-20'
     >
       <motion.div
         variants={containerVariants}
@@ -45,7 +45,7 @@ export default function Hero() {
       >
         {/* Main Title with Terminal Prompt */}
         <motion.div variants={itemVariants}>
-          <h1 className='text-[clamp(2rem,5vw,3.5rem)] font-semibold leading-[1.3] mb-6 text-text-primary font-mono'>
+          <h1 className='text-[clamp(1.6rem,5vw,3.5rem)] font-semibold leading-[1.3] mb-6 text-text-primary font-mono'>
             <span className='text-accent-green'>$</span>{' '}
             <span className='text-accent-purple'>const</span>{' '}
             <span className='text-accent-blue'>mobileEngineer</span> ={' '}

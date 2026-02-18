@@ -68,7 +68,7 @@ const ProjectModal = ({
       animate={{ scale: 1, opacity: 1 }}
       exit={{ scale: 0.9, opacity: 0 }}
       onClick={(e) => e.stopPropagation()}
-      className='bg-[#05050a]/95 border border-accent-green/20 p-8 rounded-[24px] max-w-[500px] w-[90%] relative shadow-[0_0_40px_rgba(126,231,135,0.1)]'
+      className='bg-[#05050a]/95 border border-accent-green/20 p-5 md:p-8 rounded-[24px] max-w-[500px] w-[90%] relative shadow-[0_0_40px_rgba(126,231,135,0.1)]'
     >
       <button
         onClick={onClose}
@@ -262,7 +262,7 @@ const ProjectCard = ({
           rotateY,
           transformStyle: 'preserve-3d',
         }}
-        className='bg-[#05050a]/80 border border-accent-green/20 shadow-[0_4px_30px_rgba(0,0,0,0.4)] backdrop-blur-md rounded-2xl p-8 h-full flex flex-col justify-between cursor-pointer'
+        className='bg-[#05050a]/80 border border-accent-green/20 shadow-[0_4px_30px_rgba(0,0,0,0.4)] backdrop-blur-md rounded-2xl p-5 md:p-8 h-full flex flex-col justify-between cursor-pointer'
         whileHover={{
           scale: 1.02, // Less scale
           zIndex: 10,
@@ -325,7 +325,7 @@ export default function Projects() {
   return (
     <section
       id='projects'
-      className='py-24 px-[10%]'
+      className='py-24 px-4 md:px-[10%]'
     >
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -341,7 +341,7 @@ export default function Projects() {
         </p>
       </motion.div>
 
-      <div className='grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-10'>
+      <div className='grid grid-cols-1 md:grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-10'>
         {projects.map((project, index) => (
           <ProjectCard
             key={index}

@@ -51,7 +51,7 @@ const BentoCard = ({
 
 export default function BentoGrid() {
   return (
-    <section id='skills' className='px-[10%] my-24'>
+    <section id='skills' className='px-4 md:px-[10%] my-24'>
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -61,12 +61,12 @@ export default function BentoGrid() {
         Mobile <span className='text-accent-green'>Arsenal</span>
       </motion.h2>
 
-      <div className='grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-6 auto-rows-[minmax(180px,auto)]'>
+      <div className='grid grid-cols-1 md:grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-6 auto-rows-[minmax(180px,auto)]'>
         {/* Mobile Architecture - Large Span */}
         <BentoCard
           title='System Architecture'
           icon={Layout}
-          span='col-span-2'
+          span='col-span-1 md:col-span-2'
           delay={0.1}
         >
           <div className='font-mono text-[0.85rem] text-text-secondary flex flex-col gap-2'>
