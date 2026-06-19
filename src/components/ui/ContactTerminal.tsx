@@ -4,40 +4,49 @@ import { motion, useInView } from 'framer-motion';
 import { ArrowUpRight, Check, Copy, Mail } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { SiGithub, SiLinkedin } from 'react-icons/si';
+import { DEFAULT_CONTACT, type Contact } from '@/data/content';
 
-const contactMethods = [
-  {
-    id: 'email',
-    name: 'Email',
-    value: 'ziss.dev@gmail.com',
-    icon: <Mail size={24} />,
-    type: 'copy',
-    actionLabel: 'Click to copy',
-    color: '#7ee787', // Terminal Green
-  },
-  {
-    id: 'linkedin',
-    name: 'LinkedIn',
-    value: 'linkedin.com/in/abdazis11',
-    link: 'https://www.linkedin.com/in/abdazis11/',
-    icon: <SiLinkedin size={24} />,
-    type: 'link',
-    actionLabel: 'Connect',
-    color: '#0077b5', // LinkedIn Blue
-  },
-  {
-    id: 'github',
-    name: 'GitHub',
-    value: 'github.com/ziss11',
-    link: 'https://github.com/ziss11',
-    icon: <SiGithub size={24} />,
-    type: 'link',
-    actionLabel: 'Follow',
-    color: '#c9d1d9', // GitHub Gray
-  },
-];
+// Buang protokol/trailing slash buat tampilan ringkas.
+const displayUrl = (url: string) =>
+  url.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
 
-export default function ContactTerminal() {
+export default function ContactTerminal({
+  contact = DEFAULT_CONTACT,
+}: {
+  contact?: Contact;
+}) {
+  const contactMethods = [
+    {
+      id: 'email',
+      name: 'Email',
+      value: contact.email,
+      icon: <Mail size={24} />,
+      type: 'copy',
+      actionLabel: 'Click to copy',
+      color: '#7ee787', // Terminal Green
+    },
+    {
+      id: 'linkedin',
+      name: 'LinkedIn',
+      value: displayUrl(contact.linkedinUrl),
+      link: contact.linkedinUrl,
+      icon: <SiLinkedin size={24} />,
+      type: 'link',
+      actionLabel: 'Connect',
+      color: '#0077b5', // LinkedIn Blue
+    },
+    {
+      id: 'github',
+      name: 'GitHub',
+      value: displayUrl(contact.githubUrl),
+      link: contact.githubUrl,
+      icon: <SiGithub size={24} />,
+      type: 'link',
+      actionLabel: 'Follow',
+      color: '#c9d1d9', // GitHub Gray
+    },
+  ];
+
   const [copied, setCopied] = useState(false);
   const [forceVisible, setForceVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);

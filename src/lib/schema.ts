@@ -23,3 +23,11 @@ export const projects = sqliteTable('projects', {
   playStoreUrl: text('play_store_url'),
   appStoreUrl: text('app_store_url'),
 });
+
+// Single-row table (id = 1) untuk info kontak.
+export const contact = sqliteTable('contact', {
+  id: integer('id').primaryKey(),
+  email: text('email').notNull(),
+  linkedinUrl: text('linkedin_url').notNull(),
+  githubUrl: text('github_url').notNull(),
+});

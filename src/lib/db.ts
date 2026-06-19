@@ -2,7 +2,11 @@ import 'server-only';
 import { createClient } from '@libsql/client';
 import { drizzle, type LibSQLDatabase } from 'drizzle-orm/libsql';
 import { sql } from 'drizzle-orm';
-import { DEFAULT_EXPERIENCES, DEFAULT_PROJECTS } from '@/data/content';
+import {
+  DEFAULT_CONTACT,
+  DEFAULT_EXPERIENCES,
+  DEFAULT_PROJECTS,
+} from '@/data/content';
 import * as schema from '@/lib/schema';
 
 let db: LibSQLDatabase<typeof schema> | null = null;
@@ -61,6 +65,13 @@ async function init(): Promise<void> {
     app_store_url TEXT
   )`);
 
+  await d.run(sql`CREATE TABLE IF NOT EXISTS contact (
+    id INTEGER PRIMARY KEY,
+    email TEXT NOT NULL,
+    linkedin_url TEXT NOT NULL,
+    github_url TEXT NOT NULL
+  )`);
+
   await seedIfEmpty(d);
 }
 
@@ -100,5 +111,17 @@ async function seedIfEmpty(d: LibSQLDatabase<typeof schema>): Promise<void> {
         appStoreUrl: p.appStoreUrl ?? null,
       }))
     );
+  }
+
+  const [cont] = await d
+    .select({ n: sql<number>`count(*)` })
+    .from(schema.contact);
+  if (Number(cont.n) === 0) {
+    await d.insert(schema.contact).values({
+      id: 1,
+      email: DEFAULT_CONTACT.email,
+      linkedinUrl: DEFAULT_CONTACT.linkedinUrl,
+      githubUrl: DEFAULT_CONTACT.githubUrl,
+    });
   }
 }

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useTransition } from 'react';
-import { ArrowDown, ArrowUp, Plus, Trash2 } from 'lucide-react';
+import { ArrowDown, ArrowUp, Plus, Save, Trash2 } from 'lucide-react';
 import type { Experience } from '@/data/content';
 import { saveExperiencesAction } from '@/app/admin/actions';
 
@@ -25,8 +25,10 @@ export default function ExperienceEditor({
   initial: Experience[];
 }) {
   const [items, setItems] = useState<Experience[]>(initial);
-  const [status, setStatus] = useState<string | null>(null);
   const [pending, startTransition] = useTransition();
+  const [savedAt, setSavedAt] = useState<number | null>(null);
+  const [busyIndex, setBusyIndex] = useState<number | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const update = (i: number, patch: Partial<Experience>) =>
     setItems((prev) =>
@@ -47,20 +49,28 @@ export default function ExperienceEditor({
 
   const add = () => setItems((prev) => [...prev, { ...emptyExperience }]);
 
-  const save = () => {
-    setStatus(null);
+  // Simpan seluruh daftar (snapshot terkini). Tombol ada di tiap item agar mudah dijangkau.
+  const save = (sourceIndex: number) => {
+    setError(null);
+    setBusyIndex(sourceIndex);
     startTransition(async () => {
       const res = await saveExperiencesAction(items);
-      setStatus(res.ok ? 'tersimpan ✓' : `gagal: ${res.error}`);
+      setBusyIndex(null);
+      if (res.ok) {
+        setSavedAt(sourceIndex);
+        setTimeout(() => setSavedAt(null), 2000);
+      } else {
+        setError(res.error ?? 'gagal menyimpan');
+      }
     });
   };
 
   return (
-    <div className='flex flex-col gap-5'>
+    <div className='flex flex-col gap-4'>
       <div className='flex items-center justify-between'>
-        <h2 className='font-mono text-[1.3rem] text-text-primary'>
-          Career <span className='text-accent-blue'>Milestones</span>
-        </h2>
+        <p className='font-mono text-xs text-text-muted'>
+          {items.length} milestone
+        </p>
         <button
           onClick={add}
           className='btn-terminal flex items-center gap-2 hover:border-accent-green hover:text-accent-green'
@@ -69,10 +79,14 @@ export default function ExperienceEditor({
         </button>
       </div>
 
+      {error && (
+        <p className='font-mono text-xs text-accent-red'>{'>'} {error}</p>
+      )}
+
       {items.map((it, i) => (
         <div
           key={i}
-          className='rounded-[16px] border border-accent-blue/20 bg-[#05050a]/80 p-4 backdrop-blur-md'
+          className='rounded-[16px] border border-accent-blue/20 bg-[#05050a]/60 p-4 backdrop-blur-md'
         >
           <div className='mb-3 flex items-center justify-between'>
             <span className='font-mono text-xs text-accent-green'>
@@ -176,27 +190,24 @@ export default function ExperienceEditor({
               </select>
             </label>
           </div>
+
+          <div className='mt-4 flex items-center gap-3 border-t border-accent-green/10 pt-3'>
+            <button
+              onClick={() => save(i)}
+              disabled={pending}
+              className='btn-terminal flex items-center gap-2 hover:border-accent-green hover:text-accent-green disabled:opacity-50'
+            >
+              <Save size={15} />
+              {busyIndex === i ? 'menyimpan...' : 'simpan'}
+            </button>
+            {savedAt === i && (
+              <span className='font-mono text-xs text-accent-green'>
+                tersimpan ✓
+              </span>
+            )}
+          </div>
         </div>
       ))}
-
-      <div className='flex items-center gap-3'>
-        <button
-          onClick={save}
-          disabled={pending}
-          className='btn-terminal hover:border-accent-green hover:text-accent-green disabled:opacity-50'
-        >
-          {pending ? '> menyimpan...' : '$ simpan milestones'}
-        </button>
-        {status && (
-          <span
-            className={`font-mono text-xs ${
-              status.startsWith('gagal') ? 'text-accent-red' : 'text-accent-green'
-            }`}
-          >
-            {status}
-          </span>
-        )}
-      </div>
     </div>
   );
 }

@@ -4,9 +4,9 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 import { SESSION_COOKIE, expectedToken, verifyPassword } from '@/lib/auth';
-import { saveExperiences, saveProjects } from '@/lib/content-db';
+import { saveContact, saveExperiences, saveProjects } from '@/lib/content-db';
 import { saveResume } from '@/lib/blob-content';
-import type { Experience, Project } from '@/data/content';
+import type { Contact, Experience, Project } from '@/data/content';
 
 export async function login(_prev: unknown, formData: FormData) {
   const password = String(formData.get('password') ?? '');
@@ -47,6 +47,16 @@ export async function saveExperiencesAction(data: Experience[]) {
 export async function saveProjectsAction(data: Project[]) {
   try {
     await saveProjects(data);
+    revalidatePath('/');
+    return { ok: true as const };
+  } catch (e) {
+    return { ok: false as const, error: (e as Error).message };
+  }
+}
+
+export async function saveContactAction(data: Contact) {
+  try {
+    await saveContact(data);
     revalidatePath('/');
     return { ok: true as const };
   } catch (e) {

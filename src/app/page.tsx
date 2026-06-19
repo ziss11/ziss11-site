@@ -9,14 +9,15 @@ import PerformanceMetrics from "@/components/ui/PerformanceMetrics";
 import Projects from "@/components/ui/Projects";
 import TerminalBackground from "@/components/ui/TerminalBackground";
 import LenisWrapper from "@/components/utils/LenisWrapper";
-import { getExperiences, getProjects } from "@/lib/content-db";
+import { getContact, getExperiences, getProjects } from "@/lib/content-db";
 
 export const dynamic = "force-dynamic";
 
 export default async function Home() {
-  const [experiences, projects] = await Promise.all([
+  const [experiences, projects, contact] = await Promise.all([
     getExperiences(),
     getProjects(),
+    getContact(),
   ]);
 
   return (
@@ -32,7 +33,7 @@ export default async function Home() {
         <PerformanceMetrics />
         <GithubActivity />
         <About />
-        <ContactTerminal />
+        <ContactTerminal contact={contact} />
         <footer
           style={{
             padding: "2rem",

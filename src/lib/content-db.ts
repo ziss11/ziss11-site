@@ -1,13 +1,15 @@
 import 'server-only';
-import { asc } from 'drizzle-orm';
+import { asc, eq } from 'drizzle-orm';
 import {
+  DEFAULT_CONTACT,
   DEFAULT_EXPERIENCES,
   DEFAULT_PROJECTS,
+  type Contact,
   type Experience,
   type Project,
 } from '@/data/content';
 import { ensureSchema, getDb, hasDb } from '@/lib/db';
-import { experiences, projects } from '@/lib/schema';
+import { contact, experiences, projects } from '@/lib/schema';
 
 export async function getExperiences(): Promise<Experience[]> {
   if (!hasDb()) return DEFAULT_EXPERIENCES;
@@ -75,6 +77,33 @@ export async function saveExperiences(data: Experience[]): Promise<void> {
       }))
     ),
   ]);
+}
+
+export async function getContact(): Promise<Contact> {
+  if (!hasDb()) return DEFAULT_CONTACT;
+  try {
+    await ensureSchema();
+    const [row] = await getDb()
+      .select()
+      .from(contact)
+      .where(eq(contact.id, 1));
+    if (!row) return DEFAULT_CONTACT;
+    return {
+      email: row.email,
+      linkedinUrl: row.linkedinUrl,
+      githubUrl: row.githubUrl,
+    };
+  } catch {
+    return DEFAULT_CONTACT;
+  }
+}
+
+export async function saveContact(data: Contact): Promise<void> {
+  await ensureSchema();
+  await getDb()
+    .insert(contact)
+    .values({ id: 1, ...data })
+    .onConflictDoUpdate({ target: contact.id, set: data });
 }
 
 export async function saveProjects(data: Project[]): Promise<void> {

@@ -1,29 +1,28 @@
 import { LogOut } from 'lucide-react';
-import ExperienceEditor from '@/components/admin/ExperienceEditor';
-import ProjectsEditor from '@/components/admin/ProjectsEditor';
-import ResumeUploader from '@/components/admin/ResumeUploader';
-import { getExperiences, getProjects } from '@/lib/content-db';
+import AdminTabs from '@/components/admin/AdminTabs';
+import { getContact, getExperiences, getProjects } from '@/lib/content-db';
 import { resumeExists } from '@/lib/blob-content';
 import { logout } from './actions';
 
 export const dynamic = 'force-dynamic';
 
 export default async function AdminPage() {
-  const [experiences, projects, hasResume] = await Promise.all([
+  const [experiences, projects, contact, hasResume] = await Promise.all([
     getExperiences(),
     getProjects(),
+    getContact(),
     resumeExists(),
   ]);
 
   return (
-    <main className='mx-auto max-w-[900px] px-4 py-16 md:px-8'>
-      <header className='mb-10 flex items-center justify-between'>
+    <main className='mx-auto max-w-[820px] px-4 py-12 md:px-6'>
+      <header className='mb-8 flex items-center justify-between'>
         <div className='font-mono'>
-          <div className='flex items-center gap-2 text-sm text-text-secondary'>
+          <div className='flex items-center gap-2 text-xs text-text-secondary'>
             <span className='text-accent-green'>$</span>
-            <span>./admin --dashboard</span>
+            <span>~/admin</span>
           </div>
-          <h1 className='mt-2 text-[2rem] text-text-primary'>
+          <h1 className='mt-1 text-[1.6rem] text-text-primary'>
             Content <span className='text-accent-green'>Manager</span>
           </h1>
         </div>
@@ -37,17 +36,12 @@ export default async function AdminPage() {
         </form>
       </header>
 
-      <div className='flex flex-col gap-14'>
-        <section>
-          <ExperienceEditor initial={experiences} />
-        </section>
-        <section>
-          <ProjectsEditor initial={projects} />
-        </section>
-        <section>
-          <ResumeUploader hasCustom={hasResume} />
-        </section>
-      </div>
+      <AdminTabs
+        experiences={experiences}
+        projects={projects}
+        contact={contact}
+        hasResume={hasResume}
+      />
     </main>
   );
 }

@@ -18,6 +18,18 @@ export interface Project {
   appStoreUrl?: string;
 }
 
+export interface Contact {
+  email: string;
+  linkedinUrl: string;
+  githubUrl: string;
+}
+
+export const DEFAULT_CONTACT: Contact = {
+  email: 'ziss.dev@gmail.com',
+  linkedinUrl: 'https://www.linkedin.com/in/abdazis11/',
+  githubUrl: 'https://github.com/ziss11',
+};
+
 export const DEFAULT_EXPERIENCES: Experience[] = [
   {
     role: 'Sr. Mobile Engineer',
