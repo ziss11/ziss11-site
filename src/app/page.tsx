@@ -9,7 +9,7 @@ import PerformanceMetrics from "@/components/ui/PerformanceMetrics";
 import Projects from "@/components/ui/Projects";
 import TerminalBackground from "@/components/ui/TerminalBackground";
 import LenisWrapper from "@/components/utils/LenisWrapper";
-import { getExperiences, getProjects } from "@/lib/blob-content";
+import { getExperiences, getProjects } from "@/lib/content-db";
 
 export const dynamic = "force-dynamic";
 

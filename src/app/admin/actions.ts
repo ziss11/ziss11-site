@@ -4,11 +4,8 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
 import { SESSION_COOKIE, expectedToken, verifyPassword } from '@/lib/auth';
-import {
-  saveExperiences,
-  saveProjects,
-  saveResume,
-} from '@/lib/blob-content';
+import { saveExperiences, saveProjects } from '@/lib/content-db';
+import { saveResume } from '@/lib/blob-content';
 import type { Experience, Project } from '@/data/content';
 
 export async function login(_prev: unknown, formData: FormData) {

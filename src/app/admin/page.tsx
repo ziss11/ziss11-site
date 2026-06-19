@@ -2,11 +2,8 @@ import { LogOut } from 'lucide-react';
 import ExperienceEditor from '@/components/admin/ExperienceEditor';
 import ProjectsEditor from '@/components/admin/ProjectsEditor';
 import ResumeUploader from '@/components/admin/ResumeUploader';
-import {
-  getExperiences,
-  getProjects,
-  resumeExists,
-} from '@/lib/blob-content';
+import { getExperiences, getProjects } from '@/lib/content-db';
+import { resumeExists } from '@/lib/blob-content';
 import { logout } from './actions';
 
 export const dynamic = 'force-dynamic';
