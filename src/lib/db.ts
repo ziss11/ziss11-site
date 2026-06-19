@@ -1,29 +1,32 @@
 import 'server-only';
-import { createClient, type Client } from '@libsql/client';
+import { createClient } from '@libsql/client';
+import { drizzle, type LibSQLDatabase } from 'drizzle-orm/libsql';
+import { sql } from 'drizzle-orm';
 import { DEFAULT_EXPERIENCES, DEFAULT_PROJECTS } from '@/data/content';
+import * as schema from '@/lib/schema';
 
-let client: Client | null = null;
+let db: LibSQLDatabase<typeof schema> | null = null;
 let schemaReady: Promise<void> | null = null;
 
 export function hasDb(): boolean {
   return Boolean(process.env.TURSO_DATABASE_URL);
 }
 
-export function getClient(): Client {
-  if (!client) {
-    client = createClient({
+export function getDb(): LibSQLDatabase<typeof schema> {
+  if (!db) {
+    const client = createClient({
       url: process.env.TURSO_DATABASE_URL as string,
       authToken: process.env.TURSO_AUTH_TOKEN,
     });
+    db = drizzle(client, { schema });
   }
-  return client;
+  return db;
 }
 
-/** Buat tabel kalau belum ada + seed default sekali. Dijalankan idempotent, di-cache per proses. */
+/** Buat tabel kalau belum ada + seed default sekali. Idempotent, di-cache per proses. */
 export function ensureSchema(): Promise<void> {
   if (!schemaReady) {
     schemaReady = init().catch((e) => {
-      // reset biar bisa retry di request berikutnya
       schemaReady = null;
       throw e;
     });
@@ -32,82 +35,70 @@ export function ensureSchema(): Promise<void> {
 }
 
 async function init(): Promise<void> {
-  const db = getClient();
+  const d = getDb();
 
-  await db.batch(
-    [
-      `CREATE TABLE IF NOT EXISTS experiences (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        position INTEGER NOT NULL,
-        role TEXT NOT NULL,
-        company TEXT NOT NULL,
-        type TEXT NOT NULL,
-        period TEXT NOT NULL,
-        descr TEXT NOT NULL,
-        tech TEXT NOT NULL,
-        side TEXT NOT NULL
-      )`,
-      `CREATE TABLE IF NOT EXISTS projects (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        position INTEGER NOT NULL,
-        title TEXT NOT NULL,
-        category TEXT NOT NULL,
-        tech TEXT NOT NULL,
-        description TEXT NOT NULL,
-        github_url TEXT,
-        play_store_url TEXT,
-        app_store_url TEXT
-      )`,
-    ],
-    'write'
-  );
+  await d.run(sql`CREATE TABLE IF NOT EXISTS experiences (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    position INTEGER NOT NULL,
+    role TEXT NOT NULL,
+    company TEXT NOT NULL,
+    type TEXT NOT NULL,
+    period TEXT NOT NULL,
+    descr TEXT NOT NULL,
+    tech TEXT NOT NULL,
+    side TEXT NOT NULL
+  )`);
 
-  await seedIfEmpty(db);
+  await d.run(sql`CREATE TABLE IF NOT EXISTS projects (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    position INTEGER NOT NULL,
+    title TEXT NOT NULL,
+    category TEXT NOT NULL,
+    tech TEXT NOT NULL,
+    description TEXT NOT NULL,
+    github_url TEXT,
+    play_store_url TEXT,
+    app_store_url TEXT
+  )`);
+
+  await seedIfEmpty(d);
 }
 
-async function seedIfEmpty(db: Client): Promise<void> {
-  const [exp, proj] = await Promise.all([
-    db.execute('SELECT COUNT(*) AS n FROM experiences'),
-    db.execute('SELECT COUNT(*) AS n FROM projects'),
-  ]);
+async function seedIfEmpty(d: LibSQLDatabase<typeof schema>): Promise<void> {
+  const [exp] = await d
+    .select({ n: sql<number>`count(*)` })
+    .from(schema.experiences);
+  const [proj] = await d
+    .select({ n: sql<number>`count(*)` })
+    .from(schema.projects);
 
-  if (Number(exp.rows[0].n) === 0) {
-    await db.batch(
+  if (Number(exp.n) === 0) {
+    await d.insert(schema.experiences).values(
       DEFAULT_EXPERIENCES.map((e, i) => ({
-        sql: `INSERT INTO experiences (position, role, company, type, period, descr, tech, side)
-              VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-        args: [
-          i,
-          e.role,
-          e.company,
-          e.type,
-          e.period,
-          e.desc,
-          JSON.stringify(e.tech),
-          e.side,
-        ],
-      })),
-      'write'
+        position: i,
+        role: e.role,
+        company: e.company,
+        type: e.type,
+        period: e.period,
+        descr: e.desc,
+        tech: JSON.stringify(e.tech),
+        side: e.side,
+      }))
     );
   }
 
-  if (Number(proj.rows[0].n) === 0) {
-    await db.batch(
+  if (Number(proj.n) === 0) {
+    await d.insert(schema.projects).values(
       DEFAULT_PROJECTS.map((p, i) => ({
-        sql: `INSERT INTO projects (position, title, category, tech, description, github_url, play_store_url, app_store_url)
-              VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-        args: [
-          i,
-          p.title,
-          p.category,
-          p.tech,
-          p.description,
-          p.githubUrl ?? null,
-          p.playStoreUrl ?? null,
-          p.appStoreUrl ?? null,
-        ],
-      })),
-      'write'
+        position: i,
+        title: p.title,
+        category: p.category,
+        tech: p.tech,
+        description: p.description,
+        githubUrl: p.githubUrl ?? null,
+        playStoreUrl: p.playStoreUrl ?? null,
+        appStoreUrl: p.appStoreUrl ?? null,
+      }))
     );
   }
 }
