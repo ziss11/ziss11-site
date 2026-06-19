@@ -2,45 +2,7 @@
 
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { useRef } from 'react';
-
-const experiences = [
-  {
-    role: 'Sr. Mobile Engineer',
-    company: 'PT Gamatecha Solusi Nusantara',
-    type: 'Full-time',
-    period: 'Jul 2024 - Present',
-    desc: 'Leading mobile development, driving architectural decisions, and building scalable apps with complex API integrations.',
-    tech: ['Flutter', 'Clean Arch', 'CI/CD', 'Rest API'],
-    side: 'left',
-  },
-  {
-    role: 'Software Engineer Trainee',
-    company: 'ETHERVAL IT Consultancy',
-    type: 'Contract',
-    period: 'Oct 2023 - Dec 2023',
-    desc: 'Gained hands-on experience in software engineering best practices.',
-    tech: ['React', 'TypeScript', 'System Design'],
-    side: 'right',
-  },
-  {
-    role: 'Mobile Developer',
-    company: 'Suitmedia Digital Agency',
-    type: 'Internship',
-    period: 'Feb 2023 - Jun 2023',
-    desc: 'Developed hybrid e-commerce apps using Flutter & GetX. Researched chat modules.',
-    tech: ['Flutter', 'GetX', 'Dart', 'E-commerce'],
-    side: 'left',
-  },
-  {
-    role: 'Machine Learning Cohort',
-    company: 'Bangkit Academy',
-    type: 'Apprenticeship',
-    period: 'Feb 2022 - Jul 2022',
-    desc: 'Led Capstone project with Indosat Ooredoo. Built ML models for translation.',
-    tech: ['TensorFlow', 'Python', 'Machine Learning'],
-    side: 'right',
-  },
-];
+import { DEFAULT_EXPERIENCES, type Experience } from '@/data/content';
 
 const TimelineCard = ({
   data,
@@ -122,7 +84,11 @@ const TimelineCard = ({
   );
 };
 
-export default function ExperienceTimeline() {
+export default function ExperienceTimeline({
+  experiences = DEFAULT_EXPERIENCES,
+}: {
+  experiences?: Experience[];
+}) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,

@@ -9,6 +9,7 @@ import {
 } from 'framer-motion';
 import { Github, X } from 'lucide-react';
 import { useRef, useState } from 'react';
+import { DEFAULT_PROJECTS, type Project } from '@/data/content';
 
 const AndroidIcon = ({ size = 20, color = 'currentColor' }) => (
   <svg
@@ -53,7 +54,7 @@ const ProjectModal = ({
   project,
   onClose,
 }: {
-  project: (typeof projects)[0];
+  project: Project;
   onClose: () => void;
 }) => (
   <motion.div
@@ -124,72 +125,6 @@ const ProjectModal = ({
     </motion.div>
   </motion.div>
 );
-
-const projects = [
-  {
-    title: 'Omnisource',
-    category: 'SaaS Platform',
-    tech: 'Flutter, SaaS, Real-time Operations',
-    description:
-      'A web & mobile SaaS platform helping outsourcing companies manage operations centrally and in real-time.',
-    playStoreUrl:
-      'https://play.google.com/store/apps/details?id=com.omnisource.app',
-    appStoreUrl: 'https://apps.apple.com/id/app/omnisource/id6756401381',
-  },
-  {
-    title: 'Baharkam Information Gateway',
-    category: 'Government Security',
-    tech: 'Mobile Security, Digital Gateway',
-    description:
-      'Comprehensive digital solution supporting operational duties of the National Police Security Maintenance Agency.',
-    playStoreUrl:
-      'https://play.google.com/store/apps/details?id=com.baharkam.big',
-    appStoreUrl:
-      'https://apps.apple.com/id/app/baharkam-information-gateway/id6749742831',
-  },
-  {
-    title: 'Portal Humas Presisi',
-    category: 'News & Public Relations',
-    tech: 'Flutter, News Aggregation',
-    description:
-      'Official Police PR portal providing exclusive access to law enforcement news and activities across the country.',
-    playStoreUrl:
-      'https://play.google.com/store/apps/details?id=id.go.polri.portalhumas.portal_humas_flutter',
-    appStoreUrl: 'https://apps.apple.com/id/app/portal-humas/id6477856986',
-  },
-  {
-    title: 'Ditonton Movie App',
-    category: 'Flutter / Dart',
-    tech: 'BLoC, Clean Architecture, CI/CD, TDD',
-    description:
-      'Expert-level Movie App submission for Dicoding. Features strict type safety, unit testing, and modular architecture.',
-    githubUrl: 'https://github.com/ziss11/ditonton-app',
-  },
-  {
-    title: 'Jetpack Compose Movie App',
-    category: 'Android / Kotlin',
-    tech: 'Jetpack Compose, MVVM, Hilt, Retrofit',
-    description:
-      'Modern Android movie application built entirely with Jetpack Compose. Showcase of declarative UI patterns.',
-    githubUrl: 'https://github.com/ziss11/movie-comp',
-  },
-  {
-    title: 'MyTelkomsel App Clone',
-    category: 'Flutter / Dart',
-    tech: 'Flutter UI, Custom Widgets, Responsive',
-    description:
-      'Pixel-perfect clone of the MyTelkomsel app interface. Demonstrates complex layout implementation and verified visual fidelity.',
-    githubUrl: 'https://github.com/ziss11/mytelkomsel-clone-ui',
-  },
-  {
-    title: 'Story App',
-    category: 'Flutter / Dart',
-    tech: 'Provider, Camera X, Google Maps API',
-    description:
-      'Intermediate flutter app allowing users to post stories with location data and camera integration.',
-    githubUrl: 'https://github.com/ziss11/story-app',
-  },
-];
 
 const ProjectCard = ({
   project,
@@ -317,10 +252,12 @@ const ProjectCard = ({
   );
 };
 
-export default function Projects() {
-  const [selectedProject, setSelectedProject] = useState<
-    (typeof projects)[0] | null
-  >(null);
+export default function Projects({
+  projects = DEFAULT_PROJECTS,
+}: {
+  projects?: Project[];
+}) {
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   return (
     <section
