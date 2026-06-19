@@ -10,9 +10,6 @@
   },
   "dependencies": {
     "@libsql/client": "^0.17.4",
-    "@react-three/drei": "^10.7.7",
-    "@react-three/fiber": "^9.5.0",
-    "@types/three": "^0.182.0",
     "@vercel/blob": "^2.4.1",
     "drizzle-orm": "^0.45.2",
     "framer-motion": "^12.26.2",
@@ -21,8 +18,7 @@
     "next": "16.1.1",
     "react": "19.2.3",
     "react-dom": "19.2.3",
-    "react-icons": "^5.5.0",
-    "three": "^0.182.0"
+    "react-icons": "^5.5.0"
   },
   "optionalDependencies": {
     "@next/swc-darwin-arm64": "^16.1.1"
