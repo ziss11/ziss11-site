@@ -237,6 +237,27 @@
     color: #ff8a8a;
   }
 
+  /* Project link option row (modal) */
+  .az-link-option {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.018);
+    text-decoration: none;
+    transition:
+      border-color 0.2s,
+      background 0.2s,
+      transform 0.2s;
+  }
+  .az-link-option:hover {
+    border-color: rgba(196, 242, 74, 0.45);
+    background: rgba(196, 242, 74, 0.04);
+    transform: translateY(-2px);
+  }
+
   /* Resume file input */
   .az-resume-input {
     font-family: var(--font-mono);

@@ -1,5 +1,9 @@
+'use client';
+
+import { useState } from 'react';
 import type { Project } from '@/data/content';
 import SectionKicker from './SectionKicker';
+import ProjectLinks, { projectOptions } from './ProjectLinks';
 
 const sectionTitle: React.CSSProperties = {
   fontFamily: 'var(--font-display)',
@@ -11,11 +15,6 @@ const sectionTitle: React.CSSProperties = {
   color: 'var(--color-fg-strong)',
 };
 
-/** First available external link, in priority order. */
-function primaryUrl(p: Project): string | undefined {
-  return p.playStoreUrl || p.appStoreUrl || p.githubUrl || undefined;
-}
-
 function tagsOf(p: Project): string[] {
   return p.tech
     .split(',')
@@ -23,37 +22,9 @@ function tagsOf(p: Project): string[] {
     .filter(Boolean);
 }
 
-/** Renders the card as a link when a URL exists, else a plain div. */
-function CardWrapper({
-  url,
-  style,
-  children,
-}: {
-  url?: string;
-  style: React.CSSProperties;
-  children: React.ReactNode;
-}) {
-  if (url) {
-    return (
-      <a
-        href={url}
-        target='_blank'
-        rel='noopener noreferrer'
-        className='az-card az-reveal'
-        style={style}
-      >
-        {children}
-      </a>
-    );
-  }
-  return (
-    <div className='az-card az-reveal' style={style}>
-      {children}
-    </div>
-  );
-}
-
 export default function Projects({ projects }: { projects: Project[] }) {
+  const [active, setActive] = useState<Project | null>(null);
+
   return (
     <section id='projects' style={{ padding: '104px 0' }}>
       <div className='az-reveal'>
@@ -79,18 +50,26 @@ export default function Projects({ projects }: { projects: Project[] }) {
         }}
       >
         {projects.map((proj, i) => {
-          const url = primaryUrl(proj);
+          const hasLinks = projectOptions(proj).length > 0;
           const num = String(i + 1).padStart(2, '0');
-          const cardStyle: React.CSSProperties = {
-            display: 'flex',
-            flexDirection: 'column',
-            minHeight: 248,
-            padding: 30,
-            textDecoration: 'none',
-            color: 'inherit',
-          };
           return (
-            <CardWrapper key={i} url={url} style={cardStyle}>
+            <button
+              key={i}
+              type='button'
+              onClick={hasLinks ? () => setActive(proj) : undefined}
+              className='az-card az-reveal'
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                minHeight: 248,
+                padding: 30,
+                textAlign: 'left',
+                fontFamily: 'inherit',
+                color: 'inherit',
+                background: 'rgba(255,255,255,0.018)',
+                cursor: hasLinks ? 'pointer' : 'default',
+              }}
+            >
               <div
                 style={{
                   display: 'flex',
@@ -169,10 +148,14 @@ export default function Projects({ projects }: { projects: Project[] }) {
                   </span>
                 ))}
               </div>
-            </CardWrapper>
+            </button>
           );
         })}
       </div>
+
+      {active && (
+        <ProjectLinks project={active} onClose={() => setActive(null)} />
+      )}
     </section>
   );
 }

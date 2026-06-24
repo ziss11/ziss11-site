@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { Menu, X } from 'lucide-react';
 import { useRevealOnScroll } from '@/components/utils/useRevealOnScroll';
 
 const LINKS = [
@@ -8,12 +9,14 @@ const LINKS = [
   { href: '#projects', label: 'Projects', id: 'projects' },
   { href: '#skills', label: 'Skills', id: 'skills' },
   { href: '#about', label: 'About', id: 'about' },
+  { href: '#contact', label: 'Contact', id: 'contact' },
 ];
 
 export default function Nav() {
   const [active, setActive] = useState<string>('');
+  const [open, setOpen] = useState(false);
 
-  // Global scroll-reveal for [data-reveal] across all sections.
+  // Global scroll-reveal for .az-reveal across all sections.
   useRevealOnScroll();
 
   // Scroll-spy: highlight the nav link of the section in view.
@@ -48,20 +51,22 @@ export default function Nav() {
         style={{
           maxWidth: 1180,
           margin: '0 auto',
-          padding: '0 32px',
           height: 68,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
         }}
+        className='px-5 md:px-8'
       >
         <a
           href='#top'
+          onClick={() => setOpen(false)}
           style={{
             display: 'flex',
             alignItems: 'center',
             gap: 10,
             textDecoration: 'none',
+            flexShrink: 0,
           }}
         >
           <span
@@ -94,10 +99,8 @@ export default function Nav() {
           </span>
         </a>
 
-        <div
-          style={{ display: 'flex', alignItems: 'center', gap: 30 }}
-          className='max-md:hidden'
-        >
+        {/* Desktop links */}
+        <div className='hidden items-center gap-7 md:flex'>
           {LINKS.map((l) => (
             <a
               key={l.id}
@@ -118,7 +121,61 @@ export default function Nav() {
             Resume
           </a>
         </div>
+
+        {/* Mobile hamburger */}
+        <button
+          type='button'
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-expanded={open}
+          onClick={() => setOpen((v) => !v)}
+          className='az-icon-btn md:hidden'
+        >
+          {open ? <X size={18} /> : <Menu size={18} />}
+        </button>
       </div>
+
+      {/* Mobile dropdown panel */}
+      {open && (
+        <div
+          className='md:hidden'
+          style={{
+            borderTop: '1px solid rgba(255,255,255,0.06)',
+            background: 'rgba(9,9,10,0.92)',
+            backdropFilter: 'blur(16px)',
+            padding: '14px 20px 22px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 4,
+          }}
+        >
+          {LINKS.map((l) => (
+            <a
+              key={l.id}
+              href={l.href}
+              onClick={() => setOpen(false)}
+              style={{
+                textDecoration: 'none',
+                fontSize: 16,
+                padding: '12px 4px',
+                color: active === l.id ? 'var(--color-fg)' : 'rgba(255,255,255,0.6)',
+                borderBottom: '1px solid rgba(255,255,255,0.05)',
+              }}
+            >
+              {l.label}
+            </a>
+          ))}
+          <a
+            href='/resume.pdf'
+            target='_blank'
+            rel='noopener noreferrer'
+            onClick={() => setOpen(false)}
+            className='az-btn'
+            style={{ marginTop: 12, justifyContent: 'center' }}
+          >
+            Resume
+          </a>
+        </div>
+      )}
     </nav>
   );
 }

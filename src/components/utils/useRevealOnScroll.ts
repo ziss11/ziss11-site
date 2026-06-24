@@ -3,14 +3,14 @@
 import { useEffect } from 'react';
 
 /**
- * Fade-in `[data-reveal]` elements as they scroll into view by toggling
+ * Fade-in `.az-reveal` elements as they scroll into view by toggling
  * `.is-visible`. No-op (instantly visible) when IntersectionObserver is
  * missing or the user prefers reduced motion. Safe to call once per page.
  */
 export function useRevealOnScroll() {
   useEffect(() => {
     const els = Array.from(
-      document.querySelectorAll<HTMLElement>('[data-reveal]')
+      document.querySelectorAll<HTMLElement>('.az-reveal')
     );
 
     const reduce = window.matchMedia(
