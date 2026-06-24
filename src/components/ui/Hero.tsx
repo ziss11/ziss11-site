@@ -10,8 +10,6 @@ export default function Hero() {
       style={{
         position: 'relative',
         padding: '188px 0 130px',
-        background:
-          'radial-gradient(56% 46% at 78% 4%, rgba(196,242,74,0.09), transparent 72%)',
       }}
     >
       <div

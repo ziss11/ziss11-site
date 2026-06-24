@@ -22,6 +22,7 @@ export const projects = sqliteTable('projects', {
   githubUrl: text('github_url'),
   playStoreUrl: text('play_store_url'),
   appStoreUrl: text('app_store_url'),
+  createdAt: integer('created_at'),
 });
 
 // Single-row table (id = 1) untuk info kontak.

@@ -62,8 +62,21 @@ async function init(): Promise<void> {
     description TEXT NOT NULL,
     github_url TEXT,
     play_store_url TEXT,
-    app_store_url TEXT
+    app_store_url TEXT,
+    created_at INTEGER
   )`);
+
+  // Migrasi untuk tabel projects lama: tambah kolom created_at bila belum ada,
+  // lalu backfill berdasarkan position agar urutan saat ini tetap terjaga
+  // (position 0 = paling baru).
+  try {
+    await d.run(sql`ALTER TABLE projects ADD COLUMN created_at INTEGER`);
+  } catch {
+    // kolom sudah ada — abaikan
+  }
+  await d.run(
+    sql`UPDATE projects SET created_at = (CAST(strftime('%s','now') AS INTEGER) * 1000 - position * 86400000) WHERE created_at IS NULL`
+  );
 
   await d.run(sql`CREATE TABLE IF NOT EXISTS contact (
     id INTEGER PRIMARY KEY,
@@ -109,6 +122,8 @@ async function seedIfEmpty(d: LibSQLDatabase<typeof schema>): Promise<void> {
         githubUrl: p.githubUrl ?? null,
         playStoreUrl: p.playStoreUrl ?? null,
         appStoreUrl: p.appStoreUrl ?? null,
+        // Urutan array = terbaru → lama; beri createdAt menurun agar konsisten.
+        createdAt: Date.now() - i * 86400000,
       }))
     );
   }

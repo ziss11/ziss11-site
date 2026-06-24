@@ -1,5 +1,5 @@
 import 'server-only';
-import { asc, eq } from 'drizzle-orm';
+import { asc, desc, eq } from 'drizzle-orm';
 import {
   DEFAULT_CONTACT,
   DEFAULT_EXPERIENCES,
@@ -40,7 +40,7 @@ export async function getProjects(): Promise<Project[]> {
     const rows = await getDb()
       .select()
       .from(projects)
-      .orderBy(asc(projects.position));
+      .orderBy(desc(projects.createdAt), asc(projects.position));
     return rows.map((r) => ({
       title: r.title,
       category: r.category,
@@ -49,6 +49,7 @@ export async function getProjects(): Promise<Project[]> {
       githubUrl: r.githubUrl ?? undefined,
       playStoreUrl: r.playStoreUrl ?? undefined,
       appStoreUrl: r.appStoreUrl ?? undefined,
+      createdAt: r.createdAt ?? undefined,
     }));
   } catch {
     return DEFAULT_PROJECTS;
@@ -125,6 +126,8 @@ export async function saveProjects(data: Project[]): Promise<void> {
         githubUrl: p.githubUrl?.trim() || null,
         playStoreUrl: p.playStoreUrl?.trim() || null,
         appStoreUrl: p.appStoreUrl?.trim() || null,
+        // Pertahankan createdAt lama; project baru pakai waktu sekarang.
+        createdAt: p.createdAt ?? Date.now(),
       }))
     ),
   ]);

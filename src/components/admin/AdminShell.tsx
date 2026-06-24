@@ -236,6 +236,10 @@ export default function AdminShell({
         githubUrl: d.githubUrl.trim() || undefined,
         playStoreUrl: d.playStoreUrl.trim() || undefined,
         appStoreUrl: d.appStoreUrl.trim() || undefined,
+        createdAt:
+          editing.index != null
+            ? projects[editing.index].createdAt
+            : Date.now(),
       };
       const next = [...projects];
       if (editing.index == null) next.push(item);
