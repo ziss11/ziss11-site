@@ -24,6 +24,42 @@ export interface Contact {
   githubUrl: string;
 }
 
+export interface SkillGroup {
+  label: string;
+  items: string[];
+}
+
+export const SKILL_GROUPS: SkillGroup[] = [
+  {
+    label: 'Architecture',
+    items: [
+      'Clean Architecture',
+      'BLoC Pattern',
+      'Dependency Injection',
+      'Modular Routing',
+      'MVVM',
+    ],
+  },
+  { label: 'Languages', items: ['Dart 3.0', 'Kotlin 1.9', 'Swift 5.9', 'Python'] },
+  {
+    label: 'Frameworks',
+    items: [
+      'Flutter 3.x',
+      'Jetpack Compose',
+      'GetX',
+      'Provider',
+      'Hilt',
+      'Retrofit',
+      'TensorFlow',
+    ],
+  },
+  { label: 'CI / CD', items: ['Codemagic', 'GitHub Actions'] },
+  {
+    label: 'Testing',
+    items: ['Unit Testing', 'Widget Testing', 'Integration Testing', 'TDD'],
+  },
+];
+
 export const DEFAULT_CONTACT: Contact = {
   email: 'ziss.dev@gmail.com',
   linkedinUrl: 'https://www.linkedin.com/in/abdazis11/',

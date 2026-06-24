@@ -1,102 +1,165 @@
-'use client';
-
-import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, x: -20 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.5 },
-  },
-};
+const STATS = [
+  { label: 'Platforms', value: 'iOS · Android' },
+  { label: 'Framework', value: 'Flutter' },
+  { label: 'Architecture', value: 'Clean Architecture + BLoC' },
+];
 
 export default function Hero() {
-  const [showCursor, setShowCursor] = useState(true);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setShowCursor((prev) => !prev);
-    }, 530);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <section
-      id='hero'
-      className='relative h-screen flex flex-col justify-center px-4 md:px-[10%] max-w-[1200px] mx-auto overflow-hidden pt-20'
+      style={{
+        position: 'relative',
+        padding: '188px 0 130px',
+        background:
+          'radial-gradient(56% 46% at 78% 4%, rgba(196,242,74,0.09), transparent 72%)',
+      }}
     >
-      <motion.div
-        variants={containerVariants}
-        initial='hidden'
-        animate='visible'
+      <div
+        style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: 10,
+          padding: '7px 14px 7px 12px',
+          border: '1px solid rgba(255,255,255,0.1)',
+          borderRadius: 999,
+          marginBottom: 46,
+        }}
       >
-        {/* Main Title with Terminal Prompt */}
-        <motion.div variants={itemVariants}>
-          <h1 className='text-[clamp(1.6rem,5vw,3.5rem)] font-semibold leading-[1.3] mb-6 text-text-primary font-mono'>
-            <span className='text-accent-green'>$</span>{' '}
-            <span className='text-accent-purple'>const</span>{' '}
-            <span className='text-accent-blue'>mobileEngineer</span> ={' '}
-            <span className='text-accent-yellow'>&quot;</span>
-            <span className='text-accent-green'>
-              Crafting Native Mobile Experiences
-            </span>
-            <span className='text-accent-yellow'>&quot;</span>
-            {showCursor && (
-              <span className='inline-block w-[3px] h-[1.2em] bg-accent-green ml-1 align-text-bottom' />
-            )}
-          </h1>
-        </motion.div>
+        <span
+          style={{
+            width: 8,
+            height: 8,
+            borderRadius: '50%',
+            background: 'var(--color-accent)',
+            animation: 'var(--animate-az-pulse)',
+          }}
+        />
+        <span
+          style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: 12,
+            letterSpacing: '0.06em',
+            color: 'rgba(255,255,255,0.7)',
+          }}
+        >
+          Available for new opportunities
+        </span>
+      </div>
 
-        {/* Description */}
-        <motion.div variants={itemVariants}>
-          <p className='max-w-[700px] leading-[1.8] text-text-secondary text-[1rem] mb-10 font-mono'>
-            <span className='text-text-muted'>{'/* '}</span>
-            Specialized in building high-performance native mobile apps for{' '}
-            <span className='text-accent-blue'>iOS</span> and{' '}
-            <span className='text-accent-green'>Android</span>. Expert in{' '}
-            <span className='text-accent-purple'>Flutter</span>,{' '}
-            <span className='text-accent-yellow'>Clean Architecture</span>, and
-            delivering pixel-perfect UIs with smooth{' '}
-            <span className='text-accent-yellow'>60fps</span> performance.
-            <span className='text-text-muted'>{' */'}</span>
-          </p>
-        </motion.div>
+      <p
+        style={{
+          fontFamily: 'var(--font-mono)',
+          fontSize: 13,
+          letterSpacing: '0.24em',
+          textTransform: 'uppercase',
+          color: 'var(--color-accent)',
+          margin: '0 0 22px',
+        }}
+      >
+        Senior Mobile Engineer
+      </p>
+      <h1
+        style={{
+          fontFamily: 'var(--font-display)',
+          fontWeight: 600,
+          fontSize: 'clamp(54px,9.2vw,138px)',
+          lineHeight: 0.92,
+          letterSpacing: '-0.035em',
+          margin: 0,
+          color: 'var(--color-fg-strong)',
+        }}
+      >
+        Abdul Azis
+      </h1>
+      <h2
+        style={{
+          fontFamily: 'var(--font-display)',
+          fontWeight: 400,
+          fontSize: 'clamp(26px,4.4vw,58px)',
+          lineHeight: 1.04,
+          letterSpacing: '-0.025em',
+          margin: '18px 0 0',
+          color: 'rgba(255,255,255,0.42)',
+          maxWidth: 880,
+        }}
+      >
+        Crafting native mobile experiences that feel{' '}
+        <span style={{ color: 'var(--color-fg-strong)' }}>effortless</span>.
+      </h2>
+      <p
+        style={{
+          fontSize: 'clamp(16px,1.5vw,19px)',
+          lineHeight: 1.7,
+          color: 'rgba(255,255,255,0.6)',
+          maxWidth: 600,
+          margin: '36px 0 0',
+        }}
+      >
+        I build high-performance, offline-first apps for iOS and Android —
+        specialized in Flutter, Clean Architecture, and pixel-perfect 60&nbsp;fps
+        UI.
+      </p>
 
-        {/* Tech Stack List */}
-        <motion.div variants={itemVariants}>
-          <ul className='text-[0.95rem] font-mono'>
-            <li className='mb-2 text-text-secondary'>
-              <span className='text-accent-blue'>platforms</span>:{' '}
-              <span className='text-accent-green'>
-                [&apos;iOS&apos;, &apos;Android&apos;]
-              </span>
-            </li>
-            <li className='mb-2 text-text-secondary'>
-              <span className='text-accent-blue'>framework</span>:{' '}
-              <span className='text-accent-green'>&apos;Flutter&apos;</span>
-            </li>
-            <li className='mb-2 text-text-secondary'>
-              <span className='text-accent-blue'>architecture</span>:{' '}
-              <span className='text-accent-green'>
-                &apos;Clean Architecture + BLoC&apos;
-              </span>
-            </li>
-          </ul>
-        </motion.div>
-      </motion.div>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, marginTop: 42 }}>
+        <a href='#projects' className='az-btn'>
+          View selected work
+          <svg
+            width='15'
+            height='15'
+            viewBox='0 0 24 24'
+            fill='none'
+            stroke='#09090a'
+            strokeWidth='2.4'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+          >
+            <line x1='7' y1='17' x2='17' y2='7' />
+            <polyline points='9 7 17 7 17 15' />
+          </svg>
+        </a>
+        <a href='#contact' className='az-btn-ghost'>
+          Get in touch
+        </a>
+      </div>
+
+      <div
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          gap: 48,
+          marginTop: 88,
+          paddingTop: 40,
+          borderTop: '1px solid rgba(255,255,255,0.07)',
+        }}
+      >
+        {STATS.map((s) => (
+          <div key={s.label}>
+            <p
+              style={{
+                fontFamily: 'var(--font-mono)',
+                fontSize: 11,
+                letterSpacing: '0.18em',
+                textTransform: 'uppercase',
+                color: 'rgba(255,255,255,0.4)',
+                margin: '0 0 9px',
+              }}
+            >
+              {s.label}
+            </p>
+            <p
+              style={{
+                fontFamily: 'var(--font-display)',
+                fontSize: 19,
+                color: 'var(--color-fg)',
+                margin: 0,
+                letterSpacing: '-0.01em',
+              }}
+            >
+              {s.value}
+            </p>
+          </div>
+        ))}
+      </div>
     </section>
   );
 }

@@ -1,224 +1,299 @@
-@import url('https://fonts.googleapis.com/css2?family=Google+Sans+Code:ital,wght@0,300..800;1,300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
 @import 'tailwindcss';
 
 @theme {
   /* Colors */
-  --color-bg-primary: #000000;
-  --color-bg-secondary: #0a0a0a;
-  --color-bg-tertiary: #111111;
-
-  --color-text-primary: #c9d1d9;
-  --color-text-secondary: #8b949e;
-  --color-text-muted: #6e7681;
-
-  --color-accent-green: #7ee787;
-  --color-accent-blue: #58a6ff;
-  --color-accent-yellow: #ffa657;
-  --color-accent-red: #f85149;
-  --color-accent-purple: #bc8cff;
-
-  --color-border-default: #30363d;
-  --color-border-muted: #21262d;
+  --color-bg: #09090a;
+  --color-surface: #0d0d0f;
+  --color-fg: #f4f4f3;
+  --color-fg-strong: #f7f7f6;
+  --color-accent: #c4f24a;
+  --color-danger: #ff6b6b;
 
   /* Fonts */
-  --font-sans: 'Google Sans Code', ui-sans-serif, system-ui, sans-serif,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  --font-mono: 'Google Sans Code', monospace;
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Hanken Grotesk', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
   /* Animations */
-  --animate-blink: blink 1s infinite;
-  --animate-typing: typing 2s steps(40, end);
-  --animate-fade-in: fadeIn 0.5s ease-out;
-  --animate-float: float 20s infinite ease-in-out;
-  --animate-float-reverse: float 20s infinite ease-in-out reverse;
+  --animate-az-pulse: azPulse 2.2s ease-in-out infinite;
 
-  @keyframes blink {
+  @keyframes azPulse {
     0%,
-    50% {
-      opacity: 1;
-    }
-    51%,
     100% {
-      opacity: 0;
-    }
-  }
-
-  @keyframes typing {
-    from {
-      width: 0;
-    }
-    to {
-      width: 100%;
-    }
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
       opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes float {
-    0% {
-      transform: translate(0, 0);
+      transform: scale(1);
     }
     50% {
-      transform: translate(5%, 10%);
-    }
-    100% {
-      transform: translate(0, 0);
+      opacity: 0.45;
+      transform: scale(0.82);
     }
   }
 }
 
-/* Base Styles */
 @layer base {
   * {
-    @apply border-border-muted;
+    box-sizing: border-box;
   }
 
-  html,
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply max-w-[100vw] overflow-x-hidden bg-bg-primary text-text-primary font-sans antialiased text-sm leading-relaxed;
+    margin: 0;
+    max-width: 100vw;
+    overflow-x: hidden;
+    background: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
   }
 
-  a {
-    @apply text-accent-blue no-underline transition-colors duration-200;
-  }
-
-  a:hover {
-    @apply text-accent-green underline;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-mono font-semibold leading-tight text-text-primary;
-  }
-}
-
-/* Components */
-@layer components {
-  /* Scrollbar */
-  ::-webkit-scrollbar {
-    @apply w-2 h-2;
-  }
-
-  ::-webkit-scrollbar-track {
-    @apply bg-bg-secondary;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    @apply bg-border-default rounded-sm;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    @apply bg-text-secondary;
-  }
-
-  /* Selection */
   ::selection {
-    @apply bg-accent-blue/30 text-text-primary;
+    background: var(--color-accent);
+    color: var(--color-bg);
   }
 
-  /* Code Syntax Highlighting */
-  .syntax-keyword {
-    @apply text-accent-purple font-medium;
-  }
-  .syntax-string {
-    @apply text-accent-green;
-  }
-  .syntax-function {
-    @apply text-accent-blue;
-  }
-  .syntax-number {
-    @apply text-accent-yellow;
-  }
-  .syntax-comment {
-    @apply text-text-secondary italic;
+  input::placeholder,
+  textarea::placeholder {
+    color: rgba(255, 255, 255, 0.28);
   }
 
-  /* Terminal UI */
-  .terminal-prompt::before {
-    content: '$ ';
-    @apply text-accent-green mr-2;
-  }
-
-  .terminal-comment::before {
-    content: '// ';
-    @apply text-text-secondary mr-2;
-  }
-
-  .code-block {
-    @apply bg-bg-secondary border border-border-default rounded-md p-4 font-mono text-sm overflow-x-auto;
-  }
-
-  .cursor {
-    @apply inline-block w-2 h-[1.2em] bg-accent-green ml-[2px] animate-blink;
-  }
-
-  .btn-terminal {
-    @apply bg-transparent border border-border-default text-text-primary px-4 py-2 font-mono text-sm cursor-pointer transition-all duration-200 rounded;
-  }
-
-  .btn-terminal:hover {
-    @apply bg-bg-tertiary border-accent-blue text-accent-blue;
-  }
-
-  .terminal-list {
-    @apply list-none p-0;
-  }
-
-  .terminal-list li::before {
-    content: '> ';
-    @apply text-accent-green mr-2;
+  textarea {
+    resize: vertical;
   }
 }
 
-/* Utilities */
-@utility grid-pattern {
-  background-image: linear-gradient(
-      var(--color-border-muted) 1px,
-      transparent 1px
-    ),
-    linear-gradient(90deg, var(--color-border-muted) 1px, transparent 1px);
-  background-size: 20px 20px;
-  opacity: 0.3;
-}
+@layer components {
+  /* Scroll reveal — toggled by useRevealOnScroll */
+  .az-reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition:
+      opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .az-reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .az-reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
 
-@utility fade-in {
-  @apply animate-fade-in;
-}
+  /* Primary lime button */
+  .az-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 500;
+    color: #09090a;
+    background: var(--color-accent);
+    border: none;
+    border-radius: 11px;
+    padding: 13px 22px;
+    cursor: pointer;
+    text-decoration: none;
+    transition:
+      transform 0.2s,
+      box-shadow 0.2s;
+  }
+  .az-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(196, 242, 74, 0.24);
+  }
 
-@utility typing-effect {
-  @apply overflow-hidden whitespace-nowrap border-r-2 border-accent-green animate-typing;
-  animation-fill-mode: forwards;
-}
+  /* Ghost / outline button */
+  .az-btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-fg);
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 11px;
+    padding: 13px 22px;
+    cursor: pointer;
+    text-decoration: none;
+    transition:
+      border-color 0.2s,
+      background 0.2s;
+  }
+  .az-btn-ghost:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.03);
+  }
 
-/* Glassmorphism */
-@utility glass {
-  @apply bg-[#161b22]/70 backdrop-blur-md border border-text-secondary/10;
-}
+  /* Interactive surface card (projects / contact) */
+  .az-card {
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.018);
+    transition:
+      border-color 0.3s,
+      background 0.3s,
+      transform 0.2s;
+  }
+  .az-card:hover {
+    border-color: rgba(196, 242, 74, 0.45);
+    background: rgba(196, 242, 74, 0.04);
+    transform: translateY(-4px);
+  }
 
-@utility glass-strong {
-  @apply bg-[#161b22]/85 backdrop-blur-xl border border-text-secondary/15 shadow-lg;
-}
+  /* Nav links */
+  .az-navlink {
+    font-size: 14px;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.5);
+    transition: color 0.25s;
+  }
+  .az-navlink:hover {
+    color: var(--color-fg);
+  }
 
-@utility glass-subtle {
-  @apply bg-[#161b22]/50 backdrop-blur-sm border border-text-secondary/5;
-}
+  /* Form fields */
+  .az-input,
+  .az-textarea {
+    width: 100%;
+    font-family: inherit;
+    font-size: 15px;
+    color: var(--color-fg);
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 11px;
+    padding: 13px 15px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .az-textarea {
+    font-size: 14.5px;
+    line-height: 1.6;
+  }
+  .az-input:focus,
+  .az-textarea:focus {
+    border-color: rgba(196, 242, 74, 0.5);
+  }
 
-@utility glass-hover {
-  @apply transition-all duration-300;
-  &:hover {
-    @apply bg-[#161b22]/90 border-accent-blue/30 -translate-y-0.5 shadow-xl;
+  /* Admin icon button */
+  .az-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    color: rgba(255, 255, 255, 0.65);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 9px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .az-icon-btn:hover {
+    color: #09090a;
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+  .az-icon-btn-danger:hover {
+    color: #fff;
+    background: rgba(255, 107, 107, 0.85);
+    border-color: rgba(255, 107, 107, 0.85);
+  }
+
+  /* Admin sidebar link */
+  .az-side-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: inherit;
+    font-size: 13.5px;
+    text-align: left;
+    color: rgba(255, 255, 255, 0.55);
+    background: none;
+    border: none;
+    border-radius: 9px;
+    padding: 10px 12px;
+    cursor: pointer;
+    text-decoration: none;
+    transition:
+      background 0.2s,
+      color 0.2s;
+  }
+  .az-side-link:hover {
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--color-fg);
+  }
+  .az-side-link-danger:hover {
+    background: rgba(255, 107, 107, 0.08);
+    color: #ff8a8a;
+  }
+
+  /* Resume file input */
+  .az-resume-input {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .az-resume-input::file-selector-button {
+    margin-right: 12px;
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-accent);
+    background: transparent;
+    border: 1px solid rgba(196, 242, 74, 0.3);
+    border-radius: 8px;
+    padding: 8px 12px;
+    transition: background 0.2s;
+  }
+  .az-resume-input::file-selector-button:hover {
+    background: rgba(196, 242, 74, 0.08);
+  }
+
+  /* Admin shell: sidebar + main */
+  .admin-shell {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 252px 1fr;
+  }
+  @media (max-width: 768px) {
+    .admin-shell {
+      grid-template-columns: 1fr;
+    }
+    .admin-sidebar {
+      position: static !important;
+      height: auto !important;
+    }
+  }
+
+  /* Experience timeline row: label column + content */
+  .exp-row {
+    grid-template-columns: 180px 1fr;
+  }
+  @media (max-width: 720px) {
+    .exp-row {
+      grid-template-columns: 1fr;
+      gap: 16px !important;
+    }
+  }
+
+  /* Admin list row */
+  .az-row {
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.018);
+    transition: border-color 0.25s;
+  }
+  .az-row:hover {
+    border-color: rgba(255, 255, 255, 0.2);
   }
 }

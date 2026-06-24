@@ -1,17 +1,14 @@
-import About from "@/components/ui/About";
-import BentoGrid from "@/components/ui/BentoGrid";
-import ContactTerminal from "@/components/ui/ContactTerminal";
-import ExperienceTimeline from "@/components/ui/ExperienceTimeline";
-import GithubActivity from "@/components/ui/GithubActivity";
-import Header from "@/components/ui/Header";
-import Hero from "@/components/ui/Hero";
-import PerformanceMetrics from "@/components/ui/PerformanceMetrics";
-import Projects from "@/components/ui/Projects";
-import TerminalBackground from "@/components/ui/TerminalBackground";
-import LenisWrapper from "@/components/utils/LenisWrapper";
-import { getContact, getExperiences, getProjects } from "@/lib/content-db";
+import Nav from '@/components/ui/Nav';
+import Hero from '@/components/ui/Hero';
+import Experience from '@/components/ui/Experience';
+import Projects from '@/components/ui/Projects';
+import Skills from '@/components/ui/Skills';
+import About from '@/components/ui/About';
+import Contact from '@/components/ui/Contact';
+import Footer from '@/components/ui/Footer';
+import { getContact, getExperiences, getProjects } from '@/lib/content-db';
 
-export const dynamic = "force-dynamic";
+export const dynamic = 'force-dynamic';
 
 export default async function Home() {
   const [experiences, projects, contact] = await Promise.all([
@@ -21,33 +18,20 @@ export default async function Home() {
   ]);
 
   return (
-    <LenisWrapper>
-      <Header />
-      <main className="absolute w-full overflow-x-hidden">
-        <TerminalBackground />
-        {/* Content Sections */}
+    <div style={{ background: 'var(--color-bg)', minHeight: '100vh' }}>
+      <Nav />
+      <main
+        id='top'
+        style={{ maxWidth: 1180, margin: '0 auto', padding: '0 32px' }}
+      >
         <Hero />
-        <ExperienceTimeline experiences={experiences} />
+        <Experience experiences={experiences} />
         <Projects projects={projects} />
-        <BentoGrid />
-        <PerformanceMetrics />
-        <GithubActivity />
+        <Skills />
         <About />
-        <ContactTerminal contact={contact} />
-        <footer
-          style={{
-            padding: "2rem",
-            textAlign: "center",
-            opacity: 0.3,
-            fontSize: "0.8rem",
-            color: "#fff",
-            marginBottom: "1rem",
-            fontFamily: "var(--font-mono)",
-          }}
-        >
-          © {new Date().getFullYear()} Abdul Azis.
-        </footer>
+        <Contact contact={contact} />
       </main>
-    </LenisWrapper>
+      <Footer />
+    </div>
   );
 }

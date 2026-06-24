@@ -1,302 +1,178 @@
-'use client';
+import type { Project } from '@/data/content';
+import SectionKicker from './SectionKicker';
 
-import {
-  AnimatePresence,
-  motion,
-  useMotionValue,
-  useSpring,
-  useTransform,
-} from 'framer-motion';
-import { Github, X } from 'lucide-react';
-import { useRef, useState } from 'react';
-import { DEFAULT_PROJECTS, type Project } from '@/data/content';
-
-const AndroidIcon = ({ size = 20, color = 'currentColor' }) => (
-  <svg
-    xmlns='http://www.w3.org/2000/svg'
-    width={size}
-    height={size}
-    viewBox='0 0 24 24'
-    fill='none'
-    stroke={color}
-    strokeWidth='2'
-    strokeLinecap='round'
-    strokeLinejoin='round'
-  >
-    <path d='M4 10l0 6' />
-    <path d='M20 10l0 6' />
-    <path d='M7 9h10v8a1 1 0 0 1 -1 1h-8a1 1 0 0 1 -1 -1v-8a5 5 0 0 1 10 0' />
-    <path d='M8 3l1 2' />
-    <path d='M16 3l-1 2' />
-    <path d='M9 18l0 3' />
-    <path d='M15 18l0 3' />
-  </svg>
-);
-
-const AppleIcon = ({ size = 20, color = 'currentColor' }) => (
-  <svg
-    xmlns='http://www.w3.org/2000/svg'
-    width={size}
-    height={size}
-    viewBox='0 0 24 24'
-    fill='none'
-    stroke={color}
-    strokeWidth='2'
-    strokeLinecap='round'
-    strokeLinejoin='round'
-  >
-    <path d='M9 7c-3 0 -4 3 -4 5.5c0 3 2 7.5 4 7.5c1.088 -.046 1.679 -.5 3 -.5c1.312 0 1.5 .5 3 .5s4 -3 4 -5c-.028 -.01 -2.472 -.403 -2.5 -3c-.019 -2.17 2.416 -2.954 2.5 -3c-1.023 -1.492 -2.956 -1.967 -4 -2c-1.427 -.045 -2.5 .5 -3 .5c-.5 0 -1.573 -.54 -3 -.5z' />
-    <path d='M12 4a2 2 0 0 0 2 -2a2 2 0 0 0 -2 2' />
-  </svg>
-);
-
-const ProjectModal = ({
-  project,
-  onClose,
-}: {
-  project: Project;
-  onClose: () => void;
-}) => (
-  <motion.div
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    exit={{ opacity: 0 }}
-    onClick={onClose}
-    className='fixed inset-0 bg-black/60 backdrop-blur-sm z-[1000] flex items-center justify-center p-5'
-  >
-    <motion.div
-      initial={{ scale: 0.9, opacity: 0 }}
-      animate={{ scale: 1, opacity: 1 }}
-      exit={{ scale: 0.9, opacity: 0 }}
-      onClick={(e) => e.stopPropagation()}
-      className='bg-[#05050a]/95 border border-accent-green/20 p-5 md:p-8 rounded-[24px] max-w-[500px] w-[90%] relative shadow-[0_0_40px_rgba(126,231,135,0.1)]'
-    >
-      <button
-        onClick={onClose}
-        className='absolute top-5 right-5 bg-none border-none text-[#888] cursor-pointer hover:text-white transition-colors'
-      >
-        <X size={24} />
-      </button>
-
-      <h3 className='text-[1.5rem] mb-2 text-white'>{project.title}</h3>
-      <p className='text-[#888] mb-8'>Check out the project</p>
-
-      <div className='grid gap-4'>
-        {project.githubUrl && (
-          <a
-            href={project.githubUrl}
-            target='_blank'
-            rel='noopener noreferrer'
-            className='flex items-center gap-3 p-3 px-5 bg-accent-green/5 border border-accent-green/20 rounded-xl text-text-primary no-underline transition-all hover:bg-accent-green/10'
-          >
-            <Github size={22} />
-            <span>View Source Code</span>
-          </a>
-        )}
-        {project.playStoreUrl && (
-          <a
-            href={project.playStoreUrl}
-            target='_blank'
-            rel='noopener noreferrer'
-            className='flex items-center gap-3 p-3 px-5 bg-accent-green/5 border border-accent-green/20 rounded-xl text-text-primary no-underline transition-all hover:bg-accent-green/10'
-          >
-            <AndroidIcon
-              size={24}
-              color='#fff'
-            />
-            <span>Get on Play Store</span>
-          </a>
-        )}
-        {project.appStoreUrl && (
-          <a
-            href={project.appStoreUrl}
-            target='_blank'
-            rel='noopener noreferrer'
-            className='flex items-center gap-3 p-3 px-5 bg-accent-green/5 border border-accent-green/20 rounded-xl text-text-primary no-underline transition-all hover:bg-accent-green/10'
-          >
-            <AppleIcon
-              size={22}
-              color='#fff'
-            />
-            <span>Download on App Store</span>
-          </a>
-        )}
-      </div>
-    </motion.div>
-  </motion.div>
-);
-
-const ProjectCard = ({
-  project,
-  index,
-  onClick,
-}: {
-  project: {
-    title: string;
-    category: string;
-    tech: string;
-    description: string;
-    playStoreUrl?: string;
-    appStoreUrl?: string;
-    githubUrl?: string;
-  };
-  index: number;
-  onClick: () => void;
-}) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  const mouseXSpring = useSpring(x);
-  const mouseYSpring = useSpring(y);
-
-  const rotateX = useTransform(
-    mouseYSpring,
-    [-0.5, 0.5],
-    ['17.5deg', '-17.5deg']
-  );
-  const rotateY = useTransform(
-    mouseXSpring,
-    [-0.5, 0.5],
-    ['-17.5deg', '17.5deg']
-  );
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-    const xPct = mouseX / width - 0.5;
-    const yPct = mouseY / height - 0.5;
-    x.set(xPct);
-    y.set(yPct);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      onClick={onClick}
-      className='perspective-[1000px] transform-3d'
-    >
-      <motion.div
-        style={{
-          rotateX,
-          rotateY,
-          transformStyle: 'preserve-3d',
-        }}
-        className='bg-[#05050a]/80 border border-accent-green/20 shadow-[0_4px_30px_rgba(0,0,0,0.4)] backdrop-blur-md rounded-2xl p-5 md:p-8 h-full flex flex-col justify-between cursor-pointer'
-        whileHover={{
-          scale: 1.02, // Less scale
-          zIndex: 10,
-          borderColor: 'rgba(126, 231, 135, 0.6)', // Brighter Green on hover
-          background: 'rgba(5, 5, 10, 0.95)',
-        }}
-      >
-        <div style={{ transform: 'translateZ(50px)' }}>
-          {/* IDE Header Like */}
-          <div className='text-text-secondary text-[0.75rem] font-medium mb-[0.8rem] flex items-center gap-2 overflow-hidden whitespace-nowrap'>
-            <span className='text-accent-green'>root@portfolio</span>
-            <span className='text-text-primary'>:</span>
-            <span className='text-accent-blue'>~/projects</span>
-            <span className='text-text-primary'>$</span>
-            <span className='text-text-primary'>
-              ./view {project.title.toLowerCase().replace(/\s+/g, '-')}
-            </span>
-            <motion.span
-              animate={{ opacity: [0, 1, 0] }}
-              transition={{ duration: 0.8, repeat: Infinity }}
-              className='inline-block w-[6px] h-[1.2em] bg-accent-green align-middle'
-            />
-          </div>
-
-          <h3 className='text-[1.4rem] mb-4 text-text-primary font-semibold'>
-            {project.title}
-          </h3>
-
-          <div className='text-text-secondary leading-[1.6] text-[0.9rem] mb-6 italic'>
-            {'//'} {project.description}
-          </div>
-        </div>
-
-        <div
-          style={{
-            transform: 'translateZ(30px)',
-          }}
-          className='flex justify-between items-center mt-auto'
-        >
-          <div className='flex gap-2 flex-wrap text-[0.85rem] text-text-secondary'>
-            <span className='text-accent-green'>[STACK]</span>
-            {project.tech.split(', ').map((t: string, i, arr) => (
-              <span key={t}>
-                {t}
-                {i < arr.length - 1 && ','}
-              </span>
-            ))}
-          </div>
-        </div>
-      </motion.div>
-    </motion.div>
-  );
+const sectionTitle: React.CSSProperties = {
+  fontFamily: 'var(--font-display)',
+  fontWeight: 600,
+  fontSize: 'clamp(32px,4.6vw,56px)',
+  letterSpacing: '-0.03em',
+  lineHeight: 1,
+  margin: '0 0 14px',
+  color: 'var(--color-fg-strong)',
 };
 
-export default function Projects({
-  projects = DEFAULT_PROJECTS,
+/** First available external link, in priority order. */
+function primaryUrl(p: Project): string | undefined {
+  return p.playStoreUrl || p.appStoreUrl || p.githubUrl || undefined;
+}
+
+function tagsOf(p: Project): string[] {
+  return p.tech
+    .split(',')
+    .map((t) => t.trim())
+    .filter(Boolean);
+}
+
+/** Renders the card as a link when a URL exists, else a plain div. */
+function CardWrapper({
+  url,
+  style,
+  children,
 }: {
-  projects?: Project[];
+  url?: string;
+  style: React.CSSProperties;
+  children: React.ReactNode;
 }) {
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-
-  return (
-    <section
-      id='projects'
-      className='py-24 px-4 md:px-[10%]'
-    >
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className='mb-16 text-center'
+  if (url) {
+    return (
+      <a
+        href={url}
+        target='_blank'
+        rel='noopener noreferrer'
+        className='az-card az-reveal'
+        style={style}
       >
-        <h2 className='text-[2.5rem] mb-4 text-text-primary block'>
-          Featured <span className='text-accent-green'>Projects</span>
-        </h2>
-        <p className='text-text-secondary max-w-[600px] mx-auto'>
-          {'>'} Showcase of deployed applications impacting thousands of users.
-        </p>
-      </motion.div>
+        {children}
+      </a>
+    );
+  }
+  return (
+    <div className='az-card az-reveal' style={style}>
+      {children}
+    </div>
+  );
+}
 
-      <div className='grid grid-cols-1 md:grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-10'>
-        {projects.map((project, index) => (
-          <ProjectCard
-            key={index}
-            project={project}
-            index={index}
-            onClick={() => setSelectedProject(project)}
-          />
-        ))}
+export default function Projects({ projects }: { projects: Project[] }) {
+  return (
+    <section id='projects' style={{ padding: '104px 0' }}>
+      <div className='az-reveal'>
+        <SectionKicker num='02' label='Projects' />
+        <h2 style={sectionTitle}>Featured work</h2>
+        <p
+          style={{
+            fontSize: 17,
+            color: 'rgba(255,255,255,0.55)',
+            margin: '0 0 52px',
+            maxWidth: 560,
+          }}
+        >
+          A showcase of deployed applications impacting thousands of users.
+        </p>
       </div>
 
-      <AnimatePresence>
-        {selectedProject && (
-          <ProjectModal
-            project={selectedProject}
-            onClose={() => setSelectedProject(null)}
-          />
-        )}
-      </AnimatePresence>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit,minmax(330px,1fr))',
+          gap: 18,
+        }}
+      >
+        {projects.map((proj, i) => {
+          const url = primaryUrl(proj);
+          const num = String(i + 1).padStart(2, '0');
+          const cardStyle: React.CSSProperties = {
+            display: 'flex',
+            flexDirection: 'column',
+            minHeight: 248,
+            padding: 30,
+            textDecoration: 'none',
+            color: 'inherit',
+          };
+          return (
+            <CardWrapper key={i} url={url} style={cardStyle}>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'flex-start',
+                  justifyContent: 'space-between',
+                  marginBottom: 22,
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: 'var(--font-mono)',
+                    fontSize: 13,
+                    color: 'rgba(255,255,255,0.35)',
+                  }}
+                >
+                  {num}
+                </span>
+                <svg
+                  width='18'
+                  height='18'
+                  viewBox='0 0 24 24'
+                  fill='none'
+                  stroke='rgba(255,255,255,0.32)'
+                  strokeWidth='2'
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                >
+                  <line x1='7' y1='17' x2='17' y2='7' />
+                  <polyline points='9 7 17 7 17 15' />
+                </svg>
+              </div>
+              <h3
+                style={{
+                  fontFamily: 'var(--font-display)',
+                  fontWeight: 600,
+                  fontSize: 22,
+                  letterSpacing: '-0.02em',
+                  margin: '0 0 12px',
+                  color: 'var(--color-fg)',
+                }}
+              >
+                {proj.title}
+              </h3>
+              <p
+                style={{
+                  fontSize: 15,
+                  lineHeight: 1.62,
+                  color: 'rgba(255,255,255,0.55)',
+                  margin: 0,
+                }}
+              >
+                {proj.description}
+              </p>
+              <div
+                style={{
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  gap: 8,
+                  marginTop: 'auto',
+                  paddingTop: 24,
+                }}
+              >
+                {tagsOf(proj).map((tag) => (
+                  <span
+                    key={tag}
+                    style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: 11.5,
+                      color: 'rgba(255,255,255,0.6)',
+                      border: '1px solid rgba(255,255,255,0.11)',
+                      borderRadius: 999,
+                      padding: '4px 10px',
+                    }}
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </CardWrapper>
+          );
+        })}
+      </div>
     </section>
   );
 }
