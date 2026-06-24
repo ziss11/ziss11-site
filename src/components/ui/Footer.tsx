@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 export default function Footer() {
   return (
     <footer
@@ -23,30 +21,16 @@ export default function Footer() {
         <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.42)' }}>
           © {new Date().getFullYear()} Abdul Azis
         </span>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 22 }}>
-          <Link
-            href='/admin'
-            className='az-navlink'
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: 12,
-              letterSpacing: '0.08em',
-              color: 'rgba(255,255,255,0.32)',
-            }}
-          >
-            Admin
-          </Link>
-          <span
-            style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: 12,
-              letterSpacing: '0.08em',
-              color: 'rgba(255,255,255,0.32)',
-            }}
-          >
-            Designed &amp; built for mobile-first impact
-          </span>
-        </div>
+        <span
+          style={{
+            fontFamily: 'var(--font-mono)',
+            fontSize: 12,
+            letterSpacing: '0.08em',
+            color: 'rgba(255,255,255,0.32)',
+          }}
+        >
+          Designed &amp; built for mobile-first impact
+        </span>
       </div>
     </footer>
   );

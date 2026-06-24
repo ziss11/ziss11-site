@@ -9,7 +9,11 @@ export default function Hero() {
     <section
       style={{
         position: 'relative',
-        padding: '188px 0 130px',
+        minHeight: 'calc(100svh - 68px)',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        padding: '96px 0 80px',
       }}
     >
       <div
