@@ -1,9 +1,6 @@
 import 'server-only';
 import { asc, desc, eq } from 'drizzle-orm';
 import {
-  DEFAULT_CONTACT,
-  DEFAULT_EXPERIENCES,
-  DEFAULT_PROJECTS,
   type Contact,
   type Experience,
   type Project,
@@ -11,8 +8,11 @@ import {
 import { ensureSchema, getDb, hasDb } from '@/lib/db';
 import { contact, experiences, projects } from '@/lib/schema';
 
+/** Kontak kosong — placeholder aman saat DB belum diisi (bukan data dummy). */
+const EMPTY_CONTACT: Contact = { email: '', linkedinUrl: '', githubUrl: '' };
+
 export async function getExperiences(): Promise<Experience[]> {
-  if (!hasDb()) return DEFAULT_EXPERIENCES;
+  if (!hasDb()) return [];
   try {
     await ensureSchema();
     const rows = await getDb()
@@ -29,12 +29,12 @@ export async function getExperiences(): Promise<Experience[]> {
       side: r.side === 'right' ? 'right' : 'left',
     }));
   } catch {
-    return DEFAULT_EXPERIENCES;
+    return [];
   }
 }
 
 export async function getProjects(): Promise<Project[]> {
-  if (!hasDb()) return DEFAULT_PROJECTS;
+  if (!hasDb()) return [];
   try {
     await ensureSchema();
     const rows = await getDb()
@@ -52,7 +52,7 @@ export async function getProjects(): Promise<Project[]> {
       createdAt: r.createdAt ?? undefined,
     }));
   } catch {
-    return DEFAULT_PROJECTS;
+    return [];
   }
 }
 
@@ -81,21 +81,21 @@ export async function saveExperiences(data: Experience[]): Promise<void> {
 }
 
 export async function getContact(): Promise<Contact> {
-  if (!hasDb()) return DEFAULT_CONTACT;
+  if (!hasDb()) return EMPTY_CONTACT;
   try {
     await ensureSchema();
     const [row] = await getDb()
       .select()
       .from(contact)
       .where(eq(contact.id, 1));
-    if (!row) return DEFAULT_CONTACT;
+    if (!row) return EMPTY_CONTACT;
     return {
       email: row.email,
       linkedinUrl: row.linkedinUrl,
       githubUrl: row.githubUrl,
     };
   } catch {
-    return DEFAULT_CONTACT;
+    return EMPTY_CONTACT;
   }
 }
 

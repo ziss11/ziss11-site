@@ -2,11 +2,6 @@ import 'server-only';
 import { createClient } from '@libsql/client';
 import { drizzle, type LibSQLDatabase } from 'drizzle-orm/libsql';
 import { sql } from 'drizzle-orm';
-import {
-  DEFAULT_CONTACT,
-  DEFAULT_EXPERIENCES,
-  DEFAULT_PROJECTS,
-} from '@/data/content';
 import * as schema from '@/lib/schema';
 
 let db: LibSQLDatabase<typeof schema> | null = null;
@@ -84,59 +79,4 @@ async function init(): Promise<void> {
     linkedin_url TEXT NOT NULL,
     github_url TEXT NOT NULL
   )`);
-
-  await seedIfEmpty(d);
-}
-
-async function seedIfEmpty(d: LibSQLDatabase<typeof schema>): Promise<void> {
-  const [exp] = await d
-    .select({ n: sql<number>`count(*)` })
-    .from(schema.experiences);
-  const [proj] = await d
-    .select({ n: sql<number>`count(*)` })
-    .from(schema.projects);
-
-  if (Number(exp.n) === 0) {
-    await d.insert(schema.experiences).values(
-      DEFAULT_EXPERIENCES.map((e, i) => ({
-        position: i,
-        role: e.role,
-        company: e.company,
-        type: e.type,
-        period: e.period,
-        descr: e.desc,
-        tech: JSON.stringify(e.tech),
-        side: e.side,
-      }))
-    );
-  }
-
-  if (Number(proj.n) === 0) {
-    await d.insert(schema.projects).values(
-      DEFAULT_PROJECTS.map((p, i) => ({
-        position: i,
-        title: p.title,
-        category: p.category,
-        tech: p.tech,
-        description: p.description,
-        githubUrl: p.githubUrl ?? null,
-        playStoreUrl: p.playStoreUrl ?? null,
-        appStoreUrl: p.appStoreUrl ?? null,
-        // Urutan array = terbaru → lama; beri createdAt menurun agar konsisten.
-        createdAt: Date.now() - i * 86400000,
-      }))
-    );
-  }
-
-  const [cont] = await d
-    .select({ n: sql<number>`count(*)` })
-    .from(schema.contact);
-  if (Number(cont.n) === 0) {
-    await d.insert(schema.contact).values({
-      id: 1,
-      email: DEFAULT_CONTACT.email,
-      linkedinUrl: DEFAULT_CONTACT.linkedinUrl,
-      githubUrl: DEFAULT_CONTACT.githubUrl,
-    });
-  }
 }

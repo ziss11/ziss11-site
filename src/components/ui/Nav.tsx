@@ -19,14 +19,19 @@ export default function Nav() {
   // Global scroll-reveal for .az-reveal across all sections.
   useRevealOnScroll();
 
-  // Scroll-spy: highlight the nav link of the section in view.
+  // Scroll-spy: highlight the topmost section currently in view. When none is
+  // visible (e.g. while on the hero) no link is marked active.
   useEffect(() => {
     const sections = document.querySelectorAll<HTMLElement>('section[id]');
+    const visible = new Set<string>();
     const spy = new IntersectionObserver(
       (entries) => {
         entries.forEach((en) => {
-          if (en.isIntersecting) setActive(en.target.id);
+          if (en.isIntersecting) visible.add(en.target.id);
+          else visible.delete(en.target.id);
         });
+        const top = LINKS.find((l) => visible.has(l.id));
+        setActive(top ? top.id : '');
       },
       { threshold: 0.5 }
     );
