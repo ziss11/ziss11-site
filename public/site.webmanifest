@@ -4,8 +4,8 @@
   "description": "Senior Mobile Engineer specializing in Flutter, iOS, and Android development.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#09090a",
-  "theme_color": "#C4F24A",
+  "background_color": "#121212",
+  "theme_color": "#121212",
   "icons": [
     {
       "src": "/icon.svg",
