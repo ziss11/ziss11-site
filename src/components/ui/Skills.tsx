@@ -3,59 +3,54 @@ import SectionKicker from './SectionKicker';
 
 export default function Skills() {
   return (
-    <section id='skills' style={{ padding: '104px 0' }}>
+    <section id='stack' style={{ padding: '90px 0 0', scrollMarginTop: 80 }}>
       <div className='az-reveal'>
-        <SectionKicker num='03' label='Skills' />
-        <h2
-          style={{
-            fontFamily: 'var(--font-display)',
-            fontWeight: 600,
-            fontSize: 'clamp(32px,4.6vw,56px)',
-            letterSpacing: '-0.03em',
-            lineHeight: 1,
-            margin: '0 0 56px',
-            color: 'var(--color-fg-strong)',
-          }}
-        >
-          The toolkit
-        </h2>
+        <SectionKicker
+          eyebrow='Toolkit'
+          title='Tech stack'
+          description='The languages, frameworks, and infrastructure I reach for.'
+        />
       </div>
 
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit,minmax(210px,1fr))',
-          gap: '40px 28px',
-        }}
-      >
+      <div className='bento'>
         {SKILL_GROUPS.map((group) => (
-          <div key={group.label} className='az-reveal'>
-            <h3
+          <div
+            key={group.label}
+            className='card card-pad az-reveal span-4'
+            style={{ display: 'flex', flexDirection: 'column' }}
+          >
+            <div
               style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: 12,
-                letterSpacing: '0.14em',
-                textTransform: 'uppercase',
-                color: 'var(--color-accent)',
-                margin: '0 0 20px',
-                paddingBottom: 14,
-                borderBottom: '1px solid rgba(255,255,255,0.1)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                marginBottom: 18,
               }}
             >
-              {group.label}
-            </h3>
-            <div
-              style={{ display: 'flex', flexDirection: 'column', gap: 13 }}
-            >
+              <h3
+                style={{
+                  fontWeight: 600,
+                  fontSize: 15,
+                  letterSpacing: '-0.01em',
+                  margin: 0,
+                  color: 'var(--color-fg-strong)',
+                }}
+              >
+                {group.label}
+              </h3>
+              <span
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: 11,
+                  color: 'var(--color-faint)',
+                }}
+              >
+                {String(group.items.length).padStart(2, '0')}
+              </span>
+            </div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
               {group.items.map((item) => (
-                <span
-                  key={item}
-                  style={{
-                    fontFamily: 'var(--font-display)',
-                    fontSize: 16,
-                    color: 'rgba(255,255,255,0.78)',
-                  }}
-                >
+                <span key={item} className='tech-card'>
                   {item}
                 </span>
               ))}

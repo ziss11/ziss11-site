@@ -5,10 +5,9 @@ import { Menu, X } from 'lucide-react';
 import { useRevealOnScroll } from '@/components/utils/useRevealOnScroll';
 
 const LINKS = [
+  { href: '#work', label: 'Work', id: 'work' },
+  { href: '#stack', label: 'Stack', id: 'stack' },
   { href: '#experience', label: 'Experience', id: 'experience' },
-  { href: '#projects', label: 'Projects', id: 'projects' },
-  { href: '#skills', label: 'Skills', id: 'skills' },
-  { href: '#about', label: 'About', id: 'about' },
   { href: '#contact', label: 'Contact', id: 'contact' },
 ];
 
@@ -16,11 +15,8 @@ export default function Nav() {
   const [active, setActive] = useState<string>('');
   const [open, setOpen] = useState(false);
 
-  // Global scroll-reveal for .az-reveal across all sections.
   useRevealOnScroll();
 
-  // Scroll-spy: highlight the topmost section currently in view. When none is
-  // visible (e.g. while on the hero) no link is marked active.
   useEffect(() => {
     const sections = document.querySelectorAll<HTMLElement>('section[id]');
     const visible = new Set<string>();
@@ -33,7 +29,7 @@ export default function Nav() {
         const top = LINKS.find((l) => visible.has(l.id));
         setActive(top ? top.id : '');
       },
-      { threshold: 0.5 }
+      { threshold: 0.4 }
     );
     sections.forEach((s) => spy.observe(s));
     return () => spy.disconnect();
@@ -42,21 +38,19 @@ export default function Nav() {
   return (
     <nav
       style={{
-        position: 'fixed',
+        position: 'sticky',
         top: 0,
-        left: 0,
-        right: 0,
         zIndex: 50,
-        backdropFilter: 'blur(16px)',
-        background: 'rgba(9,9,10,0.62)',
-        borderBottom: '1px solid rgba(255,255,255,0.06)',
+        backdropFilter: 'blur(14px)',
+        background: 'rgba(18,18,18,0.72)',
+        borderBottom: '1px solid var(--color-border)',
       }}
     >
       <div
         style={{
-          maxWidth: 1180,
+          maxWidth: 1200,
           margin: '0 auto',
-          height: 68,
+          height: 62,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
@@ -69,7 +63,7 @@ export default function Nav() {
           style={{
             display: 'flex',
             alignItems: 'center',
-            gap: 10,
+            gap: 11,
             textDecoration: 'none',
             flexShrink: 0,
           }}
@@ -79,39 +73,39 @@ export default function Nav() {
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
-              width: 34,
-              height: 34,
-              border: '1px solid rgba(255,255,255,0.16)',
-              borderRadius: 9,
-              fontFamily: 'var(--font-display)',
+              width: 30,
+              height: 30,
+              border: '1px solid var(--color-border-strong)',
+              borderRadius: 8,
               fontWeight: 600,
-              fontSize: 15,
-              color: 'var(--color-fg)',
+              fontSize: 13,
+              letterSpacing: '-0.02em',
+              color: 'var(--color-fg-strong)',
             }}
           >
             AZ
           </span>
           <span
             style={{
-              fontFamily: 'var(--font-display)',
               fontWeight: 500,
-              fontSize: 15,
-              color: 'var(--color-fg)',
-              letterSpacing: '-0.01em',
+              fontSize: 14.5,
+              color: 'var(--color-fg-strong)',
+              letterSpacing: '-0.015em',
             }}
           >
             Abdul Azis
           </span>
         </a>
 
-        {/* Desktop links */}
         <div className='hidden items-center gap-7 md:flex'>
           {LINKS.map((l) => (
             <a
               key={l.id}
               href={l.href}
               className='az-navlink'
-              style={active === l.id ? { color: 'var(--color-fg)' } : undefined}
+              style={
+                active === l.id ? { color: 'var(--color-fg-strong)' } : undefined
+              }
             >
               {l.label}
             </a>
@@ -121,13 +115,12 @@ export default function Nav() {
             target='_blank'
             rel='noopener noreferrer'
             className='az-btn'
-            style={{ fontSize: 13.5, padding: '9px 17px', borderRadius: 9 }}
+            style={{ fontSize: 13, padding: '8px 15px' }}
           >
-            Resume
+            Résumé
           </a>
         </div>
 
-        {/* Mobile hamburger */}
         <button
           type='button'
           aria-label={open ? 'Close menu' : 'Open menu'}
@@ -139,18 +132,17 @@ export default function Nav() {
         </button>
       </div>
 
-      {/* Mobile dropdown panel */}
       {open && (
         <div
           className='md:hidden'
           style={{
-            borderTop: '1px solid rgba(255,255,255,0.06)',
-            background: 'rgba(9,9,10,0.92)',
-            backdropFilter: 'blur(16px)',
-            padding: '14px 20px 22px',
+            borderTop: '1px solid var(--color-border)',
+            background: 'rgba(18,18,18,0.96)',
+            backdropFilter: 'blur(14px)',
+            padding: '12px 20px 20px',
             display: 'flex',
             flexDirection: 'column',
-            gap: 4,
+            gap: 2,
           }}
         >
           {LINKS.map((l) => (
@@ -160,10 +152,11 @@ export default function Nav() {
               onClick={() => setOpen(false)}
               style={{
                 textDecoration: 'none',
-                fontSize: 16,
-                padding: '12px 4px',
-                color: active === l.id ? 'var(--color-fg)' : 'rgba(255,255,255,0.6)',
-                borderBottom: '1px solid rgba(255,255,255,0.05)',
+                fontSize: 15.5,
+                padding: '11px 4px',
+                color:
+                  active === l.id ? 'var(--color-fg-strong)' : 'var(--color-muted)',
+                borderBottom: '1px solid var(--color-border)',
               }}
             >
               {l.label}
@@ -177,7 +170,7 @@ export default function Nav() {
             className='az-btn'
             style={{ marginTop: 12, justifyContent: 'center' }}
           >
-            Resume
+            Résumé
           </a>
         </div>
       )}

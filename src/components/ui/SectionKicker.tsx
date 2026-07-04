@@ -1,46 +1,45 @@
-/** The "01 — EXPERIENCE ———" eyebrow row repeated atop each section. */
+/** Clean section header: eyebrow + title + optional description. */
 export default function SectionKicker({
-  num,
-  label,
-  marginBottom = 18,
+  eyebrow,
+  title,
+  description,
+  marginBottom = 32,
 }: {
-  num: string;
-  label: string;
+  eyebrow: string;
+  title: string;
+  description?: string;
   marginBottom?: number;
 }) {
   return (
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: 14,
-        marginBottom,
-      }}
-    >
-      <span
+    <div style={{ marginBottom }}>
+      <p className='eyebrow' style={{ margin: '0 0 14px' }}>
+        {eyebrow}
+      </p>
+      <h2
         style={{
-          fontFamily: 'var(--font-mono)',
-          fontSize: 12,
-          letterSpacing: '0.1em',
-          color: 'var(--color-accent)',
+          fontWeight: 600,
+          fontSize: 'clamp(26px,3.4vw,40px)',
+          letterSpacing: '-0.03em',
+          lineHeight: 1.05,
+          margin: 0,
+          color: 'var(--color-fg-strong)',
         }}
       >
-        {num}
-      </span>
-      <span
-        style={{
-          fontFamily: 'var(--font-mono)',
-          fontSize: 12,
-          letterSpacing: '0.22em',
-          textTransform: 'uppercase',
-          color: 'rgba(255,255,255,0.5)',
-        }}
-      >
-        {label}
-      </span>
-      <span
-        style={{ flex: 1, height: 1, background: 'rgba(255,255,255,0.1)' }}
-      />
+        {title}
+      </h2>
+      {description && (
+        <p
+          style={{
+            fontSize: 16,
+            lineHeight: 1.6,
+            color: 'var(--color-muted)',
+            margin: '14px 0 0',
+            maxWidth: 560,
+          }}
+        >
+          {description}
+        </p>
+      )}
     </div>
   );
 }

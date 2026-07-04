@@ -1,32 +1,40 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 @import 'tailwindcss';
 
 @theme {
-  /* Colors */
-  --color-bg: #09090a;
-  --color-surface: #0d0d0f;
-  --color-fg: #f4f4f3;
-  --color-fg-strong: #f7f7f6;
-  --color-accent: #c4f24a;
-  --color-danger: #ff6b6b;
+  /* Colors — premium charcoal, Linear/Vercel-inspired */
+  --color-bg: #121212;
+  --color-surface: #1a1a1c;
+  --color-surface-2: #202023;
+  --color-fg-strong: #fafafa;
+  --color-fg: #e4e4e7;
+  --color-muted: #8a8a94;
+  --color-faint: #56565e;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-strong: rgba(255, 255, 255, 0.14);
+  --color-accent: #7c8aff;
+  --color-ok: #3fb950;
+  --color-danger: #f0616d;
 
   /* Fonts */
-  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
-  --font-sans: 'Hanken Grotesk', system-ui, sans-serif;
+  --font-display: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
+  /* Shape */
+  --radius: 14px;
+  --radius-sm: 9px;
+
   /* Animations */
-  --animate-az-pulse: azPulse 2.2s ease-in-out infinite;
+  --animate-az-pulse: azPulse 2.4s ease-in-out infinite;
 
   @keyframes azPulse {
     0%,
     100% {
       opacity: 1;
-      transform: scale(1);
     }
     50% {
-      opacity: 0.45;
-      transform: scale(0.82);
+      opacity: 0.35;
     }
   }
 }
@@ -38,6 +46,21 @@
 
   html {
     scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.14) transparent;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    border: 3px solid var(--color-bg);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.18);
   }
 
   body {
@@ -48,16 +71,17 @@
     color: var(--color-fg);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.011em;
   }
 
   ::selection {
-    background: var(--color-accent);
-    color: var(--color-bg);
+    background: rgba(124, 138, 255, 0.28);
+    color: var(--color-fg-strong);
   }
 
   input::placeholder,
   textarea::placeholder {
-    color: rgba(255, 255, 255, 0.28);
+    color: var(--color-faint);
   }
 
   textarea {
@@ -69,10 +93,10 @@
   /* Scroll reveal — toggled by useRevealOnScroll */
   .az-reveal {
     opacity: 0;
-    transform: translateY(28px);
+    transform: translateY(20px);
     transition:
-      opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-      transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .az-reveal.is-visible {
     opacity: 1;
@@ -86,79 +110,286 @@
     }
   }
 
-  /* Primary lime button */
+  /* ── Bento grid ─────────────────────────────────────── */
+  .bento {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 900px) {
+    .bento {
+      grid-template-columns: repeat(6, 1fr);
+    }
+  }
+  @media (max-width: 560px) {
+    .bento {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+  }
+
+  /* Responsive column spans (12 → 6 → 2 track grid) */
+  .span-12 {
+    grid-column: span 12;
+  }
+  .span-8 {
+    grid-column: span 8;
+  }
+  .span-6 {
+    grid-column: span 6;
+  }
+  .span-4 {
+    grid-column: span 4;
+  }
+  @media (max-width: 900px) {
+    .span-12 {
+      grid-column: span 6;
+    }
+    .span-8 {
+      grid-column: span 6;
+    }
+    .span-6 {
+      grid-column: span 6;
+    }
+    .span-4 {
+      grid-column: span 3;
+    }
+  }
+  @media (max-width: 560px) {
+    .span-12,
+    .span-8,
+    .span-6,
+    .span-4 {
+      grid-column: span 2;
+    }
+  }
+
+  /* Featured project card — stacks below tablet */
+  .feat-card {
+    grid-template-columns: 1.1fr 1fr;
+  }
+  @media (max-width: 720px) {
+    .feat-card {
+      grid-template-columns: 1fr !important;
+    }
+    .feat-card > div:last-child {
+      border-left: none !important;
+      border-top: 1px solid var(--color-border);
+    }
+  }
+
+  /* Card surface — 1px border + subtle inner highlight + soft lift */
+  .card {
+    position: relative;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.03),
+      0 1px 2px rgba(0, 0, 0, 0.4);
+  }
+  .card-hover {
+    transition:
+      border-color 0.25s,
+      background 0.25s,
+      transform 0.25s;
+  }
+  .card-hover:hover {
+    border-color: var(--color-border-strong);
+    background: var(--color-surface-2);
+    transform: translateY(-2px);
+  }
+  .card-pad {
+    padding: 26px;
+  }
+
+  /* ── Motion: cursor spotlight, 3D tilt, ambient parallax ──── */
+
+  /* Spotlight follows the cursor across any card (Motion.tsx toggles is-lit) */
+  .card,
+  .az-card {
+    overflow: hidden;
+  }
+  .card::after,
+  .az-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+      260px circle at var(--mx, -200px) var(--my, -200px),
+      rgba(124, 138, 255, 0.1),
+      transparent 62%
+    );
+    opacity: 0;
+    transition: opacity 0.35s;
+    pointer-events: none;
+  }
+  .card.is-lit::after,
+  .az-card.is-lit::after {
+    opacity: 1;
+  }
+
+  /* 3D tilt target — transform driven inline by Motion.tsx.
+     Keeps the reveal's opacity fade alongside the tilt transform. */
+  .tilt {
+    transition:
+      transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+
+  /* Ambient parallax blob behind the hero */
+  .ambient {
+    position: absolute;
+    top: -160px;
+    left: 50%;
+    width: 960px;
+    height: 620px;
+    max-width: 120vw;
+    transform: translateX(-50%);
+    background: radial-gradient(
+      closest-side,
+      rgba(124, 138, 255, 0.11),
+      transparent 70%
+    );
+    filter: blur(30px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card::after,
+    .az-card::after {
+      display: none;
+    }
+    .tilt {
+      transform: none !important;
+      transition: none;
+    }
+    .ambient {
+      display: none;
+    }
+  }
+
+  /* Eyebrow label */
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  /* Status dot */
+  .status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--color-ok);
+    box-shadow: 0 0 0 3px rgba(63, 185, 80, 0.16);
+  }
+
+  /* Tech micro-card */
+  .tech-card {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 9px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface-2);
+    font-size: 13.5px;
+    color: var(--color-fg);
+    transition:
+      border-color 0.2s,
+      color 0.2s;
+  }
+  .tech-card:hover {
+    border-color: var(--color-border-strong);
+    color: var(--color-fg-strong);
+  }
+
+  /* ── Buttons ────────────────────────────────────────── */
   .az-btn {
     display: inline-flex;
     align-items: center;
-    gap: 9px;
+    gap: 8px;
     font-family: inherit;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 500;
-    color: #09090a;
-    background: var(--color-accent);
-    border: none;
-    border-radius: 11px;
-    padding: 13px 22px;
+    letter-spacing: -0.01em;
+    color: #101012;
+    background: var(--color-fg-strong);
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    padding: 10px 17px;
     cursor: pointer;
     text-decoration: none;
     transition:
-      transform 0.2s,
-      box-shadow 0.2s;
+      background 0.2s,
+      transform 0.2s;
   }
   .az-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 30px rgba(196, 242, 74, 0.24);
+    background: #ffffff;
+    transform: translateY(-1px);
   }
 
-  /* Ghost / outline button */
   .az-btn-ghost {
     display: inline-flex;
     align-items: center;
-    gap: 9px;
+    gap: 8px;
     font-family: inherit;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 500;
     color: var(--color-fg);
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    border-radius: 11px;
-    padding: 13px 22px;
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-sm);
+    padding: 10px 17px;
     cursor: pointer;
     text-decoration: none;
     transition:
       border-color 0.2s,
-      background 0.2s;
+      background 0.2s,
+      color 0.2s;
   }
   .az-btn-ghost:hover {
-    border-color: rgba(255, 255, 255, 0.4);
+    border-color: rgba(255, 255, 255, 0.28);
     background: rgba(255, 255, 255, 0.03);
+    color: var(--color-fg-strong);
   }
 
   /* Interactive surface card (projects / contact) */
   .az-card {
-    border: 1px solid rgba(255, 255, 255, 0.09);
-    border-radius: 18px;
-    background: rgba(255, 255, 255, 0.018);
+    position: relative;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.03),
+      0 1px 2px rgba(0, 0, 0, 0.4);
     transition:
-      border-color 0.3s,
-      background 0.3s,
-      transform 0.2s;
+      border-color 0.25s,
+      background 0.25s,
+      transform 0.25s;
   }
   .az-card:hover {
-    border-color: rgba(196, 242, 74, 0.45);
-    background: rgba(196, 242, 74, 0.04);
-    transform: translateY(-4px);
+    border-color: var(--color-border-strong);
+    background: var(--color-surface-2);
+    transform: translateY(-2px);
   }
 
   /* Nav links */
   .az-navlink {
     font-size: 14px;
     text-decoration: none;
-    color: rgba(255, 255, 255, 0.5);
-    transition: color 0.25s;
+    color: var(--color-muted);
+    transition: color 0.2s;
   }
   .az-navlink:hover {
-    color: var(--color-fg);
+    color: var(--color-fg-strong);
   }
 
   /* Form fields */
@@ -166,50 +397,53 @@
   .az-textarea {
     width: 100%;
     font-family: inherit;
-    font-size: 15px;
+    font-size: 14.5px;
     color: var(--color-fg);
-    background: rgba(255, 255, 255, 0.025);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 11px;
-    padding: 13px 15px;
+    background: var(--color-surface-2);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 11px 14px;
     outline: none;
-    transition: border-color 0.2s;
+    transition:
+      border-color 0.2s,
+      box-shadow 0.2s;
   }
   .az-textarea {
-    font-size: 14.5px;
+    font-size: 14px;
     line-height: 1.6;
   }
   .az-input:focus,
   .az-textarea:focus {
-    border-color: rgba(196, 242, 74, 0.5);
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(124, 138, 255, 0.15);
   }
 
-  /* Admin icon button */
+  /* Icon button */
   .az-icon-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     width: 36px;
     height: 36px;
-    color: rgba(255, 255, 255, 0.65);
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 9px;
+    color: var(--color-muted);
+    background: var(--color-surface-2);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
     cursor: pointer;
     transition: all 0.2s;
   }
   .az-icon-btn:hover {
-    color: #09090a;
-    background: var(--color-accent);
-    border-color: var(--color-accent);
+    color: var(--color-fg-strong);
+    background: rgba(255, 255, 255, 0.06);
+    border-color: var(--color-border-strong);
   }
   .az-icon-btn-danger:hover {
     color: #fff;
-    background: rgba(255, 107, 107, 0.85);
-    border-color: rgba(255, 107, 107, 0.85);
+    background: rgba(240, 97, 109, 0.85);
+    border-color: rgba(240, 97, 109, 0.85);
   }
 
-  /* Admin sidebar link */
+  /* Sidebar link (admin) */
   .az-side-link {
     display: flex;
     align-items: center;
@@ -217,10 +451,10 @@
     font-family: inherit;
     font-size: 13.5px;
     text-align: left;
-    color: rgba(255, 255, 255, 0.55);
+    color: var(--color-muted);
     background: none;
     border: none;
-    border-radius: 9px;
+    border-radius: var(--radius-sm);
     padding: 10px 12px;
     cursor: pointer;
     text-decoration: none;
@@ -230,11 +464,11 @@
   }
   .az-side-link:hover {
     background: rgba(255, 255, 255, 0.04);
-    color: var(--color-fg);
+    color: var(--color-fg-strong);
   }
   .az-side-link-danger:hover {
-    background: rgba(255, 107, 107, 0.08);
-    color: #ff8a8a;
+    background: rgba(240, 97, 109, 0.1);
+    color: #f0838d;
   }
 
   /* Project link option row (modal) */
@@ -243,41 +477,39 @@
     align-items: center;
     gap: 14px;
     padding: 14px 16px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.018);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface-2);
     text-decoration: none;
     transition:
       border-color 0.2s,
-      background 0.2s,
-      transform 0.2s;
+      background 0.2s;
   }
   .az-link-option:hover {
-    border-color: rgba(196, 242, 74, 0.45);
-    background: rgba(196, 242, 74, 0.04);
-    transform: translateY(-2px);
+    border-color: var(--color-border-strong);
+    background: rgba(255, 255, 255, 0.04);
   }
 
   /* Resume file input */
   .az-resume-input {
     font-family: var(--font-mono);
     font-size: 13px;
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--color-muted);
   }
   .az-resume-input::file-selector-button {
     margin-right: 12px;
     cursor: pointer;
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--color-accent);
-    background: transparent;
-    border: 1px solid rgba(196, 242, 74, 0.3);
-    border-radius: 8px;
+    font-family: var(--font-sans);
+    font-size: 12.5px;
+    color: var(--color-fg-strong);
+    background: var(--color-surface-2);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-sm);
     padding: 8px 12px;
     transition: background 0.2s;
   }
   .az-resume-input::file-selector-button:hover {
-    background: rgba(196, 242, 74, 0.08);
+    background: rgba(255, 255, 255, 0.06);
   }
 
   /* Admin shell: sidebar + main */
@@ -296,7 +528,7 @@
     }
   }
 
-  /* Experience timeline row: label column + content */
+  /* Experience timeline row */
   .exp-row {
     grid-template-columns: 180px 1fr;
   }
@@ -309,12 +541,12 @@
 
   /* Admin list row */
   .az-row {
-    border: 1px solid rgba(255, 255, 255, 0.09);
-    border-radius: 15px;
-    background: rgba(255, 255, 255, 0.018);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
     transition: border-color 0.25s;
   }
   .az-row:hover {
-    border-color: rgba(255, 255, 255, 0.2);
+    border-color: var(--color-border-strong);
   }
 }

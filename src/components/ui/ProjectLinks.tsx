@@ -87,10 +87,10 @@ export default function ProjectLinks({
           zIndex: 91,
           width: 'min(380px, 92vw)',
           background: 'var(--color-surface)',
-          border: '1px solid rgba(255,255,255,0.1)',
-          borderRadius: 18,
+          border: '1px solid var(--color-border-strong)',
+          borderRadius: 'var(--radius)',
           padding: 26,
-          boxShadow: '0 30px 80px rgba(0,0,0,0.5)',
+          boxShadow: '0 24px 60px rgba(0,0,0,0.55)',
         }}
       >
         <div
@@ -107,9 +107,9 @@ export default function ProjectLinks({
               style={{
                 fontFamily: 'var(--font-mono)',
                 fontSize: 11,
-                letterSpacing: '0.16em',
+                letterSpacing: '0.12em',
                 textTransform: 'uppercase',
-                color: 'rgba(255,255,255,0.42)',
+                color: 'var(--color-faint)',
                 margin: '0 0 6px',
               }}
             >
@@ -117,12 +117,11 @@ export default function ProjectLinks({
             </p>
             <h3
               style={{
-                fontFamily: 'var(--font-display)',
                 fontWeight: 600,
                 fontSize: 19,
                 letterSpacing: '-0.02em',
                 margin: 0,
-                color: 'var(--color-fg)',
+                color: 'var(--color-fg-strong)',
               }}
             >
               {project.title}
@@ -165,9 +164,9 @@ export default function ProjectLinks({
               <span
                 style={{
                   flex: 1,
-                  fontFamily: 'var(--font-display)',
-                  fontSize: 16,
-                  color: 'var(--color-fg)',
+                  fontSize: 15,
+                  fontWeight: 500,
+                  color: 'var(--color-fg-strong)',
                 }}
               >
                 {o.label}
@@ -177,7 +176,7 @@ export default function ProjectLinks({
                 height='16'
                 viewBox='0 0 24 24'
                 fill='none'
-                stroke='rgba(255,255,255,0.5)'
+                stroke='var(--color-accent)'
                 strokeWidth='2'
                 strokeLinecap='round'
                 strokeLinejoin='round'

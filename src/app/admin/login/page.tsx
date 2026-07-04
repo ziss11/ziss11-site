@@ -36,7 +36,7 @@ export default function LoginPage() {
         justifyContent: 'center',
         padding: 32,
         background:
-          'radial-gradient(54% 50% at 50% 0%, rgba(196,242,74,0.07), transparent 70%)',
+          'radial-gradient(54% 50% at 50% 0%, rgba(124,138,255,0.07), transparent 70%)',
       }}
     >
       <div style={{ width: '100%', maxWidth: 420 }}>
@@ -83,7 +83,7 @@ export default function LoginPage() {
               width: 40,
               height: 40,
               border: '1px solid rgba(255,255,255,0.16)',
-              borderRadius: 11,
+              borderRadius: 9,
               fontFamily: 'var(--font-display)',
               fontWeight: 600,
               fontSize: 17,
@@ -176,7 +176,7 @@ export default function LoginPage() {
                 margin: 0,
                 padding: '11px 14px',
                 border: '1px solid rgba(255,107,107,0.3)',
-                borderRadius: 10,
+                borderRadius: 9,
                 background: 'rgba(255,107,107,0.06)',
               }}
             >

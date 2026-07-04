@@ -299,21 +299,22 @@ export default function AdminShell({
               justifyContent: 'center',
               width: 36,
               height: 36,
-              border: '1px solid rgba(255,255,255,0.16)',
-              borderRadius: 10,
+              border: '1px solid var(--color-border)',
+              borderRadius: 9,
               ...DISPLAY,
-              fontWeight: 600,
+              fontWeight: 700,
               fontSize: 15,
+              color: 'var(--color-accent)',
             }}
           >
             AZ
           </span>
           <div>
-            <p style={{ ...DISPLAY, fontWeight: 600, fontSize: 14, margin: 0, letterSpacing: '-0.01em' }}>
-              Admin Console
+            <p style={{ ...MONO, fontWeight: 700, fontSize: 13, margin: 0, letterSpacing: '-0.01em' }}>
+              <span className='prompt'>admin@portfolio</span>:~#
             </p>
-            <p style={{ ...MONO, fontSize: 10, letterSpacing: '0.08em', color: 'rgba(255,255,255,0.4)', margin: '2px 0 0' }}>
-              CONTENT CMS
+            <p style={{ ...MONO, fontSize: 10, letterSpacing: '0.06em', color: 'var(--color-accent-dim)', margin: '2px 0 0' }}>
+              content-cms v1.0
             </p>
           </div>
         </div>
@@ -339,9 +340,9 @@ export default function AdminShell({
                   fontSize: 14.5,
                   fontWeight: on ? 500 : 400,
                   padding: '11px 13px',
-                  borderRadius: 10,
+                  borderRadius: 9,
                   border: 'none',
-                  background: on ? 'rgba(196,242,74,0.1)' : 'transparent',
+                  background: on ? 'rgba(124,138,255,0.1)' : 'transparent',
                   color: on ? 'var(--color-accent)' : 'rgba(255,255,255,0.6)',
                   transition: 'background .2s, color .2s',
                 }}
@@ -390,11 +391,11 @@ export default function AdminShell({
               alignItems: 'center',
               gap: 9,
               fontSize: 14,
-              color: '#09090a',
+              color: '#101012',
               background: 'var(--color-accent)',
               padding: '12px 18px',
-              borderRadius: 11,
-              boxShadow: '0 12px 30px rgba(196,242,74,0.22)',
+              borderRadius: 9,
+              boxShadow: '0 8px 24px rgba(0,0,0,0.4)',
             }}
           >
             <Check size={16} strokeWidth={2.6} /> {toast}
@@ -419,7 +420,7 @@ export default function AdminShell({
             </h1>
           </div>
           {meta.add && (
-            <button onClick={() => openEdit(null)} className='az-btn' style={{ fontSize: 14, padding: '11px 18px', borderRadius: 10, whiteSpace: 'nowrap' }}>
+            <button onClick={() => openEdit(null)} className='az-btn' style={{ fontSize: 14, padding: '11px 18px', borderRadius: 9, whiteSpace: 'nowrap' }}>
               <Plus size={15} strokeWidth={2.6} /> {meta.add}
             </button>
           )}
@@ -443,7 +444,7 @@ export default function AdminShell({
                       {row.title}
                     </span>
                     {row.badge && (
-                      <span style={{ ...MONO, fontSize: 10.5, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--color-accent)', border: '1px solid rgba(196,242,74,0.3)', borderRadius: 999, padding: '3px 9px' }}>
+                      <span style={{ ...MONO, fontSize: 10.5, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--color-accent)', border: '1px solid rgba(124,138,255,0.3)', borderRadius: 9, padding: '3px 9px' }}>
                         {row.badge}
                       </span>
                     )}
@@ -486,7 +487,7 @@ export default function AdminShell({
               gap: 18,
               padding: 30,
               border: '1px solid rgba(255,255,255,0.09)',
-              borderRadius: 16,
+              borderRadius: 9,
               background: 'rgba(255,255,255,0.018)',
             }}
           >
@@ -507,7 +508,7 @@ export default function AdminShell({
                 />
               </div>
             ))}
-            <button onClick={saveContact} className='az-btn' style={{ alignSelf: 'flex-start', fontSize: 14, padding: '12px 22px', borderRadius: 10 }}>
+            <button onClick={saveContact} className='az-btn' style={{ alignSelf: 'flex-start', fontSize: 14, padding: '12px 22px', borderRadius: 0 }}>
               Save contact details
             </button>
           </div>

@@ -18,7 +18,7 @@ function SubmitButton() {
         alignSelf: 'flex-start',
         fontSize: 14,
         padding: '12px 22px',
-        borderRadius: 10,
+        borderRadius: 9,
         opacity: pending ? 0.6 : 1,
       }}
     >
@@ -38,7 +38,7 @@ export default function ResumeUploader({ hasCustom }: { hasCustom: boolean }) {
         gap: 18,
         padding: 30,
         border: '1px solid rgba(255,255,255,0.09)',
-        borderRadius: 16,
+        borderRadius: 9,
         background: 'rgba(255,255,255,0.018)',
       }}
     >
@@ -87,7 +87,7 @@ export default function ResumeUploader({ hasCustom }: { hasCustom: boolean }) {
               margin: 0,
               padding: '11px 14px',
               border: '1px solid rgba(255,107,107,0.3)',
-              borderRadius: 10,
+              borderRadius: 9,
               background: 'rgba(255,107,107,0.06)',
             }}
           >

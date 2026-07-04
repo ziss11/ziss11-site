@@ -2,31 +2,30 @@ export default function Footer() {
   return (
     <footer
       style={{
-        borderTop: '1px solid rgba(255,255,255,0.07)',
-        marginTop: 40,
+        borderTop: '1px solid var(--color-border)',
+        marginTop: 90,
       }}
     >
       <div
         style={{
-          maxWidth: 1180,
+          maxWidth: 1200,
           margin: '0 auto',
-          padding: 32,
+          padding: '28px 32px',
           display: 'flex',
           flexWrap: 'wrap',
           alignItems: 'center',
           justifyContent: 'space-between',
-          gap: 14,
+          gap: 12,
         }}
       >
-        <span style={{ fontSize: 14, color: 'rgba(255,255,255,0.42)' }}>
+        <span style={{ fontSize: 13.5, color: 'var(--color-muted)' }}>
           © {new Date().getFullYear()} Abdul Azis
         </span>
         <span
           style={{
             fontFamily: 'var(--font-mono)',
             fontSize: 12,
-            letterSpacing: '0.08em',
-            color: 'rgba(255,255,255,0.32)',
+            color: 'var(--color-faint)',
           }}
         >
           Designed &amp; built for mobile-first impact

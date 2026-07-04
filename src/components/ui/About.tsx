@@ -1,58 +1,67 @@
 import SectionKicker from './SectionKicker';
 
-const CHIPS = ['iOS', 'Android', 'Flutter'];
+const FOCUS = ['Native performance', '60fps UI', 'Offline-first', 'Clean Architecture'];
 
 export default function About() {
   return (
-    <section id='about' style={{ padding: '104px 0' }}>
+    <section id='about' style={{ padding: '90px 0 0', scrollMarginTop: 80 }}>
       <div className='az-reveal'>
-        <SectionKicker num='04' label='About' marginBottom={40} />
-        <p
-          style={{
-            fontFamily: 'var(--font-display)',
-            fontWeight: 400,
-            fontSize: 'clamp(26px,3.5vw,42px)',
-            lineHeight: 1.32,
-            letterSpacing: '-0.02em',
-            margin: 0,
-            maxWidth: 920,
-            color: 'rgba(255,255,255,0.5)',
-          }}
-        >
-          Senior Mobile Engineer focused on{' '}
-          <span style={{ color: 'var(--color-fg-strong)' }}>
-            native performance
-          </span>
-          , smooth{' '}
-          <span style={{ color: 'var(--color-fg-strong)' }}>60&nbsp;fps UI</span>
-          , and{' '}
-          <span style={{ color: 'var(--color-fg-strong)' }}>offline-first</span>{' '}
-          architecture — turning complex requirements into mobile products
-          people actually enjoy using.
-        </p>
+        <SectionKicker eyebrow='About' title='How I work' />
+      </div>
+
+      <div className='bento'>
+        <div className='card card-pad az-reveal span-8'>
+          <p
+            style={{
+              fontWeight: 500,
+              fontSize: 'clamp(20px,2.3vw,28px)',
+              lineHeight: 1.45,
+              letterSpacing: '-0.02em',
+              margin: 0,
+              color: 'var(--color-muted)',
+            }}
+          >
+            I turn complex requirements into mobile products people actually
+            enjoy using — obsessing over{' '}
+            <span style={{ color: 'var(--color-fg-strong)' }}>native performance</span>,{' '}
+            <span style={{ color: 'var(--color-fg-strong)' }}>smooth 60fps UI</span>, and{' '}
+            <span style={{ color: 'var(--color-fg-strong)' }}>offline-first</span>{' '}
+            architecture.
+          </p>
+        </div>
+
         <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: 10,
-            marginTop: 40,
-          }}
+          className='card card-pad az-reveal span-4'
+          style={{ display: 'flex', flexDirection: 'column' }}
         >
-          {CHIPS.map((c) => (
-            <span
-              key={c}
-              style={{
-                fontFamily: 'var(--font-mono)',
-                fontSize: 13,
-                color: 'rgba(255,255,255,0.7)',
-                border: '1px solid rgba(255,255,255,0.13)',
-                borderRadius: 999,
-                padding: '8px 15px',
-              }}
-            >
-              {c}
-            </span>
-          ))}
+          <p className='eyebrow' style={{ margin: '0 0 16px' }}>
+            Focus areas
+          </p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+            {FOCUS.map((f) => (
+              <div
+                key={f}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 10,
+                  fontSize: 14,
+                  color: 'var(--color-fg)',
+                }}
+              >
+                <span
+                  style={{
+                    width: 5,
+                    height: 5,
+                    borderRadius: '50%',
+                    background: 'var(--color-accent)',
+                    flexShrink: 0,
+                  }}
+                />
+                {f}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
