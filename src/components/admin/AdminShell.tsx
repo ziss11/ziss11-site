@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useTransition } from 'react';
+import { useRef, useState, useTransition } from 'react';
 import {
   Briefcase,
   Check,
@@ -41,16 +41,15 @@ type Editing =
   | null;
 
 const MONO: React.CSSProperties = { fontFamily: 'var(--font-mono)' };
-const DISPLAY: React.CSSProperties = { fontFamily: 'var(--font-display)' };
 
 const META: Record<
   Tab,
-  { icon: React.ReactNode; label: string; kicker: string; title: string; desc: string; add: string }
+  { icon: React.ReactNode; label: string; eyebrow: string; title: string; desc: string; add: string }
 > = {
   experience: {
     icon: <Briefcase size={16} />,
     label: 'Experience',
-    kicker: 'Section 01',
+    eyebrow: 'Career',
     title: 'Experience',
     desc: 'Manage the career milestones shown on your timeline.',
     add: 'Add role',
@@ -58,7 +57,7 @@ const META: Record<
   projects: {
     icon: <FolderGit2 size={16} />,
     label: 'Projects',
-    kicker: 'Section 02',
+    eyebrow: 'Selected work',
     title: 'Projects',
     desc: 'Curate the featured work displayed in your portfolio grid.',
     add: 'Add project',
@@ -66,7 +65,7 @@ const META: Record<
   contact: {
     icon: <Mail size={16} />,
     label: 'Contact',
-    kicker: 'Section 03',
+    eyebrow: 'Channels',
     title: 'Contact',
     desc: 'Update the contact channels visitors use to reach you.',
     add: '',
@@ -74,7 +73,7 @@ const META: Record<
   resume: {
     icon: <FileText size={16} />,
     label: 'Resume',
-    kicker: 'Section 04',
+    eyebrow: 'Document',
     title: 'Resume',
     desc: 'Upload the PDF served at /resume.pdf.',
     add: '',
@@ -98,7 +97,9 @@ export default function AdminShell({
   const [contact, setContact] = useState<Contact>(initialContact);
   const [editing, setEditing] = useState<Editing>(null);
   const [toast, setToast] = useState('');
+  const [confirmLogout, setConfirmLogout] = useState(false);
   const [, startTransition] = useTransition();
+  const logoutFormRef = useRef<HTMLFormElement>(null);
 
   const flash = (msg: string) => {
     setToast(msg);
@@ -276,7 +277,7 @@ export default function AdminShell({
           top: 0,
           alignSelf: 'start',
           height: '100vh',
-          borderRight: '1px solid rgba(255,255,255,0.07)',
+          borderRight: '1px solid var(--color-border)',
           padding: '26px 18px',
           display: 'flex',
           flexDirection: 'column',
@@ -289,7 +290,7 @@ export default function AdminShell({
             gap: 10,
             padding: '0 8px 22px',
             marginBottom: 16,
-            borderBottom: '1px solid rgba(255,255,255,0.07)',
+            borderBottom: '1px solid var(--color-border)',
           }}
         >
           <span
@@ -299,22 +300,21 @@ export default function AdminShell({
               justifyContent: 'center',
               width: 36,
               height: 36,
-              border: '1px solid var(--color-border)',
-              borderRadius: 9,
-              ...DISPLAY,
-              fontWeight: 700,
-              fontSize: 15,
-              color: 'var(--color-accent)',
+              border: '1px solid var(--color-border-strong)',
+              borderRadius: 'var(--radius-sm)',
+              fontWeight: 600,
+              fontSize: 14,
+              color: 'var(--color-fg-strong)',
             }}
           >
             AZ
           </span>
           <div>
-            <p style={{ ...MONO, fontWeight: 700, fontSize: 13, margin: 0, letterSpacing: '-0.01em' }}>
-              <span className='prompt'>admin@portfolio</span>:~#
+            <p style={{ fontWeight: 600, fontSize: 14, margin: 0, letterSpacing: '-0.01em', color: 'var(--color-fg-strong)' }}>
+              Admin Console
             </p>
-            <p style={{ ...MONO, fontSize: 10, letterSpacing: '0.06em', color: 'var(--color-accent-dim)', margin: '2px 0 0' }}>
-              content-cms v1.0
+            <p style={{ ...MONO, fontSize: 11, color: 'var(--color-faint)', margin: '2px 0 0' }}>
+              Content management
             </p>
           </div>
         </div>
@@ -340,10 +340,10 @@ export default function AdminShell({
                   fontSize: 14.5,
                   fontWeight: on ? 500 : 400,
                   padding: '11px 13px',
-                  borderRadius: 9,
+                  borderRadius: 'var(--radius-sm)',
                   border: 'none',
                   background: on ? 'rgba(124,138,255,0.1)' : 'transparent',
-                  color: on ? 'var(--color-accent)' : 'rgba(255,255,255,0.6)',
+                  color: on ? 'var(--color-accent)' : 'var(--color-muted)',
                   transition: 'background .2s, color .2s',
                 }}
               >
@@ -364,17 +364,21 @@ export default function AdminShell({
             flexDirection: 'column',
             gap: 6,
             paddingTop: 16,
-            borderTop: '1px solid rgba(255,255,255,0.07)',
+            borderTop: '1px solid var(--color-border)',
           }}
         >
           <Link href='/' target='_blank' rel='noopener noreferrer' className='az-side-link'>
             <ExternalLink size={15} /> View live site
           </Link>
-          <form action={logout}>
-            <button type='submit' className='az-side-link az-side-link-danger' style={{ width: '100%' }}>
-              <LogOut size={15} /> Sign out
-            </button>
-          </form>
+          <form ref={logoutFormRef} action={logout} style={{ display: 'none' }} />
+          <button
+            type='button'
+            onClick={() => setConfirmLogout(true)}
+            className='az-side-link az-side-link-danger'
+            style={{ width: '100%' }}
+          >
+            <LogOut size={15} /> Sign out
+          </button>
         </div>
       </aside>
 
@@ -392,9 +396,9 @@ export default function AdminShell({
               gap: 9,
               fontSize: 14,
               color: '#101012',
-              background: 'var(--color-accent)',
+              background: 'var(--color-fg-strong)',
               padding: '12px 18px',
-              borderRadius: 9,
+              borderRadius: 'var(--radius-sm)',
               boxShadow: '0 8px 24px rgba(0,0,0,0.4)',
             }}
           >
@@ -412,20 +416,20 @@ export default function AdminShell({
           }}
         >
           <div>
-            <p style={{ ...MONO, fontSize: 12, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--color-accent)', margin: '0 0 10px' }}>
-              {meta.kicker}
+            <p className='eyebrow' style={{ margin: '0 0 12px' }}>
+              {meta.eyebrow}
             </p>
-            <h1 style={{ ...DISPLAY, fontWeight: 600, fontSize: 36, letterSpacing: '-0.025em', lineHeight: 1, margin: 0 }}>
+            <h1 style={{ fontWeight: 600, fontSize: 32, letterSpacing: '-0.025em', lineHeight: 1, margin: 0, color: 'var(--color-fg-strong)' }}>
               {meta.title}
             </h1>
           </div>
           {meta.add && (
-            <button onClick={() => openEdit(null)} className='az-btn' style={{ fontSize: 14, padding: '11px 18px', borderRadius: 9, whiteSpace: 'nowrap' }}>
+            <button onClick={() => openEdit(null)} className='az-btn' style={{ fontSize: 14, whiteSpace: 'nowrap' }}>
               <Plus size={15} strokeWidth={2.6} /> {meta.add}
             </button>
           )}
         </header>
-        <p style={{ fontSize: 15, color: 'rgba(255,255,255,0.5)', margin: '0 0 36px', maxWidth: 560 }}>
+        <p style={{ fontSize: 15, color: 'var(--color-muted)', margin: '0 0 36px', maxWidth: 560 }}>
           {meta.desc}
         </p>
 
@@ -440,11 +444,11 @@ export default function AdminShell({
               >
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginBottom: 6 }}>
-                    <span style={{ ...DISPLAY, fontWeight: 600, fontSize: 17, letterSpacing: '-0.01em' }}>
+                    <span style={{ fontWeight: 600, fontSize: 17, letterSpacing: '-0.01em', color: 'var(--color-fg-strong)' }}>
                       {row.title}
                     </span>
                     {row.badge && (
-                      <span style={{ ...MONO, fontSize: 10.5, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--color-accent)', border: '1px solid rgba(124,138,255,0.3)', borderRadius: 9, padding: '3px 9px' }}>
+                      <span style={{ ...MONO, fontSize: 10.5, letterSpacing: '0.08em', textTransform: 'uppercase', color: 'var(--color-accent)', border: '1px solid var(--color-border-strong)', borderRadius: 6, padding: '3px 9px' }}>
                         {row.badge}
                       </span>
                     )}
@@ -452,7 +456,7 @@ export default function AdminShell({
                   <p
                     style={{
                       fontSize: 14,
-                      color: 'rgba(255,255,255,0.5)',
+                      color: 'var(--color-muted)',
                       margin: 0,
                       lineHeight: 1.55,
                       overflow: 'hidden',
@@ -480,24 +484,14 @@ export default function AdminShell({
 
         {/* CONTACT inline form */}
         {tab === 'contact' && (
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 18,
-              padding: 30,
-              border: '1px solid rgba(255,255,255,0.09)',
-              borderRadius: 9,
-              background: 'rgba(255,255,255,0.018)',
-            }}
-          >
+          <div className='card card-pad' style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
             {([
               { key: 'email', label: 'Email', placeholder: 'you@email.com' },
               { key: 'linkedinUrl', label: 'LinkedIn URL', placeholder: 'https://linkedin.com/in/username' },
               { key: 'githubUrl', label: 'GitHub URL', placeholder: 'https://github.com/username' },
             ] as const).map((f) => (
               <div key={f.key} style={{ display: 'flex', flexDirection: 'column', gap: 9 }}>
-                <label style={{ ...MONO, fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)' }}>
+                <label style={{ ...MONO, fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--color-muted)' }}>
                   {f.label}
                 </label>
                 <input
@@ -508,7 +502,7 @@ export default function AdminShell({
                 />
               </div>
             ))}
-            <button onClick={saveContact} className='az-btn' style={{ alignSelf: 'flex-start', fontSize: 14, padding: '12px 22px', borderRadius: 0 }}>
+            <button onClick={saveContact} className='az-btn' style={{ alignSelf: 'flex-start', fontSize: 14 }}>
               Save contact details
             </button>
           </div>
@@ -534,14 +528,14 @@ export default function AdminShell({
               zIndex: 91,
               width: 'min(480px, 92vw)',
               background: 'var(--color-surface)',
-              borderLeft: '1px solid rgba(255,255,255,0.1)',
+              borderLeft: '1px solid var(--color-border-strong)',
               padding: '34px 32px',
               overflowY: 'auto',
-              boxShadow: '-30px 0 80px rgba(0,0,0,0.5)',
+              boxShadow: '-24px 0 60px rgba(0,0,0,0.55)',
             }}
           >
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 28 }}>
-              <h2 style={{ ...DISPLAY, fontWeight: 600, fontSize: 22, letterSpacing: '-0.02em', margin: 0 }}>
+              <h2 style={{ fontWeight: 600, fontSize: 21, letterSpacing: '-0.02em', margin: 0, color: 'var(--color-fg-strong)' }}>
                 {editing.index == null
                   ? editing.kind === 'experience'
                     ? 'Add role'
@@ -558,7 +552,7 @@ export default function AdminShell({
             <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
               {formFields().map((f) => (
                 <div key={f.key} style={{ display: 'flex', flexDirection: 'column', gap: 9 }}>
-                  <label style={{ ...MONO, fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)' }}>
+                  <label style={{ ...MONO, fontSize: 11, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--color-muted)' }}>
                     {f.label}
                   </label>
                   {f.multiline ? (
@@ -578,7 +572,7 @@ export default function AdminShell({
                     />
                   )}
                   {f.hint && (
-                    <span style={{ ...MONO, fontSize: 11, color: 'rgba(255,255,255,0.34)' }}>{f.hint}</span>
+                    <span style={{ ...MONO, fontSize: 11, color: 'var(--color-faint)' }}>{f.hint}</span>
                   )}
                 </div>
               ))}
@@ -589,6 +583,58 @@ export default function AdminShell({
                 Save changes
               </button>
               <button onClick={() => setEditing(null)} className='az-btn-ghost' style={{ padding: '14px 24px' }}>
+                Cancel
+              </button>
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* SIGN OUT CONFIRM MODAL */}
+      {confirmLogout && (
+        <>
+          <div
+            onClick={() => setConfirmLogout(false)}
+            style={{ position: 'fixed', inset: 0, zIndex: 96, background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(3px)' }}
+          />
+          <div
+            role='alertdialog'
+            aria-modal='true'
+            aria-labelledby='logout-title'
+            style={{
+              position: 'fixed',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              zIndex: 97,
+              width: 'min(360px, 92vw)',
+              background: 'var(--color-surface)',
+              border: '1px solid var(--color-border-strong)',
+              borderRadius: 'var(--radius)',
+              padding: 26,
+              boxShadow: '0 24px 60px rgba(0,0,0,0.55)',
+            }}
+          >
+            <h2 id='logout-title' style={{ fontWeight: 600, fontSize: 18, letterSpacing: '-0.015em', margin: 0, color: 'var(--color-fg-strong)' }}>
+              Sign out?
+            </h2>
+            <p style={{ fontSize: 14, color: 'var(--color-muted)', lineHeight: 1.55, margin: '10px 0 24px' }}>
+              You&apos;ll need your password to sign back into the admin console.
+            </p>
+            <div style={{ display: 'flex', gap: 10 }}>
+              <button
+                onClick={() => logoutFormRef.current?.requestSubmit()}
+                className='az-btn'
+                style={{
+                  flex: 1,
+                  justifyContent: 'center',
+                  background: 'var(--color-danger)',
+                  color: '#fff',
+                }}
+              >
+                <LogOut size={15} /> Sign out
+              </button>
+              <button onClick={() => setConfirmLogout(false)} className='az-btn-ghost' style={{ flex: 1, justifyContent: 'center' }}>
                 Cancel
               </button>
             </div>

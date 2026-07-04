@@ -17,8 +17,6 @@ function SubmitButton() {
       style={{
         alignSelf: 'flex-start',
         fontSize: 14,
-        padding: '12px 22px',
-        borderRadius: 9,
         opacity: pending ? 0.6 : 1,
       }}
     >
@@ -31,18 +29,8 @@ export default function ResumeUploader({ hasCustom }: { hasCustom: boolean }) {
   const [state, formAction] = useActionState(saveResumeAction, null);
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 18,
-        padding: 30,
-        border: '1px solid rgba(255,255,255,0.09)',
-        borderRadius: 9,
-        background: 'rgba(255,255,255,0.018)',
-      }}
-    >
-      <div style={{ display: 'flex', alignItems: 'center', gap: 9, fontSize: 14, color: 'rgba(255,255,255,0.6)' }}>
+    <div className='card card-pad' style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 9, fontSize: 14, color: 'var(--color-muted)' }}>
         <FileText size={18} style={{ color: 'var(--color-accent)' }} />
         <span>
           Active file:{' '}
@@ -86,9 +74,9 @@ export default function ResumeUploader({ hasCustom }: { hasCustom: boolean }) {
               color: 'var(--color-danger)',
               margin: 0,
               padding: '11px 14px',
-              border: '1px solid rgba(255,107,107,0.3)',
-              borderRadius: 9,
-              background: 'rgba(255,107,107,0.06)',
+              border: '1px solid rgba(240,97,109,0.3)',
+              borderRadius: 'var(--radius-sm)',
+              background: 'rgba(240,97,109,0.08)',
             }}
           >
             {state.error}

@@ -82,8 +82,8 @@ export default function LoginPage() {
               justifyContent: 'center',
               width: 40,
               height: 40,
-              border: '1px solid rgba(255,255,255,0.16)',
-              borderRadius: 9,
+              border: '1px solid var(--color-border-strong)',
+              borderRadius: 'var(--radius-sm)',
               fontFamily: 'var(--font-display)',
               fontWeight: 600,
               fontSize: 17,
@@ -108,7 +108,7 @@ export default function LoginPage() {
                 fontFamily: 'var(--font-mono)',
                 fontSize: 11,
                 letterSpacing: '0.06em',
-                color: 'rgba(255,255,255,0.42)',
+                color: 'var(--color-faint)',
                 margin: '3px 0 0',
               }}
             >
@@ -132,7 +132,7 @@ export default function LoginPage() {
         <p
           style={{
             fontSize: 15,
-            color: 'rgba(255,255,255,0.5)',
+            color: 'var(--color-muted)',
             margin: '0 0 34px',
           }}
         >
@@ -152,7 +152,7 @@ export default function LoginPage() {
                 fontSize: 11,
                 letterSpacing: '0.14em',
                 textTransform: 'uppercase',
-                color: 'rgba(255,255,255,0.5)',
+                color: 'var(--color-muted)',
               }}
             >
               Password
@@ -175,9 +175,9 @@ export default function LoginPage() {
                 color: 'var(--color-danger)',
                 margin: 0,
                 padding: '11px 14px',
-                border: '1px solid rgba(255,107,107,0.3)',
-                borderRadius: 9,
-                background: 'rgba(255,107,107,0.06)',
+                border: '1px solid rgba(240,97,109,0.3)',
+                borderRadius: 'var(--radius-sm)',
+                background: 'rgba(240,97,109,0.08)',
               }}
             >
               {state.error}
