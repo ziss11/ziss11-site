@@ -4,21 +4,22 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Abdul Azis | Senior Mobile Engineer',
+    default: 'Abdul Azis | Software Engineer',
     template: '%s | Abdul Azis',
   },
   description:
-    'Senior Mobile Engineer specializing in Flutter, iOS, and Android development. Building high-performance, offline-first mobile applications with 60fps UI.',
+    'Software Engineer specializing in full-stack web and mobile development — Flutter, React, Next.js, and clean, scalable architecture.',
   keywords: [
-    'Mobile Engineer',
+    'Software Engineer',
+    'Full-Stack Developer',
     'Flutter Developer',
-    'iOS Developer',
-    'Android Developer',
-    'Senior Software Engineer',
+    'React Developer',
+    'Next.js Developer',
     'Abdul Azis',
     'ziss11',
+    'Web Development',
     'Mobile App Development',
-    'Cross-Platform Development',
+    'Backend Development',
   ],
   authors: [{ name: 'Abdul Azis', url: 'https://github.com/ziss11' }],
   creator: 'Abdul Azis',
@@ -29,15 +30,15 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://ziss11.vercel.app',
     siteName: 'Abdul Azis Portfolio',
-    title: 'Abdul Azis | Senior Mobile Engineer',
+    title: 'Abdul Azis | Software Engineer',
     description:
-      'Senior Mobile Engineer specializing in Flutter, iOS, and Android development.',
+      'Software Engineer specializing in full-stack web and mobile development.',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'Abdul Azis - Senior Mobile Engineer',
+        alt: 'Abdul Azis - Software Engineer',
       },
     ],
   },

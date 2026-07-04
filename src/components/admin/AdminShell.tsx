@@ -176,19 +176,19 @@ export default function AdminShell({
     const d = editing.draft;
     if (editing.kind === 'experience') {
       return [
-        { key: 'role', label: 'Role', value: d.role, placeholder: 'Sr. Mobile Engineer' },
+        { key: 'role', label: 'Role', value: d.role, placeholder: 'Sr. Software Engineer' },
         { key: 'company', label: 'Company', value: d.company, placeholder: '@ Company name' },
         { key: 'period', label: 'Period', value: d.period, placeholder: 'Jul 2024 — Present' },
         { key: 'type', label: 'Type', value: d.type, placeholder: 'Full-time' },
         { key: 'desc', label: 'Description', value: d.desc, placeholder: 'What you did…', multiline: true },
-        { key: 'tags', label: 'Tags', value: d.tags, placeholder: 'Flutter, CI/CD', hint: 'Comma-separated' },
+        { key: 'tags', label: 'Tags', value: d.tags, placeholder: 'Flutter, React, CI/CD', hint: 'Comma-separated' },
       ];
     }
     return [
       { key: 'title', label: 'Project name', value: d.title, placeholder: 'Project name' },
-      { key: 'category', label: 'Category', value: d.category, placeholder: 'Flutter / Dart' },
+      { key: 'category', label: 'Category', value: d.category, placeholder: 'Web / Mobile' },
       { key: 'description', label: 'Description', value: d.description, placeholder: 'What it does…', multiline: true },
-      { key: 'tags', label: 'Tags', value: d.tags, placeholder: 'Flutter, SaaS', hint: 'Comma-separated' },
+      { key: 'tags', label: 'Tags', value: d.tags, placeholder: 'Flutter, Next.js, SaaS', hint: 'Comma-separated' },
       { key: 'playStoreUrl', label: 'Play Store URL', value: d.playStoreUrl, placeholder: 'https://…', hint: 'Optional' },
       { key: 'appStoreUrl', label: 'App Store URL', value: d.appStoreUrl, placeholder: 'https://…', hint: 'Optional' },
       { key: 'githubUrl', label: 'GitHub URL', value: d.githubUrl, placeholder: 'https://…', hint: 'Optional' },

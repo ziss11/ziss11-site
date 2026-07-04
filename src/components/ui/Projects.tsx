@@ -4,6 +4,7 @@ import { useState } from 'react';
 import type { Project } from '@/data/content';
 import SectionKicker from './SectionKicker';
 import ProjectLinks, { projectOptions } from './ProjectLinks';
+import { ArrowUpRight, Folder } from 'lucide-react';
 
 function tagsOf(p: Project): string[] {
   return p.tech
@@ -12,69 +13,100 @@ function tagsOf(p: Project): string[] {
     .filter(Boolean);
 }
 
-// Clean, hand-drawn system diagram — the "featured project" preview.
+const ARCHITECTURE_LAYERS: {
+  label: string;
+  detail: string;
+  color: string;
+}[] = [
+  { label: 'UI layer', detail: 'Components / Views', color: 'var(--color-fg-strong)' },
+  { label: 'State management', detail: 'Store / Hooks / Providers', color: 'var(--color-accent)' },
+  { label: 'Domain layer', detail: 'Use Cases / Business Logic', color: 'var(--color-fg-strong)' },
+  { label: 'Data layer', detail: 'Repositories / APIs / DB', color: 'var(--color-accent-cyan)' },
+];
+
+// Clean layered-architecture summary (presentation -> state -> domain -> data)
 function ArchitectureMock() {
-  const layers = [
-    { label: 'Presentation', node: 'Flutter Widgets' },
-    { label: 'State', node: 'BLoC / Cubit' },
-    { label: 'Domain', node: 'Use Cases' },
-    { label: 'Data', node: 'Repository · REST · Local DB' },
-  ];
   return (
     <div
       style={{
         display: 'flex',
         flexDirection: 'column',
         gap: 10,
-        padding: 22,
-        borderRadius: 'var(--radius-sm)',
-        border: '1px solid var(--color-border)',
+        padding: 24,
+        borderRadius: 'var(--radius)',
+        border: '1px solid rgba(255, 255, 255, 0.06)',
         background:
-          'radial-gradient(120% 100% at 50% 0%, rgba(124,138,255,0.06), transparent 60%), var(--color-bg)',
+          'radial-gradient(130% 100% at 50% 0%, rgba(99, 102, 241, 0.06), transparent 70%), rgba(5, 5, 10, 0.4)',
       }}
       aria-hidden
     >
-      <span className='eyebrow' style={{ fontSize: 10.5 }}>
-        Clean Architecture
-      </span>
-      {layers.map((l, i) => (
-        <div key={l.label}>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          marginBottom: 4,
+        }}
+      >
+        <span className='eyebrow' style={{ fontSize: 10 }}>
+          Clean System Architecture
+        </span>
+        <span
+          style={{
+            fontSize: 9,
+            fontFamily: 'var(--font-mono)',
+            color: 'var(--color-accent-cyan)',
+            background: 'rgba(6, 182, 212, 0.08)',
+            padding: '2px 6px',
+            borderRadius: 4,
+          }}
+        >
+          Layered Design
+        </span>
+      </div>
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        {ARCHITECTURE_LAYERS.map((layer) => (
           <div
+            key={layer.label}
             style={{
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'space-between',
-              padding: '11px 14px',
+              gap: 12,
+              padding: '12px 16px',
               borderRadius: 8,
-              border: '1px solid var(--color-border)',
-              background: 'var(--color-surface-2)',
+              background: 'rgba(255, 255, 255, 0.02)',
+              border:
+                layer.label === 'State management'
+                  ? '1px solid rgba(99, 102, 241, 0.2)'
+                  : '1px solid rgba(255, 255, 255, 0.06)',
             }}
           >
             <span
               style={{
                 fontFamily: 'var(--font-mono)',
-                fontSize: 12.5,
-                color: 'var(--color-fg-strong)',
+                fontSize: 11,
+                fontWeight: 600,
+                color: layer.color,
+                flexShrink: 0,
               }}
             >
-              {l.node}
+              {layer.label}
             </span>
-            <span style={{ fontSize: 11, color: 'var(--color-faint)' }}>
-              {l.label}
+            <span
+              style={{
+                fontFamily: 'var(--font-sans)',
+                fontSize: 10,
+                color: 'var(--color-muted)',
+                textAlign: 'right',
+              }}
+            >
+              {layer.detail}
             </span>
           </div>
-          {i < layers.length - 1 && (
-            <div
-              style={{
-                width: 1,
-                height: 10,
-                margin: '0 auto',
-                background: 'var(--color-border-strong)',
-              }}
-            />
-          )}
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }
@@ -86,17 +118,17 @@ export default function Projects({ projects }: { projects: Project[] }) {
   const rest = projects.slice(1);
 
   return (
-    <section id='work' style={{ padding: '90px 0 0', scrollMarginTop: 80 }}>
+    <section id='work' style={{ padding: '100px 0 0', scrollMarginTop: 80 }}>
       <div className='az-reveal'>
         <SectionKicker
-          eyebrow='Selected work'
-          title='Featured projects'
-          description='Deployed applications impacting thousands of users across platforms.'
+          eyebrow='Portfolio'
+          title='Selected projects'
+          description='Production applications built with architectural integrity, shipped to App Store and Google Play.'
         />
       </div>
 
-      <div className='bento'>
-        {/* Featured */}
+      <div className='bento' style={{ marginTop: 8 }}>
+        {/* Featured Project */}
         {featured && (
           <button
             type='button'
@@ -105,7 +137,7 @@ export default function Projects({ projects }: { projects: Project[] }) {
                 ? () => setActive(featured)
                 : undefined
             }
-            className='card az-reveal span-12 feat-card tilt'
+            className='card card-hover az-reveal span-12 feat-card tilt'
             style={{
               display: 'grid',
               gap: 0,
@@ -115,62 +147,83 @@ export default function Projects({ projects }: { projects: Project[] }) {
               cursor:
                 projectOptions(featured).length > 0 ? 'pointer' : 'default',
               overflow: 'hidden',
+              padding: 0,
             }}
           >
             <div
               className='feat-info'
               style={{
-                padding: 34,
+                padding: '36px',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
               }}
             >
-              <span className='eyebrow' style={{ color: 'var(--color-accent)' }}>
-                Featured
-              </span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <span className='eyebrow' style={{ color: 'var(--color-accent)' }}>
+                  Featured Project
+                </span>
+                <span
+                  style={{
+                    fontSize: 10,
+                    fontFamily: 'var(--font-mono)',
+                    color: 'var(--color-accent-cyan)',
+                    border: '1px solid rgba(6, 182, 212, 0.2)',
+                    background: 'rgba(6, 182, 212, 0.05)',
+                    padding: '2px 8px',
+                    borderRadius: 99,
+                  }}
+                >
+                  {featured.category}
+                </span>
+              </div>
+              
               <h3
                 style={{
-                  fontWeight: 600,
+                  fontWeight: 700,
                   fontSize: 26,
-                  letterSpacing: '-0.025em',
-                  margin: '14px 0 0',
+                  letterSpacing: '-0.03em',
+                  margin: '16px 0 0',
                   color: 'var(--color-fg-strong)',
                 }}
               >
                 {featured.title}
               </h3>
+              
               <p
                 style={{
                   fontSize: 15,
-                  lineHeight: 1.62,
+                  lineHeight: 1.65,
                   color: 'var(--color-muted)',
-                  margin: '12px 0 0',
+                  margin: '14px 0 0',
                 }}
               >
                 {featured.description}
               </p>
+
               <div
                 style={{
                   display: 'flex',
                   flexWrap: 'wrap',
-                  gap: 7,
-                  marginTop: 20,
+                  gap: 8,
+                  marginTop: 24,
                 }}
               >
                 {tagsOf(featured).map((tag) => (
-                  <span key={tag} className='tech-card' style={{ padding: '6px 10px' }}>
+                  <span key={tag} className='tech-card'>
                     {tag}
                   </span>
                 ))}
               </div>
             </div>
+
             <div
               style={{
-                padding: 22,
+                padding: 24,
                 borderLeft: '1px solid var(--color-border)',
                 display: 'flex',
                 alignItems: 'center',
+                background: 'rgba(255, 255, 255, 0.005)',
               }}
             >
               <div style={{ width: '100%' }}>
@@ -180,7 +233,7 @@ export default function Projects({ projects }: { projects: Project[] }) {
           </button>
         )}
 
-        {/* Rest */}
+        {/* Other Projects */}
         {rest.map((proj, i) => {
           const hasLinks = projectOptions(proj).length > 0;
           const num = String(i + 2).padStart(2, '0');
@@ -193,8 +246,8 @@ export default function Projects({ projects }: { projects: Project[] }) {
               style={{
                 display: 'flex',
                 flexDirection: 'column',
-                minHeight: 210,
-                padding: 26,
+                minHeight: 250,
+                padding: '28px',
                 textAlign: 'left',
                 fontFamily: 'inherit',
                 color: 'inherit',
@@ -206,36 +259,58 @@ export default function Projects({ projects }: { projects: Project[] }) {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  marginBottom: 18,
+                  marginBottom: 20,
                 }}
               >
-                <span
+                <div
                   style={{
-                    fontFamily: 'var(--font-mono)',
-                    fontSize: 12,
-                    color: 'var(--color-faint)',
+                    width: 38,
+                    height: 38,
+                    borderRadius: 10,
+                    background: 'rgba(255, 255, 255, 0.03)',
+                    border: '1px solid rgba(255, 255, 255, 0.06)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    color: 'var(--color-accent-cyan)',
                   }}
                 >
-                  {num}
-                </span>
-                <svg
-                  width='16'
-                  height='16'
-                  viewBox='0 0 24 24'
-                  fill='none'
-                  stroke='var(--color-faint)'
-                  strokeWidth='2'
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                >
-                  <line x1='7' y1='17' x2='17' y2='7' />
-                  <polyline points='9 7 17 7 17 15' />
-                </svg>
+                  <Folder size={18} />
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                  <span
+                    style={{
+                      fontFamily: 'var(--font-mono)',
+                      fontSize: 11.5,
+                      color: 'var(--color-faint)',
+                    }}
+                  >
+                    {num}
+                  </span>
+                  {hasLinks && (
+                    <ArrowUpRight size={15} style={{ color: 'var(--color-faint)' }} />
+                  )}
+                </div>
               </div>
+
+              <span
+                style={{
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: 10.5,
+                  color: 'var(--color-accent-purple)',
+                  letterSpacing: '0.05em',
+                  textTransform: 'uppercase',
+                  display: 'block',
+                  marginBottom: 6,
+                }}
+              >
+                {proj.category}
+              </span>
+
               <h3
                 style={{
-                  fontWeight: 600,
-                  fontSize: 18,
+                  fontWeight: 700,
+                  fontSize: 18.5,
                   letterSpacing: '-0.02em',
                   margin: '0 0 10px',
                   color: 'var(--color-fg-strong)',
@@ -243,6 +318,7 @@ export default function Projects({ projects }: { projects: Project[] }) {
               >
                 {proj.title}
               </h3>
+
               <p
                 style={{
                   fontSize: 14,
@@ -253,13 +329,14 @@ export default function Projects({ projects }: { projects: Project[] }) {
               >
                 {proj.description}
               </p>
+
               <div
                 style={{
                   display: 'flex',
                   flexWrap: 'wrap',
                   gap: 6,
                   marginTop: 'auto',
-                  paddingTop: 20,
+                  paddingTop: 24,
                 }}
               >
                 {tagsOf(proj)
@@ -269,9 +346,10 @@ export default function Projects({ projects }: { projects: Project[] }) {
                       key={tag}
                       style={{
                         fontFamily: 'var(--font-mono)',
-                        fontSize: 11,
+                        fontSize: 10.5,
                         color: 'var(--color-muted)',
-                        border: '1px solid var(--color-border)',
+                        background: 'rgba(255, 255, 255, 0.02)',
+                        border: '1px solid rgba(255, 255, 255, 0.05)',
                         borderRadius: 6,
                         padding: '3px 8px',
                       }}

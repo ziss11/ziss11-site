@@ -45,19 +45,15 @@ export const SKILL_GROUPS: SkillGroup[] = [
   },
   {
     label: "Languages",
-    items: ["Dart 3.0", "Kotlin 1.9", "Swift 5.9", "Python"],
+    items: ["Dart 3.0", "TypeScript", "JavaScript", "Kotlin"],
   },
   {
     label: "Frameworks",
-    items: [
-      "Flutter 3.x",
-      "Jetpack Compose",
-      "GetX",
-      "Provider",
-      "Hilt",
-      "Retrofit",
-      "TensorFlow",
-    ],
+    items: ["Flutter 3.x", "Jetpack Compose", "React", "Next.js", "Nest.js", "GetX", "Provider"],
+  },
+  {
+    label: "Backend & Data",
+    items: ["Node.js", "REST APIs", "SQL", "Prisma ORM", "Drizzle ORM", "Room", "Retrofit"],
   },
   { label: "CI / CD", items: ["Codemagic", "GitHub Actions"] },
   {
