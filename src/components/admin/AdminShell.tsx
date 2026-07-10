@@ -339,12 +339,13 @@ export default function AdminShell({
                   gap: 10,
                   fontSize: 14.5,
                   fontWeight: on ? 500 : 400,
-                  padding: '11px 13px',
+                  padding: '11px 13px 11px 11px',
                   borderRadius: 'var(--radius-sm)',
                   border: 'none',
-                  background: on ? 'rgba(124,138,255,0.1)' : 'transparent',
+                  background: on ? 'rgba(74, 127, 192, 0.12)' : 'transparent',
                   color: on ? 'var(--color-accent)' : 'var(--color-muted)',
-                  transition: 'background .2s, color .2s',
+                  borderLeft: on ? '2px solid var(--color-accent)' : '2px solid transparent',
+                  transition: 'background .2s, color .2s, border-color .2s',
                 }}
               >
                 <span style={{ display: 'inline-flex', alignItems: 'center', gap: 10 }}>
