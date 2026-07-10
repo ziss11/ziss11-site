@@ -58,15 +58,16 @@ export default function Nav() {
       }}
     >
       <nav
+        className='grid-paper'
         style={{
           width: '100%',
           maxWidth: 1200,
           background: scrolled
-            ? 'rgba(10, 10, 20, 0.75)'
-            : 'rgba(13, 13, 23, 0.45)',
+            ? 'rgba(14, 27, 46, 0.85)'
+            : 'rgba(14, 27, 46, 0.55)',
           backdropFilter: 'blur(16px)',
           WebkitBackdropFilter: 'blur(16px)',
-          border: '1px solid rgba(255, 255, 255, 0.08)',
+          border: '1px solid var(--color-border)',
           borderRadius: 99,
           height: 56,
           display: 'flex',
@@ -98,14 +99,14 @@ export default function Nav() {
               justifyContent: 'center',
               width: 32,
               height: 32,
-              border: '1.5px solid transparent',
-              background: 'linear-gradient(var(--color-bg), var(--color-bg)) padding-box, linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-cyan) 100%) border-box',
-              borderRadius: '50%',
+              border: '1.5px solid var(--color-accent)',
+              background: 'var(--color-bg)',
+              borderRadius: 6,
               fontWeight: 700,
               fontSize: 12,
               fontFamily: 'var(--font-mono)',
               color: 'var(--color-fg-strong)',
-              boxShadow: '0 2px 8px rgba(99, 102, 241, 0.2)',
+              boxShadow: '0 2px 8px rgba(74, 127, 192, 0.25)',
             }}
           >
             AZ
@@ -125,7 +126,7 @@ export default function Nav() {
 
         {/* Desktop Links */}
         <div className='hidden items-center gap-2 md:flex'>
-          {LINKS.map((l) => (
+          {LINKS.map((l, i) => (
             <a
               key={l.id}
               href={l.href}
@@ -134,12 +135,13 @@ export default function Nav() {
                 active === l.id
                   ? {
                       color: 'var(--color-fg-strong)',
-                      background: 'rgba(255, 255, 255, 0.06)',
+                      background: 'rgba(74, 127, 192, 0.12)',
+                      borderBottom: '1px solid var(--color-accent)',
                     }
                   : undefined
               }
             >
-              {l.label}
+              {String(i + 1).padStart(2, '0')} · {l.label}
             </a>
           ))}
           <div
@@ -194,10 +196,10 @@ export default function Nav() {
               top: 68,
               left: 0,
               right: 0,
-              background: 'rgba(10, 10, 20, 0.95)',
+              background: 'rgba(14, 27, 46, 0.96)',
               backdropFilter: 'blur(20px)',
               WebkitBackdropFilter: 'blur(20px)',
-              border: '1px solid rgba(255, 255, 255, 0.08)',
+              border: '1px solid var(--color-border)',
               borderRadius: 24,
               padding: '16px 20px',
               display: 'flex',
