@@ -77,9 +77,9 @@ export default function Experience({
                     style={{
                       fontSize: 10,
                       fontFamily: 'var(--font-mono)',
-                      color: 'var(--color-accent-cyan)',
-                      border: '1px solid rgba(6, 182, 212, 0.2)',
-                      background: 'rgba(6, 182, 212, 0.04)',
+                      color: 'var(--color-accent)',
+                      border: '1px solid rgba(74, 127, 192, 0.3)',
+                      background: 'rgba(74, 127, 192, 0.05)',
                       borderRadius: 6,
                       padding: '3px 8px',
                       marginTop: 8,
@@ -108,8 +108,8 @@ export default function Experience({
                       height: 12,
                       borderRadius: '50%',
                       background: 'var(--color-bg)',
-                      border: '2.5px solid var(--color-accent)',
-                      boxShadow: '0 0 6px var(--color-accent)',
+                      border: `2.5px solid ${isLeft ? 'var(--color-accent)' : 'var(--color-accent-warm)'}`,
+                      boxShadow: `0 0 6px ${isLeft ? 'var(--color-accent)' : 'var(--color-accent-warm)'}`,
                       zIndex: 2,
                     }}
                   />
@@ -131,12 +131,12 @@ export default function Experience({
                         width: 32,
                         height: 32,
                         borderRadius: 8,
-                        background: 'rgba(255, 255, 255, 0.02)',
-                        border: '1px solid rgba(255, 255, 255, 0.06)',
+                        background: 'rgba(127, 168, 214, 0.04)',
+                        border: '1px solid var(--color-border)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        color: 'var(--color-accent-purple)',
+                        color: 'var(--color-accent)',
                       }}
                     >
                       <Briefcase size={16} />
