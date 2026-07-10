@@ -6,19 +6,19 @@ const METRICS = [
     value: '5+ Years',
     label: 'Shipping production software',
     icon: <Calendar size={18} style={{ color: 'var(--color-accent)' }} />,
-    color: 'rgba(99, 102, 241, 0.1)'
+    color: 'rgba(74, 127, 192, 0.1)'
   },
   {
     value: 'Web & Mobile',
     label: 'Full-stack platform depth',
-    icon: <Smartphone size={18} style={{ color: 'var(--color-accent-cyan)' }} />,
-    color: 'rgba(6, 182, 212, 0.1)'
+    icon: <Smartphone size={18} style={{ color: 'var(--color-accent)' }} />,
+    color: 'rgba(74, 127, 192, 0.1)'
   },
-  { 
-    value: '60fps UI', 
-    label: 'Fluid rendering benchmark', 
-    icon: <Sparkles size={18} style={{ color: 'var(--color-accent-purple)' }} />,
-    color: 'rgba(168, 85, 247, 0.1)'
+  {
+    value: '60fps UI',
+    label: 'Fluid rendering benchmark',
+    icon: <Sparkles size={18} style={{ color: 'var(--color-accent)' }} />,
+    color: 'rgba(74, 127, 192, 0.1)'
   },
 ];
 
@@ -28,7 +28,7 @@ export default function Hero() {
       <div className='bento'>
         {/* Headline Card */}
         <div
-          className='card card-pad az-reveal span-8'
+          className='card card-pad az-reveal span-8 grid-paper'
           style={{
             display: 'flex',
             flexDirection: 'column',
@@ -41,7 +41,7 @@ export default function Hero() {
           <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
             <span className='eyebrow'>
               <TermIcon size={12} />
-              Software Engineer
+              FIG. 01 — Software Engineer
             </span>
           </div>
 
@@ -60,9 +60,10 @@ export default function Hero() {
               >
                 Building software that{' '}
                 <span style={{
-                  background: 'linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-cyan) 50%, var(--color-accent-purple) 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
+                  textDecoration: 'underline',
+                  textDecorationColor: 'var(--color-accent-warm)',
+                  textDecorationThickness: '3px',
+                  textUnderlineOffset: '4px',
                 }}>
                   feels native
                 </span>{' '}
@@ -100,14 +101,14 @@ export default function Hero() {
 
         {/* Tech Focus Radar Card */}
         <div
-          className='card card-pad az-reveal span-4 tilt'
+          className='card card-pad az-reveal span-4'
           style={{
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
             minHeight: 380,
             boxShadow: '0 8px 30px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.03)',
-            background: 'radial-gradient(circle at top right, rgba(99, 102, 241, 0.05), transparent 50%), var(--color-surface)',
+            background: 'radial-gradient(circle at top right, rgba(74, 127, 192, 0.06), transparent 50%), var(--color-surface)',
           }}
         >
           <div>
