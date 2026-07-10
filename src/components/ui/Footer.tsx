@@ -1,10 +1,11 @@
 export default function Footer() {
   return (
     <footer
+      className='grid-paper'
       style={{
-        borderTop: '1px solid rgba(255, 255, 255, 0.05)',
+        borderTop: '1px solid var(--color-border)',
         marginTop: 100,
-        background: 'rgba(5, 5, 10, 0.2)',
+        background: 'rgba(14, 27, 46, 0.4)',
       }}
     >
       <div
@@ -39,7 +40,7 @@ export default function Footer() {
             </span>
           </div>
         </div>
-        
+
         <span
           style={{
             fontFamily: 'var(--font-mono)',
@@ -48,7 +49,7 @@ export default function Footer() {
             letterSpacing: '-0.01em',
           }}
         >
-          Designed &amp; built for high-performance impact
+          REV. {new Date().getFullYear()}.{String(new Date().getMonth() + 1).padStart(2, '0')} — FIG. 12
         </span>
       </div>
     </footer>
