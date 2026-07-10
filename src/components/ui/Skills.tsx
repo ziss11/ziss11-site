@@ -3,22 +3,22 @@ import SectionKicker from './SectionKicker';
 import { Layers, Code2, Boxes, RefreshCw, ShieldCheck, Database } from 'lucide-react';
 
 const ICON_MAP: Record<string, React.ReactNode> = {
-  'Architecture': <Layers size={18} style={{ color: 'var(--color-accent)' }} />,
-  'Languages': <Code2 size={18} style={{ color: 'var(--color-accent-cyan)' }} />,
-  'Frameworks': <Boxes size={18} style={{ color: 'var(--color-accent-purple)' }} />,
-  'Backend & Data': <Database size={18} style={{ color: '#f59e0b' }} />,
-  'CI / CD': <RefreshCw size={18} style={{ color: 'var(--color-ok)' }} />,
-  'Testing': <ShieldCheck size={18} style={{ color: '#f43f5e' }} />,
+  'Architecture': <Layers size={18} style={{ color: 'var(--color-accent-warm)' }} />,
+  'Languages': <Code2 size={18} style={{ color: 'var(--color-accent)' }} />,
+  'Frameworks': <Boxes size={18} style={{ color: 'var(--color-accent)' }} />,
+  'Backend & Data': <Database size={18} style={{ color: 'var(--color-accent)' }} />,
+  'CI / CD': <RefreshCw size={18} style={{ color: 'var(--color-accent)' }} />,
+  'Testing': <ShieldCheck size={18} style={{ color: 'var(--color-accent)' }} />,
 };
 
 
 const GLOW_COLOR_MAP: Record<string, string> = {
-  'Architecture': 'rgba(99, 102, 241, 0.04)',
-  'Languages': 'rgba(6, 182, 212, 0.04)',
-  'Frameworks': 'rgba(168, 85, 247, 0.04)',
-  'Backend & Data': 'rgba(245, 158, 11, 0.04)',
-  'CI / CD': 'rgba(16, 185, 129, 0.04)',
-  'Testing': 'rgba(244, 63, 94, 0.04)',
+  'Architecture': 'rgba(217, 123, 63, 0.05)',
+  'Languages': 'rgba(74, 127, 192, 0.04)',
+  'Frameworks': 'rgba(74, 127, 192, 0.04)',
+  'Backend & Data': 'rgba(74, 127, 192, 0.04)',
+  'CI / CD': 'rgba(74, 127, 192, 0.04)',
+  'Testing': 'rgba(74, 127, 192, 0.04)',
 };
 
 export default function Skills() {
