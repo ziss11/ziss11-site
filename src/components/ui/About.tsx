@@ -5,7 +5,7 @@ const FOCUS = [
   {
     title: 'Performance Engineering',
     desc: 'Profiling critical paths, optimizing memory and render cycles, and eliminating bottlenecks across the stack.',
-    icon: <Zap size={16} style={{ color: 'var(--color-accent-cyan)' }} />
+    icon: <Zap size={16} style={{ color: 'var(--color-accent)' }} />
   },
   {
     title: 'Scalable Systems',
@@ -15,12 +15,12 @@ const FOCUS = [
   {
     title: 'Data & Sync Architecture',
     desc: 'Architecting resilient data layers — from relational schemas to offline-first sync with conflict resolution.',
-    icon: <Database size={16} style={{ color: 'var(--color-accent-purple)' }} />
+    icon: <Database size={16} style={{ color: 'var(--color-accent)' }} />
   },
   {
     title: 'Clean Architecture',
     desc: 'Strict layer boundaries separating UI, business logic, and data access for testable, maintainable codebases.',
-    icon: <Layers size={16} style={{ color: 'var(--color-ok)' }} />
+    icon: <Layers size={16} style={{ color: 'var(--color-accent-warm)' }} />
   },
 ];
 
@@ -39,7 +39,7 @@ export default function About() {
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'center',
-            background: 'radial-gradient(circle at top left, rgba(99,102,241,0.04), transparent 50%), var(--color-surface)',
+            background: 'radial-gradient(circle at top left, rgba(74,127,192,0.05), transparent 50%), var(--color-surface)',
           }}
         >
           <p
