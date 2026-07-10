@@ -54,14 +54,14 @@ export default function TechRadar() {
             
             {/* Sweep gradient */}
             <linearGradient id="radarSweepGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="var(--color-accent-cyan)" stopOpacity="0.25" />
+              <stop offset="0%" stopColor="var(--color-accent-warm)" stopOpacity="0.25" />
               <stop offset="100%" stopColor="var(--color-accent)" stopOpacity="0.0" />
             </linearGradient>
 
             {/* Radar area gradient */}
             <radialGradient id="radarAreaGrad" cx="50%" cy="50%" r="50%">
               <stop offset="0%" stopColor="var(--color-accent)" stopOpacity="0.3" />
-              <stop offset="100%" stopColor="var(--color-accent-purple)" stopOpacity="0.08" />
+              <stop offset="100%" stopColor="var(--color-accent-warm)" stopOpacity="0.1" />
             </radialGradient>
           </defs>
 
@@ -105,7 +105,7 @@ export default function TechRadar() {
               y1={CY}
               x2={CX}
               y2={CY - R}
-              stroke="var(--color-accent-cyan)"
+              stroke="var(--color-accent-warm)"
               strokeWidth={1.5}
               opacity={0.8}
             />
@@ -138,7 +138,7 @@ export default function TechRadar() {
                   cx={x}
                   cy={y}
                   r={2}
-                  fill='var(--color-accent-cyan)'
+                  fill='var(--color-accent-warm)'
                 />
               </g>
             );
@@ -187,8 +187,8 @@ export default function TechRadar() {
             width: 8,
             height: 8,
             borderRadius: '50%',
-            background: 'var(--color-accent-cyan)',
-            boxShadow: '0 0 8px var(--color-accent-cyan)',
+            background: 'var(--color-accent-warm)',
+            boxShadow: '0 0 8px var(--color-accent-warm)',
           }}
           className='animate-pulse'
           aria-hidden
