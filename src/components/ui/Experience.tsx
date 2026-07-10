@@ -120,10 +120,6 @@ export default function Experience({
                   className={`card card-pad card-hover order-3 lg:col-span-5 ${
                     isLeft ? 'lg:order-3' : 'lg:order-1'
                   }`}
-                  style={{
-                    background: 'rgba(13, 13, 23, 0.4)',
-                    border: '1px solid rgba(255, 255, 255, 0.05)',
-                  }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                     <div
