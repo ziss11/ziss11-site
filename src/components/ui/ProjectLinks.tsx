@@ -42,7 +42,7 @@ export function projectOptions(p: Project): LinkOption[] {
       label: 'App Store (iOS)', 
       url: p.appStoreUrl, 
       icon: <AppleGlyph size={18} />,
-      color: 'rgba(59, 130, 246, 0.1)'
+      color: 'rgba(74, 127, 192, 0.1)'
     });
   if (p.githubUrl)
     opts.push({ 
@@ -50,7 +50,7 @@ export function projectOptions(p: Project): LinkOption[] {
       label: 'Source Code (GitHub)', 
       url: p.githubUrl, 
       icon: <Github size={18} />,
-      color: 'rgba(168, 85, 247, 0.1)'
+      color: 'rgba(74, 127, 192, 0.1)'
     });
   return opts;
 }
@@ -124,7 +124,7 @@ export default function ProjectLinks({
                 fontSize: 10,
                 letterSpacing: '0.14em',
                 textTransform: 'uppercase',
-                color: 'var(--color-accent-cyan)',
+                color: 'var(--color-accent)',
                 margin: '0 0 6px',
               }}
             >

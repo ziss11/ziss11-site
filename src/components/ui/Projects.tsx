@@ -19,9 +19,9 @@ const ARCHITECTURE_LAYERS: {
   color: string;
 }[] = [
   { label: 'UI layer', detail: 'Components / Views', color: 'var(--color-fg-strong)' },
-  { label: 'State management', detail: 'Store / Hooks / Providers', color: 'var(--color-accent)' },
+  { label: 'State management', detail: 'Store / Hooks / Providers', color: 'var(--color-accent-warm)' },
   { label: 'Domain layer', detail: 'Use Cases / Business Logic', color: 'var(--color-fg-strong)' },
-  { label: 'Data layer', detail: 'Repositories / APIs / DB', color: 'var(--color-accent-cyan)' },
+  { label: 'Data layer', detail: 'Repositories / APIs / DB', color: 'var(--color-accent)' },
 ];
 
 // Clean layered-architecture summary (presentation -> state -> domain -> data)
@@ -34,9 +34,9 @@ function ArchitectureMock() {
         gap: 10,
         padding: 24,
         borderRadius: 'var(--radius)',
-        border: '1px solid rgba(255, 255, 255, 0.06)',
+        border: '1px solid var(--color-border)',
         background:
-          'radial-gradient(130% 100% at 50% 0%, rgba(99, 102, 241, 0.06), transparent 70%), rgba(5, 5, 10, 0.4)',
+          'radial-gradient(130% 100% at 50% 0%, rgba(74, 127, 192, 0.08), transparent 70%), rgba(14, 27, 46, 0.4)',
       }}
       aria-hidden
     >
@@ -49,14 +49,14 @@ function ArchitectureMock() {
         }}
       >
         <span className='eyebrow' style={{ fontSize: 10 }}>
-          Clean System Architecture
+          FIG. 02 — Clean System Architecture
         </span>
         <span
           style={{
             fontSize: 9,
             fontFamily: 'var(--font-mono)',
-            color: 'var(--color-accent-cyan)',
-            background: 'rgba(6, 182, 212, 0.08)',
+            color: 'var(--color-accent)',
+            background: 'rgba(74, 127, 192, 0.1)',
             padding: '2px 6px',
             borderRadius: 4,
           }}
@@ -79,8 +79,8 @@ function ArchitectureMock() {
               background: 'rgba(255, 255, 255, 0.02)',
               border:
                 layer.label === 'State management'
-                  ? '1px solid rgba(99, 102, 241, 0.2)'
-                  : '1px solid rgba(255, 255, 255, 0.06)',
+                  ? '1px solid rgba(217, 123, 63, 0.3)'
+                  : '1px solid var(--color-border)',
             }}
           >
             <span
@@ -137,7 +137,7 @@ export default function Projects({ projects }: { projects: Project[] }) {
                 ? () => setActive(featured)
                 : undefined
             }
-            className='card card-hover az-reveal span-12 feat-card tilt'
+            className='card card-hover az-reveal span-12 feat-card'
             style={{
               display: 'grid',
               gap: 0,
@@ -161,15 +161,15 @@ export default function Projects({ projects }: { projects: Project[] }) {
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                 <span className='eyebrow' style={{ color: 'var(--color-accent)' }}>
-                  Featured Project
+                  FIG. 03 — Featured Project
                 </span>
                 <span
                   style={{
                     fontSize: 10,
                     fontFamily: 'var(--font-mono)',
-                    color: 'var(--color-accent-cyan)',
-                    border: '1px solid rgba(6, 182, 212, 0.2)',
-                    background: 'rgba(6, 182, 212, 0.05)',
+                    color: 'var(--color-accent)',
+                    border: '1px solid rgba(74, 127, 192, 0.3)',
+                    background: 'rgba(74, 127, 192, 0.06)',
                     padding: '2px 8px',
                     borderRadius: 99,
                   }}
@@ -267,12 +267,12 @@ export default function Projects({ projects }: { projects: Project[] }) {
                     width: 38,
                     height: 38,
                     borderRadius: 10,
-                    background: 'rgba(255, 255, 255, 0.03)',
-                    border: '1px solid rgba(255, 255, 255, 0.06)',
+                    background: 'rgba(127, 168, 214, 0.04)',
+                    border: '1px solid var(--color-border)',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    color: 'var(--color-accent-cyan)',
+                    color: 'var(--color-accent)',
                   }}
                 >
                   <Folder size={18} />
@@ -285,7 +285,7 @@ export default function Projects({ projects }: { projects: Project[] }) {
                       color: 'var(--color-faint)',
                     }}
                   >
-                    {num}
+                    FIG. {num}
                   </span>
                   {hasLinks && (
                     <ArrowUpRight size={15} style={{ color: 'var(--color-faint)' }} />
@@ -297,7 +297,7 @@ export default function Projects({ projects }: { projects: Project[] }) {
                 style={{
                   fontFamily: 'var(--font-mono)',
                   fontSize: 10.5,
-                  color: 'var(--color-accent-purple)',
+                  color: 'var(--color-accent)',
                   letterSpacing: '0.05em',
                   textTransform: 'uppercase',
                   display: 'block',
