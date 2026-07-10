@@ -107,7 +107,7 @@ export default function Contact({ contact }: { contact: ContactInfo }) {
             flexDirection: 'column',
             justifyContent: 'center',
             background:
-              'radial-gradient(circle at top left, rgba(99,102,241,0.05), transparent 50%), var(--color-surface)',
+              'radial-gradient(circle at top left, rgba(74,127,192,0.06), transparent 50%), var(--color-surface)',
           }}
         >
           <span className='eyebrow'>
@@ -146,8 +146,8 @@ export default function Contact({ contact }: { contact: ContactInfo }) {
           className='az-card az-reveal span-8'
           style={cardStyle(
             'email',
-            'rgba(6, 182, 212, 0.05)',
-            'rgba(6, 182, 212, 0.25)',
+            'rgba(74, 127, 192, 0.06)',
+            'rgba(74, 127, 192, 0.3)',
           )}
           onMouseEnter={() => setHovered('email')}
           onMouseLeave={() => setHovered(null)}
@@ -155,7 +155,7 @@ export default function Contact({ contact }: { contact: ContactInfo }) {
           <span style={labelStyle}>
             <Mail
               size={12}
-              style={{ color: 'var(--color-accent-cyan)' }}
+              style={{ color: 'var(--color-accent)' }}
             />
             Direct Email
           </span>
@@ -183,8 +183,8 @@ export default function Contact({ contact }: { contact: ContactInfo }) {
           className='az-card az-reveal span-6'
           style={cardStyle(
             'linkedin',
-            'rgba(59, 130, 246, 0.06)',
-            'rgba(59, 130, 246, 0.25)',
+            'rgba(74, 127, 192, 0.06)',
+            'rgba(74, 127, 192, 0.3)',
           )}
           onMouseEnter={() => setHovered('linkedin')}
           onMouseLeave={() => setHovered(null)}
@@ -192,7 +192,7 @@ export default function Contact({ contact }: { contact: ContactInfo }) {
           <span style={labelStyle}>
             <Linkedin
               size={12}
-              style={{ color: '#3b82f6' }}
+              style={{ color: 'var(--color-accent)' }}
             />
             LinkedIn
           </span>
@@ -212,8 +212,8 @@ export default function Contact({ contact }: { contact: ContactInfo }) {
           className='az-card az-reveal span-6'
           style={cardStyle(
             'github',
-            'rgba(168, 85, 247, 0.06)',
-            'rgba(168, 85, 247, 0.25)',
+            'rgba(74, 127, 192, 0.06)',
+            'rgba(74, 127, 192, 0.3)',
           )}
           onMouseEnter={() => setHovered('github')}
           onMouseLeave={() => setHovered(null)}
@@ -221,7 +221,7 @@ export default function Contact({ contact }: { contact: ContactInfo }) {
           <span style={labelStyle}>
             <Github
               size={12}
-              style={{ color: 'var(--color-accent-purple)' }}
+              style={{ color: 'var(--color-accent)' }}
             />
             GitHub Profile
           </span>
