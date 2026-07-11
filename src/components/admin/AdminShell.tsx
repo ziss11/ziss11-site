@@ -9,6 +9,7 @@ import {
   FolderGit2,
   LogOut,
   Mail,
+  Menu,
   Pencil,
   Plus,
   Trash2,
@@ -98,6 +99,8 @@ export default function AdminShell({
   const [editing, setEditing] = useState<Editing>(null);
   const [toast, setToast] = useState('');
   const [confirmLogout, setConfirmLogout] = useState(false);
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const closeMobileNav = () => setMobileNavOpen(false);
   const [, startTransition] = useTransition();
   const logoutFormRef = useRef<HTMLFormElement>(null);
 
@@ -267,11 +270,118 @@ export default function AdminShell({
 
   const meta = META[tab];
 
+  const sidebarBody = (
+    <>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 10,
+          padding: '0 8px 22px',
+          marginBottom: 16,
+          borderBottom: '1px solid var(--color-border)',
+        }}
+      >
+        <span
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: 36,
+            height: 36,
+            border: '1px solid var(--color-border-strong)',
+            borderRadius: 'var(--radius-sm)',
+            fontWeight: 600,
+            fontSize: 14,
+            color: 'var(--color-fg-strong)',
+          }}
+        >
+          AZ
+        </span>
+        <div>
+          <p style={{ fontWeight: 600, fontSize: 14, margin: 0, letterSpacing: '-0.01em', color: 'var(--color-fg-strong)' }}>
+            Admin Console
+          </p>
+          <p style={{ ...MONO, fontSize: 11, color: 'var(--color-faint)', margin: '2px 0 0' }}>
+            Content management
+          </p>
+        </div>
+      </div>
+
+      <nav style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+        {navItems.map(({ key, count }) => {
+          const on = key === tab;
+          return (
+            <button
+              key={key}
+              onClick={() => {
+                setTab(key);
+                setEditing(null);
+                closeMobileNav();
+              }}
+              style={{
+                cursor: 'pointer',
+                fontFamily: 'inherit',
+                textAlign: 'left',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                gap: 10,
+                fontSize: 14.5,
+                fontWeight: on ? 500 : 400,
+                padding: '11px 13px 11px 11px',
+                borderRadius: 'var(--radius-sm)',
+                border: 'none',
+                background: on ? 'rgba(74, 127, 192, 0.12)' : 'transparent',
+                color: on ? 'var(--color-accent)' : 'var(--color-muted)',
+                borderLeft: on ? '2px solid var(--color-accent)' : '2px solid transparent',
+                transition: 'background .2s, color .2s, border-color .2s',
+              }}
+            >
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 10 }}>
+                {META[key].icon}
+                {META[key].label}
+              </span>
+              <span style={{ ...MONO, fontSize: 11, opacity: 0.65 }}>{count}</span>
+            </button>
+          );
+        })}
+      </nav>
+
+      <div
+        style={{
+          marginTop: 'auto',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 6,
+          paddingTop: 16,
+          borderTop: '1px solid var(--color-border)',
+        }}
+      >
+        <Link href='/' target='_blank' rel='noopener noreferrer' className='az-side-link' onClick={closeMobileNav}>
+          <ExternalLink size={15} /> View live site
+        </Link>
+        <form ref={logoutFormRef} action={logout} style={{ display: 'none' }} />
+        <button
+          type='button'
+          onClick={() => {
+            setConfirmLogout(true);
+            closeMobileNav();
+          }}
+          className='az-side-link az-side-link-danger'
+          style={{ width: '100%' }}
+        >
+          <LogOut size={15} /> Sign out
+        </button>
+      </div>
+    </>
+  );
+
   return (
     <div className='admin-shell'>
-      {/* SIDEBAR */}
+      {/* SIDEBAR — desktop */}
       <aside
-        className='admin-sidebar'
+        className='admin-sidebar hidden md:flex'
         style={{
           position: 'sticky',
           top: 0,
@@ -279,109 +389,68 @@ export default function AdminShell({
           height: '100vh',
           borderRight: '1px solid var(--color-border)',
           padding: '26px 18px',
-          display: 'flex',
           flexDirection: 'column',
         }}
       >
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 10,
-            padding: '0 8px 22px',
-            marginBottom: 16,
-            borderBottom: '1px solid var(--color-border)',
-          }}
+        {sidebarBody}
+      </aside>
+
+      {/* TOP BAR — mobile */}
+      <div
+        className='flex md:hidden'
+        style={{
+          position: 'sticky',
+          top: 0,
+          zIndex: 60,
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          padding: '14px 18px',
+          borderBottom: '1px solid var(--color-border)',
+          background: 'var(--color-bg)',
+        }}
+      >
+        <span style={{ fontWeight: 600, fontSize: 14, color: 'var(--color-fg-strong)' }}>
+          Admin Console
+        </span>
+        <button
+          type='button'
+          aria-label={mobileNavOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={mobileNavOpen}
+          onClick={() => setMobileNavOpen((v) => !v)}
+          className='az-icon-btn'
         >
-          <span
+          {mobileNavOpen ? <X size={18} /> : <Menu size={18} />}
+        </button>
+      </div>
+
+      {/* DRAWER — mobile */}
+      {mobileNavOpen && (
+        <div className='md:hidden'>
+          <div
+            onClick={closeMobileNav}
+            style={{ position: 'fixed', inset: 0, zIndex: 95, background: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(3px)' }}
+          />
+          <aside
             style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: 36,
-              height: 36,
-              border: '1px solid var(--color-border-strong)',
-              borderRadius: 'var(--radius-sm)',
-              fontWeight: 600,
-              fontSize: 14,
-              color: 'var(--color-fg-strong)',
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              bottom: 0,
+              zIndex: 96,
+              width: 'min(280px, 80vw)',
+              background: 'var(--color-bg)',
+              borderRight: '1px solid var(--color-border-strong)',
+              padding: '26px 18px',
+              display: 'flex',
+              flexDirection: 'column',
+              overflowY: 'auto',
+              boxShadow: '24px 0 60px rgba(0,0,0,0.55)',
             }}
           >
-            AZ
-          </span>
-          <div>
-            <p style={{ fontWeight: 600, fontSize: 14, margin: 0, letterSpacing: '-0.01em', color: 'var(--color-fg-strong)' }}>
-              Admin Console
-            </p>
-            <p style={{ ...MONO, fontSize: 11, color: 'var(--color-faint)', margin: '2px 0 0' }}>
-              Content management
-            </p>
-          </div>
+            {sidebarBody}
+          </aside>
         </div>
-
-        <nav style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-          {navItems.map(({ key, count }) => {
-            const on = key === tab;
-            return (
-              <button
-                key={key}
-                onClick={() => {
-                  setTab(key);
-                  setEditing(null);
-                }}
-                style={{
-                  cursor: 'pointer',
-                  fontFamily: 'inherit',
-                  textAlign: 'left',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  gap: 10,
-                  fontSize: 14.5,
-                  fontWeight: on ? 500 : 400,
-                  padding: '11px 13px 11px 11px',
-                  borderRadius: 'var(--radius-sm)',
-                  border: 'none',
-                  background: on ? 'rgba(74, 127, 192, 0.12)' : 'transparent',
-                  color: on ? 'var(--color-accent)' : 'var(--color-muted)',
-                  borderLeft: on ? '2px solid var(--color-accent)' : '2px solid transparent',
-                  transition: 'background .2s, color .2s, border-color .2s',
-                }}
-              >
-                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 10 }}>
-                  {META[key].icon}
-                  {META[key].label}
-                </span>
-                <span style={{ ...MONO, fontSize: 11, opacity: 0.65 }}>{count}</span>
-              </button>
-            );
-          })}
-        </nav>
-
-        <div
-          style={{
-            marginTop: 'auto',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 6,
-            paddingTop: 16,
-            borderTop: '1px solid var(--color-border)',
-          }}
-        >
-          <Link href='/' target='_blank' rel='noopener noreferrer' className='az-side-link'>
-            <ExternalLink size={15} /> View live site
-          </Link>
-          <form ref={logoutFormRef} action={logout} style={{ display: 'none' }} />
-          <button
-            type='button'
-            onClick={() => setConfirmLogout(true)}
-            className='az-side-link az-side-link-danger'
-            style={{ width: '100%' }}
-          >
-            <LogOut size={15} /> Sign out
-          </button>
-        </div>
-      </aside>
+      )}
 
       {/* MAIN */}
       <main style={{ padding: '40px 48px 80px', maxWidth: 980 }}>
